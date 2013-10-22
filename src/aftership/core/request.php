@@ -11,6 +11,7 @@ class request
 
 	protected function send($url, $request_type, array $data = array()) {
 		$base_url = $this->_api_url . '/' . $this->_api_version;
+		echo $base_url;
 		$client   = new Client($base_url);
 		$headers  = array(
 			'aftership-api-key' => $this->_api_key

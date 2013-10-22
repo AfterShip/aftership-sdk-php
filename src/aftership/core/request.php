@@ -6,6 +6,7 @@ use Guzzle\Http\Client;
 class request
 {
 	private $_api_url = 'https://api.aftership.com';
+	protected $_api_key = '';
 
 	protected function send($url, $request_type, array $data = array()) {
 		$client  = new Client($this->_api_url);

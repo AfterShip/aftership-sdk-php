@@ -10,19 +10,19 @@ class request
 	private $_api_version = 'v3';
 
 	protected function send($url, $request_type, array $data = array()) {
-		$client   = new Client($this->_api_url);
-		$headers  = array(
+		$client  = new Client();
+		$headers = array(
 			'aftership-api-key' => $this->_api_key
 		);
 		switch (strtoupper($request_type)) {
 			case "GET":
-				$request = $client->get($url, $headers, array('query' => $data));
+				$request = $client->get($this->_api_url . $url, $headers, array('query' => $data));
 				break;
 			case "POST":
-				$request = $client->post($url, $headers, $data);
+				$request = $client->post($this->_api_url . $url, $headers, $data);
 				break;
 			case "PUT":
-				$request = $client->put($url, $headers, http_build_query($data));
+				$request = $client->put($this->_api_url . $url, $headers, http_build_query($data));
 				break;
 		}
 

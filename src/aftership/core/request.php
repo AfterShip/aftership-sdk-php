@@ -11,7 +11,7 @@ class request
 	protected function send($url, $request_type, array $data = array()) {
 		$client  = new Client($this->_api_url);
 		$headers = array(
-			'aftership-api-key' => API_KEY
+			'aftership-api-key' => $this->_api_key
 		);
 		switch (strtoupper($request_type)) {
 			case "GET":

@@ -1,0 +1,21 @@
+{
+    "name": "abishekrsrikaanth/aftership-php-sdk",
+    "description": "PHP SDK to integrate with Aftership API",
+    "minimum-stability": "stable",
+    "homepage": "http://abishekrsrikaanth.github.io/aftership-php-sdk",
+    "authors": [
+        {
+            "name": "Abishek R Srikaanth",
+            "email": "abishek@technicaliti.me"
+        }
+    ],
+    "require":{
+        "php": ">=5.3.0",
+        "guzzle/guzzle": "3.7.*@dev"
+    },
+    "autoload": {
+        "psr-0": {
+            "AfterShip": "src/"
+        }
+    }
+}

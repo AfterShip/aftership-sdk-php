@@ -7,9 +7,10 @@ class request
 {
 	private $_api_url = 'https://api.aftership.com';
 	protected $_api_key = '';
+	private $_api_version = 'v3';
 
 	protected function send($url, $request_type, array $data = array()) {
-		$client  = new Client($this->_api_url);
+		$client  = new Client($this->_api_url . '/' . $this->_api_version);
 		$headers = array(
 			'aftership-api-key' => $this->_api_key
 		);

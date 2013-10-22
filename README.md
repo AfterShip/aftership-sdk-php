@@ -1,13 +1,11 @@
 ###Aftership PHP SDK
 
-[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/abishekrsrikaanth/aftership-php-sdk/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
-
 #### Installation
 **Using Composer**
 ```
  "require": {
         ....
-        "abishekrsrikaanth/aftership-php-sdk": "dev-master"
+        "AfterShip/aftership-php": "dev-master"
     },
 ```
 

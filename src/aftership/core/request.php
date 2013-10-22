@@ -5,7 +5,7 @@ use Guzzle\Http\Client;
 
 class request
 {
-	private $_api_url = 'https://api.aftership.com/v3/';
+	private $_api_url = 'https://api.aftership.com/';
 	protected $_api_key = '';
 	private $_api_version = 'v3';
 
@@ -16,13 +16,13 @@ class request
 		);
 		switch (strtoupper($request_type)) {
 			case "GET":
-				$request = $client->get($this->_api_url . $url, $headers, array('query' => $data));
+				$request = $client->get($this->_api_url . '/' . $this->_api_version . '/' . $url, $headers, array('query' => $data));
 				break;
 			case "POST":
-				$request = $client->post($this->_api_url . $url, $headers, $data);
+				$request = $client->post($this->_api_url . '/' . $this->_api_version . '/' . $url, $headers, $data);
 				break;
 			case "PUT":
-				$request = $client->put($this->_api_url . $url, $headers, http_build_query($data));
+				$request = $client->put($this->_api_url . '/' . $this->_api_version . '/' . $url, $headers, http_build_query($data));
 				break;
 		}
 

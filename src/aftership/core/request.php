@@ -5,14 +5,12 @@ use Guzzle\Http\Client;
 
 class request
 {
-	private $_api_url = 'https://api.aftership.com';
+	private $_api_url = 'https://api.aftership.com/v3';
 	protected $_api_key = '';
 	private $_api_version = 'v3';
 
 	protected function send($url, $request_type, array $data = array()) {
-		$base_url = $this->_api_url . '/' . $this->_api_version;
-		echo $base_url;
-		$client   = new Client($base_url);
+		$client   = new Client($this->_api_url);
 		$headers  = array(
 			'aftership-api-key' => $this->_api_key
 		);

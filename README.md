@@ -23,7 +23,7 @@ $response = $courier->get();
 ```
 require 'vendor/autoload.php';
 
-$tracking = new AfterShip\Tracking('AFTERSHIP_API_KEY);
+$tracking = new AfterShip\Tracking('AFTERSHIP_API_KEY');
 $tracking_info = array(
     'slug'              => 'dhl',
     'tracking_number'   => 'RA123456789US',
@@ -39,7 +39,7 @@ $response = $tracking->create($tracking_info);
 ```
 require 'vendor/autoload.php';
 
-$tracking = new AfterShip\Tracking('AFTERSHIP_API_KEY);
+$tracking = new AfterShip\Tracking('AFTERSHIP_API_KEY');
 $options = array(
     'page'=>1,
     'limit'=>10
@@ -54,7 +54,7 @@ $response = $tracking->get($options)
 ```
 require 'vendor/autoload.php';
 
-$tracking = new AfterShip\Tracking('AFTERSHIP_API_KEY);
+$tracking = new AfterShip\Tracking('AFTERSHIP_API_KEY');
 $response = $tracking->info('dhl','RA123456789US',array('title','order_id'));
 ```
 
@@ -64,7 +64,7 @@ $response = $tracking->info('dhl','RA123456789US',array('title','order_id'));
 ```
 require 'vendor/autoload.php';
 
-$tracking = new AfterShip\Tracking('AFTERSHIP_API_KEY);
+$tracking = new AfterShip\Tracking('AFTERSHIP_API_KEY');
 $params = array(
     'smses'             => array(),
     'emails'            => array(),
@@ -75,4 +75,20 @@ $params = array(
     'custom_fields'     => array()
 );
 $response = $tracking->update('dhl','RA123456789US',$params);
+```
+
+####Adding Guzzle Plugins
+[Guzzle Plugins](http://guzzlephp.org/plugins/plugins-overview.html)
+
+```
+require 'vendor/autoload.php';
+
+$history = new HistoryPlugin();
+$async = new AsyncPlugin();
+$logPlugin = new LogPlugin($adapter, MessageFormatter::DEBUG_FORMAT);
+
+$guzzlePlugins = array($history, $async, $logPlugin);
+
+$tracking = new AfterShip\Tracking('AFTERSHIP_API_KEY', $guzzlePlugins);
+$couriers = new AfterShip\Couriers('AFTERSHIP_API_KEY', $guzzlePlugins);
 ```

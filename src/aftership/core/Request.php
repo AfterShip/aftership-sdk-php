@@ -1,5 +1,6 @@
 <?php
-namespace aftership\core;
+
+namespace Aftership\Core;
 
 use Guzzle\Http\Client;
 use Guzzle\Http\Exception\BadResponseException;

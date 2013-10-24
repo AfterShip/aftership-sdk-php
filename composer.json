@@ -1,5 +1,5 @@
 {
-    "name": "AfterShip/aftership-php",
+    "name": "AfterShip/aftership-php-sdk",
     "description": "PHP SDK to integrate with Aftership API",
     "minimum-stability": "stable",
     "license": "BSD-3-Clause",

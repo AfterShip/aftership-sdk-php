@@ -21,17 +21,17 @@ class Tracking extends request
 	}
 
 	public function get(array $options = array()) {
-		return $this->send('/trackings', 'GET', $options);
+		return $this->send('trackings', 'GET', $options);
 	}
 
-	public function info($slug, $tracking_number, array $fields) {
+	public function info($slug, $tracking_number, array $fields = array()) {
 		if (empty($slug))
 			throw new \Exception("Slug cannot be empty");
 
 		if (empty($tracking_number))
 			throw new \Exception('Tracking number cannot be empty');
 
-		return $this->send('trackings/' . $slug . '/' . $tracking_number, 'GET', implode(',', $fields));
+		return $this->send('trackings/' . $slug . '/' . $tracking_number, 'GET', $fields);
 	}
 
 	public function update($slug, $tracking_number, array $options) {

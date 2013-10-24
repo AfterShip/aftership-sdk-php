@@ -9,7 +9,7 @@ class request
 	protected $_api_key = '';
 	private $_api_version = 'v3';
 
-	protected function send($url, $request_type, $data) {
+	protected function send($url, $request_type, $data = array()) {
 		$client  = new Client();
 		$headers = array(
 			'aftership-api-key' => $this->_api_key
@@ -22,7 +22,7 @@ class request
 				$request = $client->post($this->_api_url . '/' . $this->_api_version . '/' . $url, $headers, $data);
 				break;
 			case "PUT":
-				$request = $client->put($this->_api_url . '/' . $this->_api_version . '/' . $url, $headers, http_build_query($data));
+				$request = $client->put($this->_api_url . '/' . $this->_api_version . '/' . $url, $headers, $data);
 				break;
 		}
 

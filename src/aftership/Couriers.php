@@ -1,9 +1,9 @@
 <?php
 namespace aftership;
 
-use AfterShip\core\request;
+use AfterShip\core\Request;
 
-class Couriers extends request
+class Couriers extends Request
 {
     public function __construct($api_key, $guzzle_plugins = array())
     {
@@ -12,11 +12,11 @@ class Couriers extends request
 
         $this->_api_key = $api_key;
 
-	    if(count($guzzle_plugins) > 0){
-		    $this->_guzzle_plugins = $guzzle_plugins;
-	    }
+        if (count($guzzle_plugins) > 0) {
+            $this->_guzzle_plugins = $guzzle_plugins;
+        }
 
-	    parent::__construct();
+        parent::__construct();
     }
 
     public function get()

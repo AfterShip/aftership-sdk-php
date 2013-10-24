@@ -37,3 +37,6 @@ $RECYCLE.BIN/
 npm-debug.log
 
 dump.rdb
+=======
+composer.phar
+/vendor

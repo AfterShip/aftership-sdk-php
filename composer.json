@@ -8,6 +8,10 @@
         {
             "name": "Abishek R Srikaanth",
             "email": "abishek@technicaliti.me"
+        },
+        {
+            "name":     "Community contributions",
+            "homepage": "http://github.com/abishekrsrikaanth/aftership-php-sdk/contributors"
         }
     ],
     "require": {

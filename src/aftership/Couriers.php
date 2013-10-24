@@ -1,7 +1,8 @@
 <?php
-namespace aftership;
 
-use AfterShip\core\Request;
+namespace Aftership;
+
+use AfterShip\Core\Request;
 
 class Couriers extends Request
 {

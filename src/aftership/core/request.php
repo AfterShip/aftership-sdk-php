@@ -9,7 +9,7 @@ class request
 	protected $_api_key = '';
 	private $_api_version = 'v3';
 
-	protected function send($url, $request_type, array $data = array()) {
+	protected function send($url, $request_type, $data) {
 		$client  = new Client();
 		$headers = array(
 			'aftership-api-key' => $this->_api_key

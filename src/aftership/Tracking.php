@@ -17,7 +17,7 @@ class Tracking extends request
 		if (empty($data))
 			throw new \Exception('Tracking Request cannot be empty');
 
-		return $this->send('/trackings', 'POST', $data);
+		return $this->send('/trackings', 'POST', json_encode(array('tracking' => $data)));
 	}
 
 	public function get(array $options = array()) {
@@ -41,6 +41,6 @@ class Tracking extends request
 		if (empty($tracking_number))
 			throw new \Exception('Tracking number cannot be empty');
 
-		return $this->send('/trackings/' . $slug . '/' . $tracking_number, 'PUT', $options);
+		return $this->send('/trackings/' . $slug . '/' . $tracking_number, 'PUT', json_encode(array('tracking' => $options)));
 	}
 }

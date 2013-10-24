@@ -5,7 +5,7 @@ use Guzzle\Http\Client;
 
 class request
 {
-	private $_api_url = 'https://api.aftership.com/';
+	private $_api_url = 'https://api.aftership.com';
 	protected $_api_key = '';
 	private $_api_version = 'v3';
 

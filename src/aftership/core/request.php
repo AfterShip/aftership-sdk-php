@@ -2,28 +2,30 @@
 namespace aftership\core;
 
 use Guzzle\Http\Client;
+use Guzzle\Http\Exception\BadResponseException;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
-class request
+class Request
 {
     private $_api_url = 'https://api.aftership.com';
     protected $_api_key = '';
     private $_api_version = 'v3';
     protected $_guzzle_plugins = array();
-	private $_client;
+    private $_client;
 
-	protected function __construct(){
-		$this->_client  = new Client();
+    protected function __construct()
+    {
+        $this->_client = new Client();
 
-		if(count($this->_guzzle_plugins) > 0){
-			foreach($this->_guzzle_plugins as $plugin)
-				if($plugin instanceof EventSubscriberInterface)
-					$this->_client->addSubscriber($plugin);
-		}
-	}
+        if (count($this->_guzzle_plugins) > 0) {
+            foreach ($this->_guzzle_plugins as $plugin)
+                if ($plugin instanceof EventSubscriberInterface)
+                    $this->_client->addSubscriber($plugin);
+        }
+    }
+
     protected function send($url, $request_type, $data = array())
     {
-
         $headers = array(
             'aftership-api-key' => $this->_api_key
         );
@@ -39,7 +41,13 @@ class request
                 break;
         }
 
-        $response = $request->send()->json();
+        try {
+            $response = $request->send()->json();
+        } catch (BadResponseException $ex) {
+            $response = $ex->getResponse()->json();
+        } catch (\Exception $ex) {
+            throw $ex;
+        }
 
         return $response;
     }

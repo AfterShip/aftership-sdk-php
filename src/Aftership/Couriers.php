@@ -1,6 +1,6 @@
 <?php
 
-namespace Aftership;
+namespace AfterShip;
 
 use AfterShip\Core\Request;
 

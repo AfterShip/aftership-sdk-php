@@ -1,6 +1,6 @@
 <?php
 
-namespace Aftership\Core;
+namespace AfterShip\Core;
 
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Guzzle\Common\Exception\GuzzleException;

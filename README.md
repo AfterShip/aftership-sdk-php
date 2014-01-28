@@ -18,6 +18,15 @@ $courier = new AfterShip\Couriers('AFTERSHIP_API_KEY');
 $response = $courier->get();
 ```
 
+#### Detect courier by tracking number
+
+```
+require 'vendor/autoload.php';
+
+$courier = new AfterShip\Couriers('AFTERSHIP_API_KEY');
+$response = $courier->detect('1234567890Z');
+```
+
 #### Create a new tracking number
 [List of data for the API](https://www.aftership.com/docs/api/3.0/tracking/post-trackings#request)
 ```

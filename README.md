@@ -86,6 +86,24 @@ $params = array(
 $response = $tracking->update('dhl','RA123456789US',$params);
 ```
 
+####Reactivate Tracking
+
+```
+require 'vendor/autoload.php';
+
+$tracking = new AfterShip\Tracking('AFTERSHIP_API_KEY');
+$response = $tracking->reactivate('dhl','RA123456789US');
+```
+
+####Finding Last Checkpoint
+
+```
+require 'vendor/autoload.php';
+
+$checkpoint = new AfterShip\LastCheckPoint('AFTERSHIP_API_KEY');
+$response = $checkpoint->get('dhl','RA123456789US');
+```
+
 ####Adding Guzzle Plugins
 [Guzzle Plugins](http://guzzlephp.org/plugins/plugins-overview.html)
 

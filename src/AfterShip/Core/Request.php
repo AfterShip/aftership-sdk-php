@@ -31,7 +31,8 @@ class Request
     protected function send($url, $request_type, $data = array())
     {
         $headers = array(
-            'aftership-api-key' => $this->_api_key
+            'aftership-api-key' => $this->_api_key,
+            'content-type'      => 'application/json'
         );
 
         switch (strtoupper($request_type)) {

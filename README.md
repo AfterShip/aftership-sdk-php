@@ -5,7 +5,7 @@
 ```
  "require": {
         ....
-        "abishekrsrikaanth/aftership-php-sdk": "dev-master"
+        "abishekrsrikaanth/aftership-php-sdk": "1.0"
     },
 ```
 

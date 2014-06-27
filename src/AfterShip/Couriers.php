@@ -22,7 +22,7 @@ class Couriers extends Request
 
     public function get()
     {
-        return $this->send('/couriers', 'GET');
+        return $this->send('couriers', 'GET');
     }
 
     public function detect($tracking_number)
@@ -31,6 +31,6 @@ class Couriers extends Request
             throw new \Exception('Tracking number cannot be empty');
         }
 
-        return $this->send('/couriers/detect/'.$tracking_number, 'GET');
+        return $this->send('couriers/detect/'.$tracking_number, 'GET');
     }
 }

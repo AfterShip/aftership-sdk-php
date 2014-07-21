@@ -1,5 +1,5 @@
 {
-    "name": "aftership",
+    "name": "aftership/aftership",
     "description": "The PHP SDK of AfterShip API",
     "minimum-stability": "alpha",
     "license": "MIT",

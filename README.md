@@ -5,7 +5,7 @@
 ```
  "require": {
         ....
-        "abishekrsrikaanth/aftership-php-sdk": "1.0"
+        "aftership/aftership-php-sdk": "1.0"
     },
 ```
 
@@ -14,8 +14,8 @@
 ```
 require 'vendor/autoload.php';
 
-$courier = new AfterShip\Couriers('AFTERSHIP_API_KEY');
-$response = $courier->get();
+$couriers = new AfterShip\Couriers('AFTERSHIP_API_KEY');
+$response = $couriers->get();
 ```
 
 #### Detect courier by tracking number
@@ -32,13 +32,13 @@ $response = $courier->detect('1234567890Z');
 ```
 require 'vendor/autoload.php';
 
-$tracking = new AfterShip\Tracking('AFTERSHIP_API_KEY');
+$trackings = new AfterShip\Trackings('AFTERSHIP_API_KEY');
 $tracking_info = array(
     'slug'              => 'dhl',
     'tracking_number'   => 'RA123456789US',
 
 );
-$response = $tracking->create($tracking_info);
+$response = $trackings->create($tracking_info);
 ```
 
 
@@ -48,13 +48,13 @@ $response = $tracking->create($tracking_info);
 ```
 require 'vendor/autoload.php';
 
-$tracking = new AfterShip\Tracking('AFTERSHIP_API_KEY');
+$trackings = new AfterShip\Trackings('AFTERSHIP_API_KEY');
 $options = array(
     'page'=>1,
     'limit'=>10
 );
 
-$response = $tracking->get($options)
+$response = $trackings->get_all($options)
 ```
 
 ####Return a tracking result with all the detail checkpoints
@@ -63,8 +63,8 @@ $response = $tracking->get($options)
 ```
 require 'vendor/autoload.php';
 
-$tracking = new AfterShip\Tracking('AFTERSHIP_API_KEY');
-$response = $tracking->info('dhl','RA123456789US',array('title','order_id'));
+$trackings = new AfterShip\Trackings('AFTERSHIP_API_KEY');
+$response = $trackings->get('dhl','RA123456789US',array('title','order_id'));
 ```
 
 ####Update tracking record and return all the detail, exclude the checkpoints
@@ -73,7 +73,7 @@ $response = $tracking->info('dhl','RA123456789US',array('title','order_id'));
 ```
 require 'vendor/autoload.php';
 
-$tracking = new AfterShip\Tracking('AFTERSHIP_API_KEY');
+$trackings = new AfterShip\Trackings('AFTERSHIP_API_KEY');
 $params = array(
     'smses'             => array(),
     'emails'            => array(),
@@ -83,7 +83,7 @@ $params = array(
     'order_id_path'     => '',
     'custom_fields'     => array()
 );
-$response = $tracking->update('dhl','RA123456789US',$params);
+$response = $trackings->update('dhl','RA123456789US',$params);
 ```
 
 ####Reactivate Tracking
@@ -91,8 +91,8 @@ $response = $tracking->update('dhl','RA123456789US',$params);
 ```
 require 'vendor/autoload.php';
 
-$tracking = new AfterShip\Tracking('AFTERSHIP_API_KEY');
-$response = $tracking->reactivate('dhl','RA123456789US');
+$trackings = new AfterShip\Trackings('AFTERSHIP_API_KEY');
+$response = $trackings->retrack('dhl','RA123456789US');
 ```
 
 ####Finding Last Checkpoint
@@ -100,8 +100,8 @@ $response = $tracking->reactivate('dhl','RA123456789US');
 ```
 require 'vendor/autoload.php';
 
-$checkpoint = new AfterShip\LastCheckPoint('AFTERSHIP_API_KEY');
-$response = $checkpoint->get('dhl','RA123456789US');
+$last_check_point = new AfterShip\LastCheckPoint('AFTERSHIP_API_KEY');
+$response = $last_check_point->get('dhl','RA123456789US');
 ```
 
 ####Adding Guzzle Plugins

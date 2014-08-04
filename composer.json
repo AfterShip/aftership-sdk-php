@@ -1,26 +1,16 @@
 {
-    "name": "abishekrsrikaanth/aftership-php-sdk",
-    "description": "PHP SDK to integrate with Aftership API",
-    "minimum-stability": "stable",
-    "license": "BSD-3-Clause",
-    "keywords": ["track", "ups", "usps", "fedex", "aftership", "shipping", "tracking", "dhl"],
+    "name": "aftership/aftership",
+    "description": "The PHP SDK of AfterShip API",
+    "minimum-stability": "alpha",
+    "license": "MIT",
+    "keywords": ["aftership", "track", "ups", "usps", "fedex", "aftership", "shipping", "tracking", "dhl"],
     "authors": [
         {
-            "name": "Abishek R Srikaanth",
-            "email": "abishek@technicaliti.me"
-        },
-        {
-            "name":     "Community contributions",
-            "homepage": "http://github.com/abishekrsrikaanth/aftership-php-sdk/contributors"
-        }
+            "name": "AfterShip",
+            "email": "support@aftership.com"
+	}
     ],
     "require": {
-        "php": ">=5.3.0",
-        "guzzle/guzzle": "3.8.*@dev"
-    },
-    "autoload": {
-        "psr-0": {
-            "AfterShip": "src/"
-        }
+        "php": ">=5.3.0"
     }
 }

@@ -47,4 +47,8 @@ class LastCheckPoint extends Request
 
         return $this->send('last_checkpoint/' . $slug . '/' . $tracking_number, 'GET');
     }
+
+	public function get_by_id($id){
+
+	}
 } 

@@ -11,7 +11,7 @@ class Request
 {
     private $_api_url = 'https://api.aftership.com';
     protected $_api_key = '';
-    private $_api_version = 'v3';
+    private $_api_version = 'v4';
     protected $_guzzle_plugins = array();
     private $_client;
 
@@ -40,10 +40,13 @@ class Request
                 $request = $this->_client->get($this->_api_url . '/' . $this->_api_version . '/' . $url, $headers, array('query' => $data));
                 break;
             case "POST":
-                $request = $this->_client->post($this->_api_url . '/' . $this->_api_version . '/' . $url, $headers, $data);
+                $request = $this->_client->post($this->_api_url . '/' . $this->_api_version . '/' . $url, $headers, json_encode($data));
                 break;
             case "PUT":
-                $request = $this->_client->put($this->_api_url . '/' . $this->_api_version . '/' . $url, $headers, $data);
+                $request = $this->_client->put($this->_api_url . '/' . $this->_api_version . '/' . $url, $headers, json_encode($data));
+				break;
+			case "DELETE":
+                $request = $this->_client->delete($this->_api_url . '/' . $this->_api_version . '/' . $url, $headers, json_encode($data));
                 break;
         }
 

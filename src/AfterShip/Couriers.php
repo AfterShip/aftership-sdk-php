@@ -25,6 +25,10 @@ class Couriers extends Request
         return $this->send('couriers', 'GET');
     }
 
+	public function get_all(){
+		return $this->send('couriers/all', 'GET');
+	}
+
     public function detect($tracking_number)
     {
         if (empty($tracking_number)) {

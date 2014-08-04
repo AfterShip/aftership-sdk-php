@@ -27,7 +27,8 @@ class Trackings extends Request
 			throw new \Exception('Tracking number cannot be empty');
 		}
 
-		return $this->send('trackings', 'POST', $params);
+		$params['tracking_number'] = $tracking_number;
+		return $this->send('trackings', 'POST', array('tracking' => $params));
 	}
 
 	public function batch_create(array $tracking_numbers = array())
@@ -49,7 +50,11 @@ class Trackings extends Request
 	}
 
 	public function delete_by_id($id){
-		//TODO
+		if (empty($id)) {
+			throw new \Exception('Tracking ID cannot be empty');
+		}
+
+		return $this->send('trackings/' . $id, 'DELETE');
 	}
 
 	public function get_all(array $params = array()){
@@ -69,8 +74,12 @@ class Trackings extends Request
 		return $this->send('trackings/' . $slug . '/' . $tracking_number, 'GET', $params);
 	}
 
-	public function get_by_id($id, $params){
-		//TODO
+	public function get_by_id($id, array $params = array()){
+		if (empty($id)) {
+			throw new \Exception('Tracking ID cannot be empty');
+		}
+
+		return $this->send('trackings/' . $id, 'GET', $params);
 	}
 
 	public function update($slug, $tracking_number, array $params = array())
@@ -83,17 +92,16 @@ class Trackings extends Request
 			throw new \Exception('Tracking number cannot be empty');
 		}
 
-		return $this->send('trackings/' . $slug . '/' . $tracking_number, 'PUT', $params);
+		return $this->send('trackings/' . $slug . '/' . $tracking_number, 'PUT', array('tracking' => $params));
 	}
 
-	public function update_by_id($id, array $fields = array())
+	public function update_by_id($id, array $params = array())
 	{
-		//TODO
 		if (empty($id)) {
 			throw new \Exception('Tracking ID cannot be empty');
 		}
 
-		return $this->send('trackings/' . $id, 'PUT', $fields);
+		return $this->send('trackings/' . $id, 'PUT', array('tracking' => $params));
 	}
 
 	public function retrack($slug, $tracking_number)
@@ -110,6 +118,10 @@ class Trackings extends Request
 	}
 
 	public function retrack_by_id($id){
-		//TODO
+		if (empty($id)) {
+			throw new \Exception('Tracking ID cannot be empty');
+		}
+
+		return $this->send('trackings/' . $id . '/retrack', 'POST');
 	}
 }

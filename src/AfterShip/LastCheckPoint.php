@@ -35,7 +35,7 @@ class LastCheckPoint extends Request
      * @return mixed
      * @throws \Exception
      */
-    public function get ($slug, $tracking_number)
+    public function get ($slug, $tracking_number, array $params = array())
     {
         if (empty($slug)) {
             throw new \Exception("Slug cannot be empty");
@@ -45,10 +45,14 @@ class LastCheckPoint extends Request
             throw new \Exception('Tracking number cannot be empty');
         }
 
-        return $this->send('last_checkpoint/' . $slug . '/' . $tracking_number, 'GET');
+        return $this->send('last_checkpoint/' . $slug . '/' . $tracking_number, 'GET', $params);
     }
 
-	public function get_by_id($id){
+	public function get_by_id($id, array $params = array()){
+		if (empty($id)) {
+			throw new \Exception('Tracking ID cannot be empty');
+		}
 
+		return $this->send('last_checkpoint/' . $id, 'GET', $params);
 	}
 } 

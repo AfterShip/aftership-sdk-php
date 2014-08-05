@@ -11,6 +11,7 @@
 ```
 
 #### Get your selected couriers list
+https://www.aftership.com/docs/api/4/couriers/get-couriers
 ```
 require 'vendor/autoload.php';
 
@@ -19,6 +20,7 @@ $response = $couriers->get();
 ```
 
 #### Get all our supported couriers list
+https://www.aftership.com/docs/api/4/couriers/get-couriers-all
 ```
 require 'vendor/autoload.php';
 
@@ -27,6 +29,7 @@ $response = $couriers->get_all();
 ```
 
 #### Detect courier by tracking number
+https://www.aftership.com/docs/api/4/couriers/post-couriers-detect
 ```
 require 'vendor/autoload.php';
 

@@ -9,8 +9,8 @@
         "aftership/aftership-php-sdk": "1.0"
     },
 ```
-#### Get your selected couriers list
 
+#### Get your selected couriers list
 ```
 require 'vendor/autoload.php';
 
@@ -19,7 +19,6 @@ $response = $couriers->get();
 ```
 
 #### Get all our supported couriers list
-
 ```
 require 'vendor/autoload.php';
 
@@ -28,7 +27,6 @@ $response = $couriers->get_all();
 ```
 
 #### Detect courier by tracking number
-
 ```
 require 'vendor/autoload.php';
 

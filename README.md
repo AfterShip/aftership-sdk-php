@@ -10,6 +10,9 @@ This is the offical PHP SDK provided by AfterShip <support@aftership.com>
         "aftership/aftership-php-sdk": "1.0"
     },
 ```
+```
+composer install
+```
 
 ## Couriers
 ##### Get your selected couriers list

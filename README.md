@@ -1,5 +1,6 @@
 ![Picture](https://www.aftership.com/assets/common/img/logo-aftership-premium-bright.png)
-###Aftership PHP SDK
+###AfterShip PHP SDK
+<hr>
 
 #### Installation
 **Using Composer**
@@ -37,24 +38,42 @@ $courier = new AfterShip\Couriers('AFTERSHIP_API_KEY');
 $response = $courier->detect('1234567890Z');
 ```
 
-#### Create a new tracking number
-[List of data for the API](https://www.aftership.com/docs/api/3.0/tracking/post-trackings#request)
+#### Create a new tracking
+https://www.aftership.com/docs/api/4/trackings/post-trackings
 ```
 require 'vendor/autoload.php';
 
 $trackings = new AfterShip\Trackings('AFTERSHIP_API_KEY');
 $tracking_info = array(
-    'slug'              => 'dhl',
-    'tracking_number'   => 'RA123456789US',
-
+    'slug'    => 'dhl',
+    'title'   => 'My Title',
 );
-$response = $trackings->create($tracking_info);
+$response = $trackings->create('RA123456789US', $tracking_info);
 ```
 
+#### Create multiple trackings
+(Will be available soon)
 
-####Return the latest 100 created trackings in past 30 days from the user account.
-[List of allowed parameters for the options](https://www.aftership.com/docs/api/3.0/tracking/get-trackings#request)
+#### Delete a tracking by slug and tracking number
+https://www.aftership.com/docs/api/4/trackings/delete-trackings
+```
+require 'vendor/autoload.php';
 
+$trackings = new AfterShip\Trackings('AFTERSHIP_API_KEY');
+$response = $trackings->delete('dhl', 'RA123456789US');
+```
+
+#### Delete a tracking by tracking ID
+https://www.aftership.com/docs/api/4/trackings/delete-trackings
+```
+require 'vendor/autoload.php';
+
+$trackings = new AfterShip\Trackings('AFTERSHIP_API_KEY');
+$response = $trackings->delete_by_id('53df4a90868a6df243b6efd8');
+```
+
+####Get tracking results of multiple trackings
+https://www.aftership.com/docs/api/4/trackings/get-trackings
 ```
 require 'vendor/autoload.php';
 
@@ -63,23 +82,29 @@ $options = array(
     'page'=>1,
     'limit'=>10
 );
-
 $response = $trackings->get_all($options)
 ```
 
-####Return a tracking result with all the detail checkpoints
-[Fields for the request](https://www.aftership.com/docs/api/3.0/tracking/get-trackings-slug-tracking_number#request)
-
+####Get tracking results of a single tracking by slug and tracking number
+https://www.aftership.com/docs/api/4/trackings/get-trackings-slug-tracking_number
 ```
 require 'vendor/autoload.php';
 
 $trackings = new AfterShip\Trackings('AFTERSHIP_API_KEY');
-$response = $trackings->get('dhl','RA123456789US',array('title','order_id'));
+$response = $trackings->get('dhl', 'RA123456789US', array('title','order_id'));
 ```
 
-####Update tracking record and return all the detail, exclude the checkpoints
-[List of allowed parameters](https://www.aftership.com/docs/api/3.0/tracking/put-trackings-slug-tracking_number#request)
+####Get tracking results of a single tracking by tracking ID
+https://www.aftership.com/docs/api/4/trackings/get-trackings-slug-tracking_number
+```
+require 'vendor/autoload.php';
 
+$trackings = new AfterShip\Trackings('AFTERSHIP_API_KEY');
+$response = $trackings->get_by_id('53df4a90868a6df243b6efd8', array('title','order_id'));
+```
+
+####Update a tracking by slug and tracking number
+https://www.aftership.com/docs/api/4/trackings/put-trackings-slug-tracking_number
 ```
 require 'vendor/autoload.php';
 
@@ -93,11 +118,28 @@ $params = array(
     'order_id_path'     => '',
     'custom_fields'     => array()
 );
-$response = $trackings->update('dhl','RA123456789US',$params);
+$response = $trackings->update('dhl', 'RA123456789US', $params);
 ```
 
-####Reactivate Tracking
+####Update a tracking by tracking ID
+https://www.aftership.com/docs/api/4/trackings/put-trackings-slug-tracking_number
+```
+require 'vendor/autoload.php';
 
+$trackings = new AfterShip\Trackings('AFTERSHIP_API_KEY');
+$params = array(
+    'smses'             => array(),
+    'emails'            => array(),
+    'title'             => '',
+    'customer_name'     => '',
+    'order_id'          => '',
+    'order_id_path'     => '',
+    'custom_fields'     => array()
+);
+$response = $trackings->update_by_id('53df4a90868a6df243b6efd8', $params);
+```
+
+####Reactivate Tracking by slug and tracking number
 ```
 require 'vendor/autoload.php';
 
@@ -105,13 +147,28 @@ $trackings = new AfterShip\Trackings('AFTERSHIP_API_KEY');
 $response = $trackings->retrack('dhl','RA123456789US');
 ```
 
-####Finding Last Checkpoint
+####Reactivate Tracking by tracking ID
+```
+require 'vendor/autoload.php';
 
+$trackings = new AfterShip\Trackings('AFTERSHIP_API_KEY');
+$response = $trackings->retrack_by_id('53df4a90868a6df243b6efd8');
+```
+
+####Return the tracking information of the last checkpoint of a single tracking by slug and tracking number
 ```
 require 'vendor/autoload.php';
 
 $last_check_point = new AfterShip\LastCheckPoint('AFTERSHIP_API_KEY');
 $response = $last_check_point->get('dhl','RA123456789US');
+```
+
+####Return the tracking information of the last checkpoint of a single tracking by tracking ID
+```
+require 'vendor/autoload.php';
+
+$last_check_point = new AfterShip\LastCheckPoint('AFTERSHIP_API_KEY');
+$response = $last_check_point->get_by_id('53df4a90868a6df243b6efd8');
 ```
 
 ####Adding Guzzle Plugins

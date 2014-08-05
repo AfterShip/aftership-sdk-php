@@ -1,4 +1,4 @@
-![Picture](https://www.aftership.com/assets/common/img/logo-aftership-premium-bright.png)
+![alt text](https://www.aftership.com/assets/common/img/logo-aftership-premium-bright.png)
 #AfterShip API PHP SDK
 This is the offical PHP SDK of AfterShip API. Provided by AfterShip <support@aftership.com>
 

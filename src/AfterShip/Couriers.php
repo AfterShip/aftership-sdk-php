@@ -6,7 +6,12 @@ use AfterShip\Core\Request;
 
 class Couriers extends Request
 {
-    public function __construct($api_key, $guzzle_plugins = array())
+	/**
+	 * The Couriers Constructor.
+	 * @param $api_key The AfterShip API Key.
+	 * @param array $guzzle_plugins Guzzle Plugins
+	 */
+	public function __construct($api_key, $guzzle_plugins = array())
     {
         if (empty($api_key))
             throw new \Exception('API Key is missing');
@@ -20,22 +25,41 @@ class Couriers extends Request
         parent::__construct();
     }
 
-    public function get()
+	/**
+	 * Return a list of user couriers enabled by user's account along their names, URLs, slugs, required fields.
+	 * https://www.aftership.com/docs/api/4/couriers/get-couriers
+	 * @return array Response body
+	 */
+	public function get()
     {
         return $this->send('couriers', 'GET');
     }
 
+	/**
+	 * Return a list of system couriers supported by AfterShip along with their names, URLs, slugs, required fields.
+	 * https://www.aftership.com/docs/api/4/couriers/get-couriers-all
+	 * @return array Response body
+	 */
 	public function get_all(){
 		return $this->send('couriers/all', 'GET');
 	}
 
-    public function detect($tracking_number, array $params = array())
+	/**
+	 * Return a list of matched couriers of a tracking based on the tracking number format. User can limit number of
+	 * matched couriers and change courier priority at courier settings. Or, passing the parameter `slugs` to detect.
+	 * https://www.aftership.com/docs/api/4/couriers/post-couriers-detect
+	 * @param $tracking_number The tracking number which is provider by tracking provider
+	 * @param array $params The optional parameters
+	 * @return array Response Body
+	 * @throws \Exception
+	 */
+	public function detect($tracking_number, array $params = array())
     {
         if (empty($tracking_number)) {
             throw new \Exception('Tracking number cannot be empty');
         }
 
-		//TODO
+		// Fill the tracking number into the params array
 		$params['tracking_number'] = $tracking_number;
         return $this->send('couriers/detect/', 'POST', array('tracking' => $params));
     }

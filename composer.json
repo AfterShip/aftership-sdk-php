@@ -3,7 +3,7 @@
     "description": "The PHP SDK of AfterShip API",
     "minimum-stability": "alpha",
     "license": "MIT",
-    "keywords": ["aftership", "track", "ups", "usps", "fedex", "aftership", "shipping", "tracking", "dhl"],
+    "keywords": ["aftership", "track", "ups", "usps", "fedex", "shipping", "tracking", "dhl"],
     "authors": [
         {
             "name": "AfterShip",

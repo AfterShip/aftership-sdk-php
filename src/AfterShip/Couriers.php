@@ -26,6 +26,7 @@ class Couriers extends Request
     }
 
 	/**
+	 * Get your selected couriers list
 	 * Return a list of user couriers enabled by user's account along their names, URLs, slugs, required fields.
 	 * https://www.aftership.com/docs/api/4/couriers/get-couriers
 	 * @return array Response body
@@ -36,6 +37,7 @@ class Couriers extends Request
     }
 
 	/**
+	 * Get all our supported couriers list
 	 * Return a list of system couriers supported by AfterShip along with their names, URLs, slugs, required fields.
 	 * https://www.aftership.com/docs/api/4/couriers/get-couriers-all
 	 * @return array Response body
@@ -45,6 +47,7 @@ class Couriers extends Request
 	}
 
 	/**
+	 * Detect courier by tracking number
 	 * Return a list of matched couriers of a tracking based on the tracking number format. User can limit number of
 	 * matched couriers and change courier priority at courier settings. Or, passing the parameter `slugs` to detect.
 	 * https://www.aftership.com/docs/api/4/couriers/post-couriers-detect

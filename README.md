@@ -10,6 +10,7 @@ This is the offical PHP SDK provided by AfterShip <support@aftership.com>
         "aftership/aftership-php-sdk": "1.0"
     },
 ```
+Run the following command in the command line
 ```
 composer install
 ```

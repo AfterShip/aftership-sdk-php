@@ -34,6 +34,7 @@ print '</br>';
 echo '<form action="testing.php" method="get" id="form">';
 echo 'API KEY: ';
 print '<input type="text" value="'.$api_key.'" name="api_key" size="45"/>';
+print ' <a href="http://aftership.uservoice.com/knowledgebase/articles/401963">How to generate AfterShip API Key?</a>';
 print '</br>';
 echo 'Request All: ';
 print '<input type="button" value="ALL" class="btn"/>';

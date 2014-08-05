@@ -1,6 +1,6 @@
 ![Picture](https://www.aftership.com/assets/common/img/logo-aftership-premium-bright.png)
-#AfterShip PHP SDK
-This is the offical PHP SDK provided by AfterShip <support@aftership.com>
+#AfterShip API PHP SDK
+This is the offical PHP SDK of AfterShip API. Provided by AfterShip <support@aftership.com>
 
 ## Installation
 #####Using Composer

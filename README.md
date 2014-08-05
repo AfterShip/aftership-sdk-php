@@ -9,14 +9,22 @@
         "aftership/aftership-php-sdk": "1.0"
     },
 ```
-#### 
-#### Get all our supported couriers list.
+#### Get your selected couriers list
 
 ```
 require 'vendor/autoload.php';
 
 $couriers = new AfterShip\Couriers('AFTERSHIP_API_KEY');
 $response = $couriers->get();
+```
+
+#### Get all our supported couriers list
+
+```
+require 'vendor/autoload.php';
+
+$couriers = new AfterShip\Couriers('AFTERSHIP_API_KEY');
+$response = $couriers->get_all();
 ```
 
 #### Detect courier by tracking number

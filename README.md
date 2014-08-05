@@ -1,8 +1,7 @@
 ![Picture](https://www.aftership.com/assets/common/img/logo-aftership-premium-bright.png)
 #AfterShip PHP SDK
-<hr>
 
-#### Installation
+## Installation
 **Using Composer**
 ```
  "require": {
@@ -11,6 +10,7 @@
     },
 ```
 
+## Couriers
 #### Get your selected couriers list
 https://www.aftership.com/docs/api/4/couriers/get-couriers
 ```

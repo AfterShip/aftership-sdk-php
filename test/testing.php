@@ -19,21 +19,31 @@
 
 <body>
 <?
-include_once('config.php');
 include_once('../vendor/autoload.php');
 
 $action = isset($_GET['action']) ? $_GET['action'] : '';
+$api_key = isset($_GET['api_key']) ? $_GET['api_key'] : '';
+$request_all = ($action == 'ALL');
 
-global $api_key;
-echo 'API KEY: ' . $api_key;
+echo '<img src="https://www.aftership.com/assets/common/img/logo-aftership-premium-bright.png"/>';
+echo '<h1>AfterShip API PHP SDK Testing</h1>';
+echo 'This is the offical PHP SDK of AfterShip API. Provided by AfterShip ';
+echo '<a href="support@aftership.com">support@aftership.com</a>';
+print '</br>';
+
+echo '<form action="testing.php" method="get" id="form">';
+echo 'API KEY: ';
+print '<input type="text" value="'.$api_key.'" name="api_key" size="45"/>';
+print '</br>';
+echo 'Request All: ';
+print '<input type="button" value="ALL" class="btn"/>';
 print '</br>';
 echo 'ACTION: '. $action;
 print '</br>';
-echo 'Request All: '. $request_all;
-print '</br>';
 
+print '<hr>';
 
-if (isset($api_key)){
+if (!$api_key){
 	echo '</br>';
 	echo '<b>Plase input API key first</b>';
 	exit;
@@ -51,11 +61,10 @@ function p($arr)
 }
 
 
-echo '<form action="testing.php" method="get" id="form">';
 echo '<input type="hidden" name="action" id="hidden"/>';
 
 $couriers = new AfterShip\Couriers($api_key);
-echo '<h1>Couriers</h1>';
+echo '<h2>Couriers</h2>';
 echo '<input type="button" value="couriers_get" class="btn">' . 'get user\'s couriers' . '</br>';
 if ($request_all || $action == 'couriers_get') {
 	p($couriers->get());
@@ -73,7 +82,7 @@ if ($request_all || $action == 'couriers_detect') {
 
 
 $trackings = new AfterShip\Trackings($api_key);
-echo '<h1>Trackings</h1>';
+echo '<h2>Trackings</h2>';
 echo '<input type="button" value="trackings_create" class="btn">' . 'create tracking' . '</br>';
 if ($request_all || $action == 'trackings_create') {
 	p($trackings->create('2254095771'));
@@ -145,7 +154,7 @@ if ($request_all || $action == 'trackings_retrack_by_id') {
 
 
 $last_check_point = new AfterShip\LastCheckPoint($api_key);
-echo '<h1>Last Check Point</h1>';
+echo '<h2>Last Check Point</h2>';
 echo '<input type="button" value="last_check_point_get" class="btn">' . 'get' . '</br>';
 if ($request_all || $action == 'last_check_point_get') {
 	p($last_check_point->get('dhl', '2254095771'));

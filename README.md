@@ -15,6 +15,12 @@ Run the following command in the command line
 composer install
 ```
 
+## Testing
+1. Execulte the file: aftership-php/test/testing.php at your browser
+2. Insert your AfterShip API Key. [How to generate AfterShip API Key](http://aftership.uservoice.com/knowledgebase/articles/401963)
+3. Click the request all button or the button of the represented request
+
+
 ## Couriers
 ##### Get your selected couriers list
 https://www.aftership.com/docs/api/4/couriers/get-couriers

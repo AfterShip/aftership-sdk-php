@@ -16,6 +16,9 @@ composer install
 ```
 
 ## Testing
+1. Execulte the file: aftership-php/test/testing.php at your browser
+2. Insert your AfterShip API Key. [How to generate AfterShip API Key](http://aftership.uservoice.com/knowledgebase/articles/401963)
+3. Click the request all button or the button of the represented request
 
 
 ## Couriers

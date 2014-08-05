@@ -140,6 +140,7 @@ $response = $trackings->update_by_id('53df4a90868a6df243b6efd8', $params);
 ```
 
 ####Reactivate Tracking by slug and tracking number
+https://www.aftership.com/docs/api/4/trackings/post-trackings-slug-tracking_number-retrack
 ```
 require 'vendor/autoload.php';
 
@@ -148,6 +149,7 @@ $response = $trackings->retrack('dhl','RA123456789US');
 ```
 
 ####Reactivate Tracking by tracking ID
+https://www.aftership.com/docs/api/4/trackings/post-trackings-slug-tracking_number-retrack
 ```
 require 'vendor/autoload.php';
 
@@ -156,6 +158,7 @@ $response = $trackings->retrack_by_id('53df4a90868a6df243b6efd8');
 ```
 
 ####Return the tracking information of the last checkpoint of a single tracking by slug and tracking number
+https://www.aftership.com/docs/api/4/last_checkpoint/get-last_checkpoint-slug-tracking_number
 ```
 require 'vendor/autoload.php';
 
@@ -164,6 +167,7 @@ $response = $last_check_point->get('dhl','RA123456789US');
 ```
 
 ####Return the tracking information of the last checkpoint of a single tracking by tracking ID
+https://www.aftership.com/docs/api/4/last_checkpoint/get-last_checkpoint-slug-tracking_number
 ```
 require 'vendor/autoload.php';
 

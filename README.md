@@ -5,7 +5,7 @@ aftership-php is a PHP SDK (module) for [AfterShip API](https://www.aftership.co
 Contact: <support@aftership.com>
 
 ## Installation
-#####Using Composer
+##### Using Composer
 ```
  "require": {
         ....
@@ -86,7 +86,7 @@ $trackings = new AfterShip\Trackings('AFTERSHIP_API_KEY');
 $response = $trackings->delete_by_id('53df4a90868a6df243b6efd8');
 ```
 
-#####Get tracking results of multiple trackings
+##### Get tracking results of multiple trackings
 https://www.aftership.com/docs/api/4/trackings/get-trackings
 ```
 require 'vendor/autoload.php';
@@ -99,7 +99,7 @@ $options = array(
 $response = $trackings->get_all($options)
 ```
 
-#####Get tracking results of a single tracking by slug and tracking number
+##### Get tracking results of a single tracking by slug and tracking number
 https://www.aftership.com/docs/api/4/trackings/get-trackings-slug-tracking_number
 ```
 require 'vendor/autoload.php';
@@ -108,7 +108,7 @@ $trackings = new AfterShip\Trackings('AFTERSHIP_API_KEY');
 $response = $trackings->get('dhl', 'RA123456789US', array('title','order_id'));
 ```
 
-#####Get tracking results of a single tracking by tracking ID
+##### Get tracking results of a single tracking by tracking ID
 https://www.aftership.com/docs/api/4/trackings/get-trackings-slug-tracking_number
 ```
 require 'vendor/autoload.php';
@@ -117,7 +117,7 @@ $trackings = new AfterShip\Trackings('AFTERSHIP_API_KEY');
 $response = $trackings->get_by_id('53df4a90868a6df243b6efd8', array('title','order_id'));
 ```
 
-#####Update a tracking by slug and tracking number
+##### Update a tracking by slug and tracking number
 https://www.aftership.com/docs/api/4/trackings/put-trackings-slug-tracking_number
 ```
 require 'vendor/autoload.php';
@@ -135,7 +135,7 @@ $params = array(
 $response = $trackings->update('dhl', 'RA123456789US', $params);
 ```
 
-#####Update a tracking by tracking ID
+##### Update a tracking by tracking ID
 https://www.aftership.com/docs/api/4/trackings/put-trackings-slug-tracking_number
 ```
 require 'vendor/autoload.php';
@@ -153,7 +153,7 @@ $params = array(
 $response = $trackings->update_by_id('53df4a90868a6df243b6efd8', $params);
 ```
 
-#####Reactivate Tracking by slug and tracking number
+##### Reactivate Tracking by slug and tracking number
 https://www.aftership.com/docs/api/4/trackings/post-trackings-slug-tracking_number-retrack
 ```
 require 'vendor/autoload.php';
@@ -162,7 +162,7 @@ $trackings = new AfterShip\Trackings('AFTERSHIP_API_KEY');
 $response = $trackings->retrack('dhl','RA123456789US');
 ```
 
-#####Reactivate Tracking by tracking ID
+##### Reactivate Tracking by tracking ID
 https://www.aftership.com/docs/api/4/trackings/post-trackings-slug-tracking_number-retrack
 ```
 require 'vendor/autoload.php';
@@ -171,8 +171,8 @@ $trackings = new AfterShip\Trackings('AFTERSHIP_API_KEY');
 $response = $trackings->retrack_by_id('53df4a90868a6df243b6efd8');
 ```
 
-##Last Check Point
-#####Return the tracking information of the last checkpoint of a single tracking by slug and tracking number
+## Last Check Point
+##### Return the tracking information of the last checkpoint of a single tracking by slug and tracking number
 https://www.aftership.com/docs/api/4/last_checkpoint/get-last_checkpoint-slug-tracking_number
 ```
 require 'vendor/autoload.php';
@@ -181,7 +181,7 @@ $last_check_point = new AfterShip\LastCheckPoint('AFTERSHIP_API_KEY');
 $response = $last_check_point->get('dhl','RA123456789US');
 ```
 
-#####Return the tracking information of the last checkpoint of a single tracking by tracking ID
+##### Return the tracking information of the last checkpoint of a single tracking by tracking ID
 https://www.aftership.com/docs/api/4/last_checkpoint/get-last_checkpoint-slug-tracking_number
 ```
 require 'vendor/autoload.php';
@@ -190,7 +190,7 @@ $last_check_point = new AfterShip\LastCheckPoint('AFTERSHIP_API_KEY');
 $response = $last_check_point->get_by_id('53df4a90868a6df243b6efd8');
 ```
 
-##Adding Guzzle Plugins
+## Adding Guzzle Plugins
 [Guzzle Plugins](http://guzzlephp.org/plugins/plugins-overview.html)
 
 ```

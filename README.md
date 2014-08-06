@@ -51,7 +51,7 @@ $courier = new AfterShip\Couriers('AFTERSHIP_API_KEY');
 $response = $courier->detect('1234567890Z');
 ```
 
-##Trackings
+## Trackings
 ##### Create a new tracking
 https://www.aftership.com/docs/api/4/trackings/post-trackings
 ```

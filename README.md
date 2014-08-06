@@ -212,9 +212,9 @@ $couriers = new AfterShip\Couriers('AFTERSHIP_API_KEY', $guzzlePlugins);
 ##Contributors
 These amazing people have contributed code to this project:
 
-Abishek R Srikaanth - [view contributions](https://github.com/AfterShip/aftership-php/commits?author=abishekrsrikaanth)
-Luis Cordova - [view contributions](https://github.com/AfterShip/aftership-php/commits?author=cordoval)
-Russell Davies - [view contributions](https://github.com/AfterShip/aftership-php/commits?author=russelldavies)
-akovalyov - [view contributions](https://github.com/AfterShip/aftership-php/commits?author=akovalyov)
-Robert Basic - [view contributions](https://github.com/AfterShip/aftership-php/commits?author=robertbasic)
+- Abishek R Srikaanth - [view contributions](https://github.com/AfterShip/aftership-php/commits?author=abishekrsrikaanth)
+- Luis Cordova - [view contributions](https://github.com/AfterShip/aftership-php/commits?author=cordoval)
+- Russell Davies - [view contributions](https://github.com/AfterShip/aftership-php/commits?author=russelldavies)
+- akovalyov - [view contributions](https://github.com/AfterShip/aftership-php/commits?author=akovalyov)
+- Robert Basic - [view contributions](https://github.com/AfterShip/aftership-php/commits?author=robertbasic)
 

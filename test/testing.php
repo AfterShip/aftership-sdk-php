@@ -86,7 +86,7 @@ $trackings = new AfterShip\Trackings($api_key);
 echo '<h2>Trackings</h2>';
 echo '<input type="button" value="trackings_create" class="btn">' . 'create tracking' . '</br>';
 if ($request_all || $action == 'trackings_create') {
-	p($trackings->create('2254095771'));
+	p($trackings->create('1ZV90R483A33906706'));
 }
 
 /*

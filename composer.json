@@ -1,7 +1,7 @@
 {
     "name": "aftership/aftership-php-sdk",
     "description": "The PHP SDK of AfterShip API",
-    "minimum-stability": "alpha",
+    "minimum-stability": "1.0",
     "license": "MIT",
     "keywords": ["aftership", "track", "ups", "usps", "fedex", "shipping", "tracking", "dhl"],
     "authors": [

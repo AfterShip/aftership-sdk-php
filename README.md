@@ -1,6 +1,8 @@
 ![Picture](https://www.aftership.com/assets/common/img/logo-aftership-premium-bright.png)
 #AfterShip API PHP SDK
-This is the offical PHP SDK of AfterShip API. Provided by AfterShip <support@aftership.com>
+aftership-php is a PHP SDK (module) for [AfterShip API](https://www.aftership.com/docs/api/4/). Module provides clean and elegant way to access API endpoints. **Compatible with Afership API**
+
+Contact: <support@aftership.com>
 
 ## Installation
 #####Using Composer
@@ -203,3 +205,14 @@ $guzzlePlugins = array($history, $async, $logPlugin);
 $tracking = new AfterShip\Tracking('AFTERSHIP_API_KEY', $guzzlePlugins);
 $couriers = new AfterShip\Couriers('AFTERSHIP_API_KEY', $guzzlePlugins);
 ```
+
+
+##Contributors
+These amazing people have contributed code to this project:
+
+- Abishek R Srikaanth - [view contributions](https://github.com/AfterShip/aftership-php/commits?author=abishekrsrikaanth)
+- Luis Cordova - [view contributions](https://github.com/AfterShip/aftership-php/commits?author=cordoval)
+- Russell Davies - [view contributions](https://github.com/AfterShip/aftership-php/commits?author=russelldavies)
+- akovalyov - [view contributions](https://github.com/AfterShip/aftership-php/commits?author=akovalyov)
+- Robert Basic - [view contributions](https://github.com/AfterShip/aftership-php/commits?author=robertbasic)
+

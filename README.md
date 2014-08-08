@@ -9,7 +9,7 @@ Contact: <support@aftership.com>
 ```
  "require": {
         ....
-        "aftership/aftership-php-sdk": "4.0.0"
+        "aftership/aftership-php-sdk": "4.0.1"
     },
 ```
 Run the following command in the command line

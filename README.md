@@ -22,7 +22,6 @@ or
 ```
 php composer.phar install
 ```
-
 4.  Please ensure you have installed the PHP extension CURL, you could run the following command to install it 
 ```
 sudo apt-get install php5-curl

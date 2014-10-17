@@ -7,20 +7,34 @@ Contact: <support@aftership.com>
 ## Installation
 ##### Using Composer
 ```
- "require": {
-        ....
-        "aftership/aftership-php-sdk": "4.0.0"
-    },
+//Create a Composer.json
+{
+	"require": {
+		"aftership/aftership-php-sdk": "4.0.0"
+	}
+}
 ```
+
 Run the following command in the command line
 ```
 composer install
 ```
 
+Please ensure you have installed the PHP extension CURL, you could run the following command to install it 
+```
+sudo apt-get install php5-curl
+```
+and restart the web server and PHP process
+
+
 ## Testing
-1. Execulte the file: aftership-php/test/testing.php at your browser
-2. Insert your AfterShip API Key. [How to generate AfterShip API Key](http://aftership.uservoice.com/knowledgebase/articles/401963)
-3. Click the request all button or the button of the represented request
+1. Copy the test folder to the same folder of composer.json
+```
+cp -r -f vendor/aftership/aftership-php-sdk/ ./
+```
+2. Execulte the file: aftership-php/test/testing.php at your browser
+3. Insert your AfterShip API Key. [How to generate AfterShip API Key](http://aftership.uservoice.com/knowledgebase/articles/401963)
+4. Click the request all button or the button of the represented request
 
 
 ## Couriers

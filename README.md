@@ -5,8 +5,8 @@ aftership-php is a PHP SDK (module) for [AfterShip API](https://www.aftership.co
 Contact: <support@aftership.com>
 
 ## Installation
-1.  Download and Install Composer. https://getcomposer.org/download/
-2.  Create a composer.json
+Download and Install Composer. https://getcomposer.org/download/
+Create a composer.json
 ```
 {
         "require": {
@@ -14,7 +14,7 @@ Contact: <support@aftership.com>
 		}
 }
 ```
-3. Run the following command in the command line
+Run the following command in the command line
 ```
 composer install
 ```
@@ -22,7 +22,7 @@ or
 ```
 php composer.phar install
 ```
-4.  Please ensure you have installed the PHP extension CURL, you could run the following command to install it 
+Please ensure you have installed the PHP extension CURL, you could run the following command to install it 
 ```
 sudo apt-get install php5-curl
 ```
@@ -225,6 +225,7 @@ $couriers = new AfterShip\Couriers('AFTERSHIP_API_KEY', $guzzlePlugins);
 ## Contributors
 These amazing people have contributed code to this project:
 
+- Teddy Chan - [view contributions](https://github.com/AfterShip/aftership-php/commits?author=teddychan)
 - Sunny Chow - [view contributions](https://github.com/AfterShip/aftership-php/commits?author=sunnychow)
 - Abishek R Srikaanth - [view contributions](https://github.com/AfterShip/aftership-php/commits?author=abishekrsrikaanth)
 - Luis Cordova - [view contributions](https://github.com/AfterShip/aftership-php/commits?author=cordoval)

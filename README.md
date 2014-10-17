@@ -14,6 +14,13 @@ Create a composer.json
 		}
 }
 ```
+Please ensure you have installed the PHP extension CURL, you could run the following command to install it 
+```
+sudo apt-get install php5-curl
+```
+and restart the web server and PHP process. 
+
+
 Run the following command in the command line
 ```
 composer install
@@ -22,11 +29,6 @@ or
 ```
 php composer.phar install
 ```
-Please ensure you have installed the PHP extension CURL, you could run the following command to install it 
-```
-sudo apt-get install php5-curl
-```
-and restart the web server and PHP process. Then, run step 3 again.
 
 ## Testing
 1. Copy the test folder to the same folder of composer.json

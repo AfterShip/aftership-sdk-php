@@ -30,7 +30,7 @@ and restart the web server and PHP process
 ## Testing
 1. Copy the test folder to the same folder of composer.json
 ```
-cp -r -f vendor/aftership/aftership-php-sdk/ ./
+cp -r -f vendor/aftership/aftership-php-sdk/test ./
 ```
 2. Execulte the file: aftership-php/test/testing.php at your browser
 3. Insert your AfterShip API Key. [How to generate AfterShip API Key](http://aftership.uservoice.com/knowledgebase/articles/401963)

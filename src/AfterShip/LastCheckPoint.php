@@ -11,11 +11,15 @@ use AfterShip\Core\Request;
  */
 class LastCheckPoint extends Request
 {
-	/**
-	 * The LastCheckPoint constructor.
-	 * @param $api_key The AfterShip API Key.
-	 * @param array $guzzle_plugins Guzzle Plugins
-	 */
+
+    /**
+     * The LastCheckPoint constructor.
+     *
+     * @param string $api_key The AfterShip API Key.
+     * @param array $guzzle_plugins Guzzle Plugins
+     *
+     * @throws \Exception
+     */
 	public function __construct ($api_key, $guzzle_plugins = array())
     {
         if (empty($api_key)) {
@@ -34,8 +38,8 @@ class LastCheckPoint extends Request
 	/**
 	 * Return the tracking information of the last checkpoint of a single tracking.
 	 * https://www.aftership.com/docs/api/4/last_checkpoint/get-last_checkpoint-slug-tracking_number
-	 * @param $slug The slug of the tracking provider
-	 * @param $tracking_number The tracking number which is provider by tracking provider
+	 * @param string $slug The slug of the tracking provider
+	 * @param string $tracking_number The tracking number which is provider by tracking provider
 	 * @param array $params The optional parameters
 	 * @return array Response body
 	 * @throws \Exception
@@ -56,7 +60,7 @@ class LastCheckPoint extends Request
 	/**
 	 * Return the tracking information of the last checkpoint of a single tracking.
 	 * https://www.aftership.com/docs/api/4/last_checkpoint/get-last_checkpoint-slug-tracking_number
-	 * @param $id The tracking ID which is provided by AfterShip
+	 * @param string $id The tracking ID which is provided by AfterShip
 	 * @param array $params The optional parameters
 	 * @return array Response body
 	 * @throws \Exception

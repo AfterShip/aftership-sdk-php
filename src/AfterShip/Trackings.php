@@ -6,11 +6,15 @@ use AfterShip\Core\Request;
 
 class Trackings extends Request
 {
-	/**
-	 * The Trackings constructor.
-	 * @param $api_key The AfterShip API Key.
-	 * @param array $guzzle_plugins Guzzle Plugins
-	 */
+
+    /**
+     * The Trackings constructor.
+     *
+     * @param string $api_key The AfterShip API Key.
+     * @param array $guzzle_plugins Guzzle Plugins
+     *
+     * @throws \Exception
+     */
 	public function __construct($api_key, $guzzle_plugins = array())
 	{
 		if (empty($api_key)) {
@@ -29,7 +33,7 @@ class Trackings extends Request
 	/**
 	 * Create a tracking.
 	 * https://www.aftership.com/docs/api/4/trackings/post-trackings
-	 * @param $tracking_number The tracking number which is provider by tracking provider
+	 * @param string $tracking_number The tracking number which is provider by tracking provider
 	 * @param array $params The optional parameters
 	 * @return array Reponse Body
 	 * @throws \Exception
@@ -60,8 +64,8 @@ class Trackings extends Request
 	/**
 	 * Delete a tracking number.
 	 * https://www.aftership.com/docs/api/4/trackings/delete-trackings
-	 * @param $slug The slug of the tracking provider
-	 * @param $tracking_number The tracking number which is provider by tracking provider
+	 * @param string $slug The slug of the tracking provider
+	 * @param string $tracking_number The tracking number which is provider by tracking provider
 	 * @return array Response body
 	 * @throws \Exception
 	 */
@@ -81,7 +85,7 @@ class Trackings extends Request
 	/**
 	 * Delete a tracking number.
 	 * https://www.aftership.com/docs/api/4/trackings/delete-trackings
-	 * @param $id The tracking ID which is provided by AfterShip
+	 * @param string $id The tracking ID which is provided by AfterShip
 	 * @return array Response body
 	 * @throws \Exception
 	 */
@@ -106,8 +110,8 @@ class Trackings extends Request
 	/**
 	 * Get tracking results of a single tracking.
 	 * https://www.aftership.com/docs/api/4/trackings/get-trackings-slug-tracking_number
-	 * @param $slug The slug of the tracking provider
-	 * @param $tracking_number The tracking number which is provider by tracking provider
+	 * @param string $slug The slug of the tracking provider
+	 * @param string $tracking_number The tracking number which is provider by tracking provider
 	 * @param array $params The optional parameters
 	 * @return array Response body
 	 * @throws \Exception
@@ -128,7 +132,7 @@ class Trackings extends Request
 	/**
 	 * Get tracking results of a single tracking.
 	 * https://www.aftership.com/docs/api/4/trackings/get-trackings-slug-tracking_number
-	 * @param $id The tracking ID which is provided by AfterShip
+	 * @param string $id The tracking ID which is provided by AfterShip
 	 * @param array $params The optional parameters
 	 * @return array Response body
 	 * @throws \Exception
@@ -144,8 +148,8 @@ class Trackings extends Request
 	/**
 	 * Update a tracking.
 	 * https://www.aftership.com/docs/api/4/trackings/put-trackings-slug-tracking_number
-	 * @param $slug The slug of the tracking provider
-	 * @param $tracking_number The tracking number which is provider by tracking provider
+	 * @param string $slug The slug of the tracking provider
+	 * @param string $tracking_number The tracking number which is provider by tracking provider
 	 * @param array $params The optional parameters
 	 * @return array Response body
 	 * @throws \Exception
@@ -166,7 +170,7 @@ class Trackings extends Request
 	/**
 	 * Update a tracking.
 	 * https://www.aftership.com/docs/api/4/trackings/put-trackings-slug-tracking_number
-	 * @param $id The tracking ID which is provided by AfterShip
+	 * @param string $id The tracking ID which is provided by AfterShip
 	 * @param array $params The optional parameters
 	 * @return array Response body
 	 * @throws \Exception
@@ -183,8 +187,8 @@ class Trackings extends Request
 	/**
 	 * Retrack an expired tracking once.
 	 * https://www.aftership.com/docs/api/4/trackings/post-trackings-slug-tracking_number-retrack
-	 * @param $slug The slug of tracking provider
-	 * @param $tracking_number The tracking number which is provider by tracking provider
+	 * @param string $slug The slug of tracking provider
+	 * @param string $tracking_number The tracking number which is provider by tracking provider
 	 * @return array Response body
 	 * @throws \Exception
 	 */
@@ -204,7 +208,7 @@ class Trackings extends Request
 	/**
 	 * Retrack an expired tracking once.
 	 * https://www.aftership.com/docs/api/4/trackings/post-trackings-slug-tracking_number-retrack
-	 * @param $id The tracking ID which is provided by AfterShip
+	 * @param string $id The tracking ID which is provided by AfterShip
 	 * @return array Response body
 	 * @throws \Exception
 	 */

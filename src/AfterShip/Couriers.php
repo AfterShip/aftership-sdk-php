@@ -6,11 +6,15 @@ use AfterShip\Core\Request;
 
 class Couriers extends Request
 {
-	/**
-	 * The Couriers Constructor.
-	 * @param $api_key The AfterShip API Key.
-	 * @param array $guzzle_plugins Guzzle Plugins
-	 */
+
+    /**
+     * The Couriers Constructor.
+     *
+     * @param string $api_key The AfterShip API Key.
+     * @param array $guzzle_plugins Guzzle Plugins
+     *
+     * @throws \Exception
+     */
 	public function __construct($api_key, $guzzle_plugins = array())
     {
         if (empty($api_key))
@@ -51,7 +55,7 @@ class Couriers extends Request
 	 * Return a list of matched couriers of a tracking based on the tracking number format. User can limit number of
 	 * matched couriers and change courier priority at courier settings. Or, passing the parameter `slugs` to detect.
 	 * https://www.aftership.com/docs/api/4/couriers/post-couriers-detect
-	 * @param $tracking_number The tracking number which is provider by tracking provider
+	 * @param string $tracking_number The tracking number which is provider by tracking provider
 	 * @param array $params The optional parameters
 	 * @return array Response Body
 	 * @throws \Exception

@@ -20,7 +20,7 @@ class LastCheckPoint extends Request
      *
      * @throws \Exception
      */
-	public function __construct ($api_key, $guzzle_plugins = array())
+	public function __construct ($api_key, array $guzzle_plugins = array())
     {
         if (empty($api_key)) {
             throw new \Exception('API Key is missing');

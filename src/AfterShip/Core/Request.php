@@ -28,7 +28,7 @@ class Request
 		}
 	}
 
-	protected function send($url, $request_type, $data = array())
+	protected function send($url, $request_type, array $data = array())
 	{
 		$headers = array(
 			'aftership-api-key' => $this->_api_key,

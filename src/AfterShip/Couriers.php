@@ -3,6 +3,7 @@
 namespace AfterShip;
 
 use AfterShip\Core\Request;
+use AfterShip\Exception\AftershipException;
 
 class Couriers extends Request
 {
@@ -13,12 +14,12 @@ class Couriers extends Request
      * @param string $api_key The AfterShip API Key.
      * @param array $guzzle_plugins Guzzle Plugins
      *
-     * @throws \Exception
+     * @throws AftershipException
      */
 	public function __construct($api_key, array $guzzle_plugins = array())
     {
         if (empty($api_key))
-            throw new \Exception('API Key is missing');
+            throw new AftershipException('API Key is missing');
 
         $this->_api_key = $api_key;
 
@@ -63,7 +64,7 @@ class Couriers extends Request
 	public function detect($tracking_number, array $params = array())
     {
         if (empty($tracking_number)) {
-            throw new \Exception('Tracking number cannot be empty');
+            throw new AftershipException('Tracking number cannot be empty');
         }
 
 		// Fill the tracking number into the params array

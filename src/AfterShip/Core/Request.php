@@ -2,6 +2,7 @@
 
 namespace AfterShip\Core;
 
+use AfterShip\Exception\AftershipException;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Guzzle\Common\Exception\GuzzleException;
 use Guzzle\Http\Client;
@@ -49,7 +50,7 @@ class Request
 				$request = $this->_client->delete($this->_api_url . '/' . $this->_api_version . '/' . $url, $headers, json_encode($data));
 				break;
             default:
-                throw new \Exception("Method $request_type is currently not supported.");
+                throw new AftershipException("Method $request_type is currently not supported.");
 		}
 
 		try {

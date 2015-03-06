@@ -28,7 +28,7 @@ class Request
 		}
 	}
 
-	protected function send($url, $request_type, $data = array())
+	protected function send($url, $request_type, array $data = array())
 	{
 		$headers = array(
 			'aftership-api-key' => $this->_api_key,
@@ -48,6 +48,8 @@ class Request
 			case "DELETE":
 				$request = $this->_client->delete($this->_api_url . '/' . $this->_api_version . '/' . $url, $headers, json_encode($data));
 				break;
+            default:
+                throw new \Exception("Method $request_type is currently not supported.");
 		}
 
 		try {

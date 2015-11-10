@@ -14,7 +14,7 @@ class Couriers extends Request
      * @param string $api_key The AfterShip API Key.
      * @param array $guzzle_plugins Guzzle Plugins
      *
-     * @throws AftershipException
+     * @throws \AftershipException
      */
 	public function __construct($api_key, array $guzzle_plugins = array())
     {
@@ -59,7 +59,7 @@ class Couriers extends Request
 	 * @param string $tracking_number The tracking number which is provider by tracking provider
 	 * @param array $params The optional parameters
 	 * @return array Response Body
-	 * @throws \Exception
+	 * @throws \AftershipException
 	 */
 	public function detect($tracking_number, array $params = array())
     {

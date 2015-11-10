@@ -132,7 +132,6 @@ try {
 		)));
 	}
 
-
 	echo '<input type="button" value="trackings_update" class="btn">' . 'update a tracking' . '</br>';
 	if ($request_all || $action == 'trackings_update') {
 		p($trackings->update('ups', '1ZV90R483A33906706', array(
@@ -147,7 +146,6 @@ try {
 			'customer_name' => 'Sunny'
 		));
 	}
-
 
 	echo '<input type="button" value="trackings_retrack" class="btn">' . 'retrack a tracking' . '</br>';
 	if ($request_all || $action == 'trackings_retrack') {
@@ -180,6 +178,51 @@ try {
 } catch (Exception $e) {
 	echo $e->getMessage() . "<br>";
 }
+
+
+try {
+	$notifications = new AfterShip\Notifications($api_key);
+	echo '<h2>Notifications</h2>';
+
+
+	echo '<input type="button" value="notifications_create" class="btn">' . 'create notification' . '</br>';
+	if ($request_all || $action == 'notifications_create') {
+		p($notifications->create('ups', '1ZV90R483A33906706', array(
+			'email' => ['youremail@yourdomain.com']
+		)));
+	}
+
+	echo '<input type="button" value="notifications_create_by_id" class="btn">' . 'create notification by id' . '</br>';
+	if ($request_all || $action == 'notifications_create_by_id') {
+		p($notifications->create_by_id('53df4a90868a6df243b6efd8'));
+	}
+
+	echo '<input type="button" value="notifications_delete" class="btn">' . 'delete notification' . '</br>';
+	if ($request_all || $action == 'notifications_delete') {
+		p($notifications->delete('ups', '1ZV90R483A33906706'));
+	}
+
+	echo '<input type="button" value="notifications_delete_by_id" class="btn">' . 'delete notification by id' . '</br>';
+	if ($request_all || $action == 'notifications_delete_by_id') {
+		p($notifications->delete_by_id('53df4d66868a6df243b6f882'));
+	}
+
+	echo '<input type="button" value="notifications_get" class="btn">' . 'get a notification' . '</br>';
+	if ($request_all || $action == 'notifications_get') {
+		p($notifications->get('dhl', '2254095771'));
+	}
+
+	echo '<input type="button" value="notifications_get_by_id" class="btn">' . 'get a notification by id' . '</br>';
+	if ($request_all || $action == 'notifications_get_by_id') {
+		p($notifications->get_by_id('53df4a90868a6df243b6efd8', array(
+			'fields' => 'customer_name'
+		)));
+	}
+
+} catch (Exception $e) {
+	echo $e->getMessage() . "<br>";
+}
+
 echo '</form>';
 
 echo '

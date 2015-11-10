@@ -10,7 +10,7 @@ Create a composer.json
 ```
 {
         "require": {
-		    "aftership/aftership-php-sdk": "4.0.0"
+		    "aftership/aftership-php-sdk": "4.0.1"
 		}
 }
 ```
@@ -206,6 +206,62 @@ require 'vendor/autoload.php';
 $last_check_point = new AfterShip\LastCheckPoint('AFTERSHIP_API_KEY');
 $response = $last_check_point->get_by_id('53df4a90868a6df243b6efd8');
 ```
+
+## Notifications
+##### Create a new notification by slug and tracking number
+https://www.aftership.com/docs/api/4/notifications/post-add-notifications
+```
+require 'vendor/autoload.php';
+
+$notifications = new AfterShip\Notifications('AFTERSHIP_API_KEY');
+$response = $notifications->create('ups', '1ZV90R483A33906706', array(
+                'email' => ['youremail@yourdomain.com']
+            ))
+```
+
+##### Create a new notification by tracking ID
+https://www.aftership.com/docs/api/4/notifications/post-add-notifications
+```
+require 'vendor/autoload.php';
+
+$notifications = new AfterShip\Notifications('AFTERSHIP_API_KEY');
+$response = $notifications->create_by_id('53df4a90868a6df243b6efd8');
+```
+
+##### Delete a notification by slug and tracking number.
+https://www.aftership.com/docs/api/4/notifications/post-remove-notifications
+```
+require 'vendor/autoload.php';
+
+$notifications = new AfterShip\Notifications('AFTERSHIP_API_KEY');
+$response = $notifications->delete('ups', '1ZV90R483A33906706'));
+```
+##### Delete a notification by tracking ID.
+https://www.aftership.com/docs/api/4/notifications/post-remove-notifications
+```
+require 'vendor/autoload.php';
+
+$notifications = new AfterShip\Notifications('AFTERSHIP_API_KEY');
+$response = $notifications->delete_by_id('53df4d66868a6df243b6f882'));
+```
+
+##### Get notification of a single tracking by slug and tracking number.
+https://www.aftership.com/docs/api/4/notifications/get-notifications
+```
+require 'vendor/autoload.php';
+
+$notifications = new AfterShip\Notifications('AFTERSHIP_API_KEY');
+$response = $notifications->get('dhl', '2254095771'));
+```
+##### Get notification of a single tracking by tracking ID
+https://www.aftership.com/docs/api/4/notifications/get-notifications
+```
+require 'vendor/autoload.php';
+
+$notifications = new AfterShip\Notifications('AFTERSHIP_API_KEY');
+$response = $notifications->get_by_id('53df4a90868a6df243b6efd8', array('fields' => 'customer_name'));
+```
+
 
 ## Adding Guzzle Plugins
 [Guzzle Plugins](http://guzzlephp.org/plugins/plugins-overview.html)

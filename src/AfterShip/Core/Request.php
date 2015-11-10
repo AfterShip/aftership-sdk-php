@@ -56,7 +56,7 @@ class Request
 		try {
 			$response = $request->send()->json();
 		} catch (BadResponseException $exception) {
-			$response = $exception->getResponse()->json();
+			throw $exception;
 		} catch (GuzzleException $exception) {
 			throw $exception;
 		}

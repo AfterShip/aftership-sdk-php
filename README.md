@@ -6,29 +6,16 @@ Contact: <support@aftership.com>
 
 ## Installation
 Download and Install Composer. https://getcomposer.org/download/
-Create a composer.json
+Run the following command to require AfterShip PHP SDK
 ```
-{
-        "require": {
-		    "aftership/aftership-php-sdk": "4.0.1"
-		}
-}
+composer require aftership/aftership-php-sdk
 ```
+
 Please ensure you have installed the PHP extension CURL, you could run the following command to install it 
 ```
 sudo apt-get install php5-curl
 ```
-and restart the web server and PHP process. 
-
-
-Run the following command in the command line
-```
-composer install
-```
-or
-```
-php composer.phar install
-```
+and restart the web server and PHP process.
 
 ## Testing
 1. Copy the test folder to the same folder of composer.json

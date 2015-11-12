@@ -5,17 +5,25 @@ aftership-php is a PHP SDK (module) for [AfterShip API](https://www.aftership.co
 Contact: <support@aftership.com>
 
 ## Installation
-Download and Install Composer. https://getcomposer.org/download/
-Run the following command to require AfterShip PHP SDK
+##### Download and Install Composer. https://getcomposer.org/download/
+
+Then, you have 2 options to download the AfterShip PHP SDK
+1. Run the following command to require AfterShip PHP SDK
 ```
 composer require aftership/aftership-php-sdk
 ```
+or
+2. git pull this repo and run the following command
+```
+composer install
+```
 
-Please ensure you have installed the PHP extension CURL, you could run the following command to install it 
+#### Please ensure you have installed the PHP extension CURL, you could run the following command to install it
 ```
 sudo apt-get install php5-curl
 ```
 and restart the web server and PHP process.
+
 
 ## Testing
 1. Copy the test folder to the same folder of composer.json

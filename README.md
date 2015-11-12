@@ -22,7 +22,7 @@ and restart the web server and PHP process.
 ```
 cp -r -f vendor/aftership/aftership-php-sdk/test ./
 ```
-2. Execulte the file: aftership-php/test/testing.php at your browser
+2. Execulte the file: test/testing.php at your browser
 3. Insert your AfterShip API Key. [How to generate AfterShip API Key](http://aftership.uservoice.com/knowledgebase/articles/401963)
 4. Click the request all button or the button of the represented request
 

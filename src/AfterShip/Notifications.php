@@ -49,7 +49,7 @@ class Notifications extends Request
 			throw new AftershipException('Tracking number cannot be empty');
 		}
 
-		return $this->send('notifications/' . $slug . '/' . $tracking_number, 'POST', array('notification' => $params));
+		return $this->send('notifications/' . $slug . '/' . $tracking_number . '/add', 'POST', array('notification' => $params));
 	}
 
 	/**
@@ -65,7 +65,7 @@ class Notifications extends Request
 			throw new AftershipException('Tracking ID cannot be empty');
 		}
 
-		return $this->send('notifications/' . $id, 'POST', array('notification' => $params));
+		return $this->send('notifications/' . $id . '/add', 'POST', array('notification' => $params));
 	}
 
 	/**
@@ -86,7 +86,7 @@ class Notifications extends Request
 			throw new AftershipException('Tracking number cannot be empty');
 		}
 
-		return $this->send('notifications/' . $slug . '/' . $tracking_number, 'DELETE', array('notification' => $params));
+		return $this->send('notifications/' . $slug . '/' . $tracking_number . '/remove', 'POST', array('notification' => $params));
 	}
 
 	/**
@@ -101,7 +101,7 @@ class Notifications extends Request
 			throw new AftershipException('Tracking ID cannot be empty');
 		}
 
-		return $this->send('notifications/' . $id, 'DELETE', array('notification' => $params));
+		return $this->send('notifications/' . $id . '/remove', 'POST', array('notification' => $params));
 	}
 
 	/**

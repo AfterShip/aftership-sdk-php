@@ -115,14 +115,14 @@ try {
 	echo '<input type="button" value="trackings_get_all" class="btn">' . 'get all trackings' . '</br>';
 	if ($request_all || $action == 'trackings_get_all') {
 		p($trackings->get_all(array(
-			'slug' => 'dhl',
+			'slug' => 'ups',
 			'fields' => 'title,order_id,message,country_name'
 		)));
 	}
 
 	echo '<input type="button" value="trackings_get" class="btn">' . 'get a tracking' . '</br>';
 	if ($request_all || $action == 'trackings_get') {
-		p($trackings->get('dhl', '2254095771'));
+		p($trackings->get('ups', '1ZV90R483A33906706'));
 	}
 
 	echo '<input type="button" value="trackings_get_by_id" class="btn">' . 'get a tracking by id' . '</br>';
@@ -149,7 +149,7 @@ try {
 
 	echo '<input type="button" value="trackings_retrack" class="btn">' . 'retrack a tracking' . '</br>';
 	if ($request_all || $action == 'trackings_retrack') {
-		p($trackings->retrack('dhl', '2254095771'));
+		p($trackings->retrack('ups', '1ZV90R483A33906706'));
 	}
 
 	echo '<input type="button" value="trackings_retrack_by_id" class="btn">' . 'retrack a tracking by id' . '</br>';
@@ -166,7 +166,7 @@ try {
 	echo '<h2>Last Check Point</h2>';
 	echo '<input type="button" value="last_check_point_get" class="btn">' . 'get' . '</br>';
 	if ($request_all || $action == 'last_check_point_get') {
-		p($last_check_point->get('dhl', '2254095771'));
+		p($last_check_point->get('ups', '1ZV90R483A33906706'));
 	}
 
 	echo '<input type="button" value="last_check_point_get_by_id" class="btn">' . 'get by id' . '</br>';
@@ -184,11 +184,10 @@ try {
 	$notifications = new AfterShip\Notifications($api_key);
 	echo '<h2>Notifications</h2>';
 
-
 	echo '<input type="button" value="notifications_create" class="btn">' . 'create notification' . '</br>';
 	if ($request_all || $action == 'notifications_create') {
 		p($notifications->create('ups', '1ZV90R483A33906706', array(
-			'email' => ['youremail@yourdomain.com']
+			'emails' => ['youremail@yourdomain.com']
 		)));
 	}
 
@@ -199,7 +198,9 @@ try {
 
 	echo '<input type="button" value="notifications_delete" class="btn">' . 'delete notification' . '</br>';
 	if ($request_all || $action == 'notifications_delete') {
-		p($notifications->delete('ups', '1ZV90R483A33906706'));
+		p($notifications->delete('ups', '1ZV90R483A33906706', array(
+			'emails' => ['youremail@yourdomain.com']
+		)));
 	}
 
 	echo '<input type="button" value="notifications_delete_by_id" class="btn">' . 'delete notification by id' . '</br>';
@@ -209,7 +210,7 @@ try {
 
 	echo '<input type="button" value="notifications_get" class="btn">' . 'get a notification' . '</br>';
 	if ($request_all || $action == 'notifications_get') {
-		p($notifications->get('dhl', '2254095771'));
+		p($notifications->get('ups', '1ZV90R483A33906706'));
 	}
 
 	echo '<input type="button" value="notifications_get_by_id" class="btn">' . 'get a notification by id' . '</br>';

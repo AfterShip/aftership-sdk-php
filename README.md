@@ -202,7 +202,7 @@ require 'vendor/autoload.php';
 
 $notifications = new AfterShip\Notifications('AFTERSHIP_API_KEY');
 $response = $notifications->create('ups', '1ZV90R483A33906706', array(
-                'email' => ['youremail@yourdomain.com']
+                'emails' => ['youremail@yourdomain.com']
             ))
 ```
 
@@ -221,7 +221,9 @@ https://www.aftership.com/docs/api/4/notifications/post-remove-notifications
 require 'vendor/autoload.php';
 
 $notifications = new AfterShip\Notifications('AFTERSHIP_API_KEY');
-$response = $notifications->delete('ups', '1ZV90R483A33906706'));
+$response = $notifications->delete('ups', '1ZV90R483A33906706', array(
+                  'emails' => ['youremail@yourdomain.com']
+              )));
 ```
 ##### Delete a notification by tracking ID.
 https://www.aftership.com/docs/api/4/notifications/post-remove-notifications

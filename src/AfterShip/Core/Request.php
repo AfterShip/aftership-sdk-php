@@ -54,13 +54,20 @@ class Request
 		}
 
 		try {
-			$response = $request->send()->json();
+			$result = $request->send();
 		} catch (BadResponseException $exception) {
-			throw $exception;
+			// http://guzzle3.readthedocs.org/http-client/request.html#http-request-messages
+			$result = $exception->getResponse();
 		} catch (GuzzleException $exception) {
 			throw $exception;
 		}
 
-		return $response;
+		try {
+			$json = $result->json();
+		} catch (Exception $exception) {
+			throw $exception;
+		}
+
+		return $json;
 	}
 }

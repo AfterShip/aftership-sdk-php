@@ -29,10 +29,6 @@ class LastCheckPoint extends Request
 
         $this->_api_key = $api_key;
 
-        if (count($guzzle_plugins) > 0) {
-            $this->_guzzle_plugins = $guzzle_plugins;
-        }
-
         parent::__construct();
     }
 

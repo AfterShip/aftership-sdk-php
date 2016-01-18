@@ -1,5 +1,4 @@
 <?php
-
 namespace AfterShip\Core;
 
 use GuzzleHttp\ClientInterface;
@@ -24,19 +23,32 @@ class Request
     protected $client;
 
     /**
+     * @var string
+     */
+    protected $apiUrl;
+
+    /**
+     * @var Client
+     */
+    protected $apiVersion;
+
+    /**
      * Request constructor.
      *
-     * @param $apiKey
+     * @param string $apiKey
+     * @param string $apiUrl
+     * @param string $apiVersion
      *
      * @throws AfterShipException
      */
-    public function __construct($apiKey)
+    public function __construct($apiKey, $apiUrl = self::API_URL, $apiVersion = self::API_VERSION)
     {
         if (empty($apiKey)) {
             throw new AfterShipException('API Key is missing');
         }
-
-        $this->apiKey = $apiKey;
+        $this->apiKey     = $apiKey;
+        $this->apiUrl     = $apiUrl;
+        $this->apiVersion = $apiVersion;
     }
 
     /**
@@ -79,8 +91,7 @@ class Request
             'aftership-api-key' => $this->apiKey,
             'Content-Type'      => 'application/json'
         ];
-
-        $url     = self::API_URL . '/' . self::API_VERSION . '/' . $url;
+        $url     = $this->apiUrl . '/' . $this->apiVersion . '/' . $url;
         $options = [
             'headers' => $headers,
             'body'    => json_encode($data),
@@ -107,7 +118,6 @@ class Request
         } catch (GuzzleException $exception) {
             throw $exception;
         }
-
         try {
             $response = json_decode($result->getBody());
         } catch (\Exception $exception) {

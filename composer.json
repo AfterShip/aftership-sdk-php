@@ -1,5 +1,5 @@
 {
-    "name": "aftership/aftership-php-sdk",
+    "name": "mhabibi/aftership-php-sdk",
     "description": "The PHP SDK of AfterShip API",
     "minimum-stability": "stable",
     "license": "MIT",

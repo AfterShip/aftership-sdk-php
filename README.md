@@ -10,7 +10,7 @@ Contact: <support@aftership.com>
 Then, you have 2 options to download the AfterShip PHP SDK
 1. Run the following command to require AfterShip PHP SDK
 ```
-composer require aftership/aftership-php-sdk
+composer require mhabibi/aftership-php-sdk
 ```
 or
 2. git pull this repo and run the following command
@@ -26,14 +26,14 @@ and restart the web server and PHP process.
 
 
 ## Testing
-1. Copy the test folder to the same folder of composer.json
-```
-cp -r -f vendor/aftership/aftership-php-sdk/test ./
-```
-2. Execulte the file: test/testing.php at your browser
-3. Insert your AfterShip API Key. [How to generate AfterShip API Key](http://aftership.uservoice.com/knowledgebase/articles/401963)
-4. Click the request all button or the button of the represented request
+1. Execulte the file: test/testing.php at your browser
+2. Insert your AfterShip API Key. [How to generate AfterShip API Key](http://aftership.uservoice.com/knowledgebase/articles/401963)
+3. Click the request all button or the button of the represented request
 
+## UnitTest
+```
+vendor/bin/phpunit
+```
 
 ## Couriers
 ##### Get your selected couriers list
@@ -258,33 +258,3 @@ require 'vendor/autoload.php';
 $notifications = new AfterShip\Notifications('AFTERSHIP_API_KEY');
 $response = $notifications->get_by_id('53df4a90868a6df243b6efd8', array('fields' => 'customer_name'));
 ```
-
-
-## Adding Guzzle Plugins
-[Guzzle Plugins](http://guzzlephp.org/plugins/plugins-overview.html)
-
-```
-require 'vendor/autoload.php';
-
-$history = new HistoryPlugin();
-$async = new AsyncPlugin();
-$logPlugin = new LogPlugin($adapter, MessageFormatter::DEBUG_FORMAT);
-
-$guzzlePlugins = array($history, $async, $logPlugin);
-
-$tracking = new AfterShip\Tracking('AFTERSHIP_API_KEY', $guzzlePlugins);
-$couriers = new AfterShip\Couriers('AFTERSHIP_API_KEY', $guzzlePlugins);
-```
-
-
-## Contributors
-These amazing people have contributed code to this project:
-
-- Teddy Chan - [view contributions](https://github.com/AfterShip/aftership-php/commits?author=teddychan)
-- Sunny Chow - [view contributions](https://github.com/AfterShip/aftership-php/commits?author=sunnychow)
-- Abishek R Srikaanth - [view contributions](https://github.com/AfterShip/aftership-php/commits?author=abishekrsrikaanth)
-- Luis Cordova - [view contributions](https://github.com/AfterShip/aftership-php/commits?author=cordoval)
-- Russell Davies - [view contributions](https://github.com/AfterShip/aftership-php/commits?author=russelldavies)
-- akovalyov - [view contributions](https://github.com/AfterShip/aftership-php/commits?author=akovalyov)
-- Robert Basic - [view contributions](https://github.com/AfterShip/aftership-php/commits?author=robertbasic)
-

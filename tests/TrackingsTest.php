@@ -50,7 +50,7 @@ class TrackingsTest extends \PHPUnit_Framework_TestCase
     {
         $response = $this->getTrackings($responseJson)->create('tracking - number', ['foo' => 'bar']);
 
-        static::assertEquals(json_decode(json_encode($result)), $response);
+        static::assertEquals($result, $response);
     }
 
     /**
@@ -81,7 +81,7 @@ class TrackingsTest extends \PHPUnit_Framework_TestCase
     {
         $response = $this->getTrackings($responseJson)->delete('slug', 'tracking - number');
 
-        static::assertEquals(json_decode(json_encode($result)), $response);
+        static::assertEquals($result, $response);
     }
 
     /**
@@ -103,7 +103,7 @@ class TrackingsTest extends \PHPUnit_Framework_TestCase
     {
         $response = $this->getTrackings($responseJson)->deleteById('tracking - id');
 
-        static::assertEquals(json_decode(json_encode($result)), $response);
+        static::assertEquals($result, $response);
     }
 
     /**
@@ -116,7 +116,7 @@ class TrackingsTest extends \PHPUnit_Framework_TestCase
     {
         $response = $this->getTrackings($responseJson)->getAll();
 
-        static::assertEquals(json_decode(json_encode($result)), $response);
+        static::assertEquals($result, $response);
     }
 
     /**
@@ -147,7 +147,7 @@ class TrackingsTest extends \PHPUnit_Framework_TestCase
     {
         $response = $this->getTrackings($responseJson)->get('slug', 'tracking - number');
 
-        static::assertEquals(json_decode(json_encode($result)), $response);
+        static::assertEquals($result, $response);
     }
 
     /**
@@ -169,7 +169,7 @@ class TrackingsTest extends \PHPUnit_Framework_TestCase
     {
         $response = $this->getTrackings($responseJson)->getById('tracking - id');
 
-        static::assertEquals(json_decode(json_encode($result)), $response);
+        static::assertEquals($result, $response);
     }
 
     /**
@@ -200,7 +200,7 @@ class TrackingsTest extends \PHPUnit_Framework_TestCase
     {
         $response = $this->getTrackings($responseJson)->update('slug', 'tracking - number');
 
-        static::assertEquals(json_decode(json_encode($result)), $response);
+        static::assertEquals($result, $response);
     }
 
     /**
@@ -222,7 +222,7 @@ class TrackingsTest extends \PHPUnit_Framework_TestCase
     {
         $response = $this->getTrackings($responseJson)->updateById('tracking - id');
 
-        static::assertEquals(json_decode(json_encode($result)), $response);
+        static::assertEquals($result, $response);
     }
 
     /**
@@ -253,7 +253,7 @@ class TrackingsTest extends \PHPUnit_Framework_TestCase
     {
         $response = $this->getTrackings($responseJson)->reTrack('slug', 'tracking - number');
 
-        static::assertEquals(json_decode(json_encode($result)), $response);
+        static::assertEquals($result, $response);
     }
 
     /**
@@ -275,7 +275,7 @@ class TrackingsTest extends \PHPUnit_Framework_TestCase
     {
         $response = $this->getTrackings($responseJson)->reTrackById('tracking - id');
 
-        static::assertEquals(json_decode(json_encode($result)), $response);
+        static::assertEquals($result, $response);
     }
 
     public function requestProvider()

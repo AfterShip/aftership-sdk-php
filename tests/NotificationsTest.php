@@ -59,7 +59,7 @@ class NotificationsTest extends \PHPUnit_Framework_TestCase
     {
         $response = $this->getNotifications($responseJson)->create('slug', 'tracking - number');
 
-        static::assertEquals(json_decode(json_encode($result)), $response);
+        static::assertEquals($result, $response);
     }
 
     /**
@@ -81,7 +81,7 @@ class NotificationsTest extends \PHPUnit_Framework_TestCase
     {
         $response = $this->getNotifications($responseJson)->createById('tracking - id');
 
-        static::assertEquals(json_decode(json_encode($result)), $response);
+        static::assertEquals($result, $response);
     }
 
     /**
@@ -112,7 +112,7 @@ class NotificationsTest extends \PHPUnit_Framework_TestCase
     {
         $response = $this->getNotifications($responseJson)->delete('slug', 'tracking - number');
 
-        static::assertEquals(json_decode(json_encode($result)), $response);
+        static::assertEquals($result, $response);
     }
 
     /**
@@ -134,7 +134,7 @@ class NotificationsTest extends \PHPUnit_Framework_TestCase
     {
         $response = $this->getNotifications($responseJson)->deleteById('tracking - id');
 
-        static::assertEquals(json_decode(json_encode($result)), $response);
+        static::assertEquals($result, $response);
     }
 
     /**
@@ -165,7 +165,7 @@ class NotificationsTest extends \PHPUnit_Framework_TestCase
     {
         $response = $this->getNotifications($responseJson)->get('slug', 'tracking - number');
 
-        static::assertEquals(json_decode(json_encode($result)), $response);
+        static::assertEquals($result, $response);
     }
 
     /**
@@ -187,7 +187,7 @@ class NotificationsTest extends \PHPUnit_Framework_TestCase
     {
         $response = $this->getNotifications($responseJson)->getById('tracking - id');
 
-        static::assertEquals(json_decode(json_encode($result)), $response);
+        static::assertEquals($result, $response);
     }
 
     public function requestProvider()

@@ -119,7 +119,7 @@ class Request
             throw $exception;
         }
         try {
-            $response = json_decode($result->getBody());
+            $response = json_decode($result->getBody(), true);
         } catch (\Exception $exception) {
             throw $exception;
         }

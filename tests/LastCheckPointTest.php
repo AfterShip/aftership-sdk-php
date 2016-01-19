@@ -59,7 +59,7 @@ class LastCheckPointTest extends \PHPUnit_Framework_TestCase
     {
         $response = $this->getLastCheckPoint($responseJson)->get('slug', 'tracking - number');
 
-        static::assertEquals(json_decode(json_encode($result)), $response);
+        static::assertEquals($result, $response);
     }
 
     /**
@@ -81,7 +81,7 @@ class LastCheckPointTest extends \PHPUnit_Framework_TestCase
     {
         $response = $this->getLastCheckPoint($responseJson)->getById('tracking - id');
 
-        static::assertEquals(json_decode(json_encode($result)), $response);
+        static::assertEquals($result, $response);
     }
 
     public function requestProvider()

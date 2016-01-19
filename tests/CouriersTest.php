@@ -41,7 +41,7 @@ class CouriersTest extends \PHPUnit_Framework_TestCase
     {
         $response = $this->getCouriers($responseJson)->get();
 
-        static::assertEquals(json_decode(json_encode($result)), $response);
+        static::assertEquals($result, $response);
     }
 
     /**
@@ -54,7 +54,7 @@ class CouriersTest extends \PHPUnit_Framework_TestCase
     {
         $response = $this->getCouriers($responseJson)->getAll();
 
-        static::assertEquals(json_decode(json_encode($result)), $response);
+        static::assertEquals($result, $response);
     }
 
     /**
@@ -76,7 +76,7 @@ class CouriersTest extends \PHPUnit_Framework_TestCase
     {
         $response = $this->getCouriers($responseJson)->detect('tracking - id');
 
-        static::assertEquals(json_decode(json_encode($result)), $response);
+        static::assertEquals($result, $response);
     }
 
     public function requestProvider()

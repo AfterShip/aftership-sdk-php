@@ -1,11 +1,12 @@
 ![Picture](https://www.aftership.com/assets/common/img/logo-aftership-premium-bright.png)
-#AfterShip API PHP SDK
+
+# AfterShip API PHP SDK
 aftership-php is a PHP SDK (module) for [AfterShip API](https://www.aftership.com/docs/api/4/). Module provides clean and elegant way to access API endpoints. **Compatible with Afership API**
 
 Contact: <support@aftership.com>
 
 ## Installation
-##### Manual installation
+##### Option 1: Manual installation
 1. Download or clone this repository to desired location
 2. Reference files of this SDK in your project. Absolute path should be prefered.
 
@@ -14,15 +15,17 @@ require('/path/to/repository/src/AfterShip/Exception/AftershipException.php');
 require('/path/to/repository/src/AfterShip/Core/Request.php');
 require('/path/to/repository/src/AfterShip/Couriers.php');
 require('/path/to/repository/src/AfterShip/Trackings.php');
+require('/path/to/repository/src/AfterShip/Notifications.php');
 require('/path/to/repository/src/AfterShip/LastCheckPoint.php');
 
 $key = 'AFTERSHIP API KEY';
 
 $couriers = new AfterShip\Couriers($key);
 $trackings = new AfterShip\Trackings($key);
+$notifications = new AfterShip\Notifications($key);
 $last_check_point = new AfterShip\LastCheckPoint($key);
 ```
-##### Download and Install Composer. https://getcomposer.org/download/
+##### Option 2: Download and Install Composer. https://getcomposer.org/download/
 
 Then, you have 2 options to download the AfterShip PHP SDK
 1. Run the following command to require AfterShip PHP SDK
@@ -52,13 +55,9 @@ and restart the web server and PHP process.
 
 
 ## Testing
-1. Copy the test folder to the same folder of composer.json
-```
-cp -r -f vendor/aftership/aftership-php-sdk/test ./
-```
-2. Execulte the file: test/testing.php at your browser
-3. Insert your AfterShip API Key. [How to generate AfterShip API Key](http://aftership.uservoice.com/knowledgebase/articles/401963)
-4. Click the request all button or the button of the represented request
+1. Execulte the file: test/testing.php at your browser
+2. Insert your AfterShip API Key. [How to generate AfterShip API Key](http://aftership.uservoice.com/knowledgebase/articles/401963)
+3. Click the request all button or the button of the represented request
 
 
 ## Couriers

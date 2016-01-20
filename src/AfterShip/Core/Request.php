@@ -63,7 +63,7 @@ class Request
 			CURLOPT_CUSTOMREQUEST => $method,
 			CURLOPT_HTTPHEADER => $headers
 		);
-		if ($method == 'POST') {
+		if ($method != 'POST') {
 			$body = $parameters['body'];
 			$curl_params[CURLOPT_POSTFIELDS] = $body;
 		}

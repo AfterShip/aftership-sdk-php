@@ -44,7 +44,6 @@ class Request
 	}
 
 	private function call($method, $parameters = array()) {
-		$body = $parameters['body'];
 		$headers = array();
 		foreach($parameters['headers'] as $key => $value) {
 			array_push($headers, "$key: $value");
@@ -65,6 +64,7 @@ class Request
 			CURLOPT_HTTPHEADER => $headers
 		);
 		if ($method == 'POST') {
+			$body = $parameters['body'];
 			$curl_params[CURLOPT_POSTFIELDS] = $body;
 		}
 		curl_setopt_array($curl, $curl_params);

@@ -27,13 +27,11 @@ $last_check_point = new AfterShip\LastCheckPoint($key);
 ```
 ##### Option 2: Download and Install Composer. https://getcomposer.org/download/
 
-Then, you have to download the AfterShip PHP SDK
-
-1. Run the following command to require AfterShip PHP SDK
+Run the following command to require AfterShip PHP SDK
 ```
 composer require aftership/aftership-php-sdk
 ```
-2. Use autoloader to import SDK files
+Use autoloader to import SDK files
 ```php
 require 'vendor/autoload.php';
 

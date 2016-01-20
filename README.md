@@ -27,17 +27,13 @@ $last_check_point = new AfterShip\LastCheckPoint($key);
 ```
 ##### Option 2: Download and Install Composer. https://getcomposer.org/download/
 
-Then, you have 2 options to download the AfterShip PHP SDK
+Then, you have to download the AfterShip PHP SDK
+
 1. Run the following command to require AfterShip PHP SDK
 ```
 composer require aftership/aftership-php-sdk
 ```
-or
-2. git pull this repo and run the following command
-```
-composer install
-```
-3. Use autoloader to import SDK files
+2. Use autoloader to import SDK files
 ```php
 require 'vendor/autoload.php';
 
@@ -55,9 +51,11 @@ and restart the web server and PHP process.
 
 
 ## Testing
-1. Execulte the file: test/testing.php at your browser
+1. Execute the file: 
+* If you are install manually, please execute 'test/testing.php' on your browser.
+* If you are install by composer, please execute 'vendor/aftersip/aftership-php-sdk/test/testing.php' on your browser.
 2. Insert your AfterShip API Key. [How to generate AfterShip API Key](http://aftership.uservoice.com/knowledgebase/articles/401963)
-3. Click the request all button or the button of the represented request
+3. Click the request all button or the button of the represented request.
 
 
 ## Couriers

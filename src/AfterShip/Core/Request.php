@@ -75,7 +75,7 @@ class Request
 		}
 		$info = curl_getinfo($curl);
 		$code = $info['http_code'];
-		if ($code != 200) {
+		if ($code < 200 || $code >= 300) {
 			$parsed = json_decode($response);
 			$err_code = '';
 			$err_message = '';

@@ -25,16 +25,16 @@ class Request
 
 		switch (strtoupper($request_type)) {
 			case "GET":
-				$request = $this->get($this->_api_url . '/' . $this->_api_version . '/' . $url, $headers, array('query' => $data));
+				$request = $this->callGET($this->_api_url . '/' . $this->_api_version . '/' . $url, $headers, array('query' => $data));
 				break;
 			case "POST":
-				$request = $this->post($this->_api_url . '/' . $this->_api_version . '/' . $url, $headers, json_encode($data));
+				$request = $this->callPOST($this->_api_url . '/' . $this->_api_version . '/' . $url, $headers, json_encode($data));
 				break;
 			case "PUT":
-				$request = $this->put($this->_api_url . '/' . $this->_api_version . '/' . $url, $headers, json_encode($data));
+				$request = $this->callPUT($this->_api_url . '/' . $this->_api_version . '/' . $url, $headers, json_encode($data));
 				break;
 			case "DELETE":
-				$request = $this->delete($this->_api_url . '/' . $this->_api_version . '/' . $url, $headers, json_encode($data));
+				$request = $this->callDELETE($this->_api_url . '/' . $this->_api_version . '/' . $url, $headers, json_encode($data));
 				break;
 			default:
                 		throw new AftershipException("Method $request_type is currently not supported.");
@@ -98,7 +98,7 @@ class Request
 		return json_decode($response, true);
 	}
 
-	private function GET($url, $headers, $body) {
+	private function callGET($url, $headers, $body) {
 		$parameters = array();
 		$parameters['query'] = $body;
 		$parameters['headers'] = $headers;
@@ -106,7 +106,7 @@ class Request
 		return $this->call('GET', $parameters);
 	}
 
-	private function POST($url, $headers, $body) {
+	private function callPOST($url, $headers, $body) {
 		$parameters = array();
 		$parameters['body'] = $body;
 		$parameters['headers'] = $headers;
@@ -114,7 +114,7 @@ class Request
 		return $this->call('POST', $parameters);
 	}
 
-	private function PUT($url, $headers, $body) {
+	private function callPUT($url, $headers, $body) {
 		$parameters = array();
 		$parameters['body'] = $body;
 		$parameters['headers'] = $headers;
@@ -122,7 +122,7 @@ class Request
 		return $this->call('PUT', $parameters);
 	}
 
-	private function DELETE($url, $headers, $body) {
+	private function callDELETE($url, $headers, $body) {
 		$parameters = array();
 		$parameters['body'] = $body;
 		$parameters['headers'] = $headers;

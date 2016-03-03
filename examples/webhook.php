@@ -9,6 +9,7 @@
 // Aftership will make a POST request to your webhook link with 'Content-Type: application/json' header,
 // please use the "php://input" to get the post body, body is a JSON String.
 // Reference: http://stackoverflow.com/questions/2731297/file-get-contentsphp-input-or-http-raw-post-data-which-one-is-better-to
+// file_get_contents, need PHP 4 >= 4.3.0, PHP 5, PHP 7.
 $inputJSON = file_get_contents("php://input");
 
 // you will get a JOSN string as this api doc mentioned, https://www.aftership.com/docs/api/4/webhook

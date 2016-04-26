@@ -25,7 +25,7 @@ class Request
 
 		switch (strtoupper($request_type)) {
 			case "GET":
-				$request = $this->callGET($this->_api_url . '/' . $this->_api_version . '/' . $url, $headers, array('query' => $data));
+				$request = $this->callGET($this->_api_url . '/' . $this->_api_version . '/' . $url, $headers, $data);
 				break;
 			case "POST":
 				$request = $this->callPOST($this->_api_url . '/' . $this->_api_version . '/' . $url, $headers, json_encode($data));

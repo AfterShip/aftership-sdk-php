@@ -80,6 +80,11 @@ class Request
 		$code = $info['http_code'];
 		if ($code < 200 || $code >= 300) {
 			$parsed = json_decode($response);
+			
+			if($parsed === NULL) {
+				throw new AftershipException("Error processing request - received HTTP error code $code");
+			}
+			
 			$err_code = '';
 			$err_message = '';
 			$err_type = '';

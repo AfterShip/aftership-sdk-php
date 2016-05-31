@@ -3,7 +3,7 @@
 namespace AfterShip;
 
 use AfterShip\Core\Request;
-use Aftership\Exception\AftershipException;
+use AfterShip\Exception\AftershipException;
 
 class Notifications extends Request
 {

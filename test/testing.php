@@ -19,7 +19,7 @@ $(function(){
 <body>
 ';
 
-require('../src/AfterShip/Exception/AftershipException.php');
+require('../src/AfterShip/Exception/AfterShipException.php');
 require('../src/AfterShip/Core/Request.php');
 require('../src/AfterShip/Couriers.php');
 require('../src/AfterShip/Trackings.php');

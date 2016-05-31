@@ -20,7 +20,7 @@ Contact: <support@aftership.com>
 2. Reference files of this SDK in your project. Absolute path should be prefered.
 
 ```php
-require('/path/to/repository/src/AfterShip/Exception/AftershipException.php');
+require('/path/to/repository/src/AfterShip/Exception/AfterShipException.php');
 require('/path/to/repository/src/AfterShip/Core/Request.php');
 require('/path/to/repository/src/AfterShip/Couriers.php');
 require('/path/to/repository/src/AfterShip/Trackings.php');

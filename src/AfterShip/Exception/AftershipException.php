@@ -2,4 +2,4 @@
 
 namespace AfterShip\Exception;
 
-class AftershipException extends \Exception {}
+class AfterShipException extends \Exception {}

@@ -2,7 +2,7 @@
 
 namespace AfterShip\Core;
 
-use AfterShip\Exception\AftershipException;
+use AfterShip\Exception\AfterShipException;
 
 class Request
 {
@@ -37,7 +37,7 @@ class Request
 				$request = $this->callDELETE($this->_api_url . '/' . $this->_api_version . '/' . $url, $headers, json_encode($data));
 				break;
 			default:
-                		throw new AftershipException("Method $request_type is currently not supported.");
+				throw new AfterShipException("Method $request_type is currently not supported.");
 		}
 
 		return $request;
@@ -74,7 +74,7 @@ class Request
 		$response = curl_exec($curl);
 		$err = curl_error($curl);
 		if ($err) {
-			throw new AftershipException("failed to request: $err");
+			throw new AfterShipException("failed to request: $err");
 		}
 		$info = curl_getinfo($curl);
 		$code = $info['http_code'];
@@ -92,7 +92,7 @@ class Request
 			if (isset($parsed->meta->type)) {
 				$err_type = $parsed->meta->type;
 			}
-			throw new AftershipException("$err_type: $err_code - $err_message");
+			throw new AfterShipException("$err_type: $err_code - $err_message");
 		}
 		curl_close($curl);
 		return json_decode($response, true);

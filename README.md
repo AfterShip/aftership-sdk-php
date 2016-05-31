@@ -1,5 +1,3 @@
-![Picture](https://www.aftership.com/assets/common/img/logo-aftership-premium-bright.png)
-
 # AfterShip API PHP SDK
 aftership-php is a PHP SDK (module) for [AfterShip API](https://www.aftership.com/docs/api/4/). Module provides clean and elegant way to access API endpoints. **Compatible with Afership API**
 

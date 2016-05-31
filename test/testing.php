@@ -30,7 +30,6 @@ $action = isset($_GET['action']) ? $_GET['action'] : '';
 $api_key = isset($_GET['api_key']) ? $_GET['api_key'] : '';
 $request_all = ($action == 'ALL');
 
-echo '<img src="https://www.aftership.com/assets/common/img/logo-aftership-premium-bright.png"/>';
 echo '<h1>AfterShip API PHP SDK Testing</h1>';
 echo 'This is the offical PHP SDK of AfterShip API. Provided by AfterShip ';
 echo '<a href="support@aftership.com">support@aftership.com</a>';

@@ -82,7 +82,7 @@ class Request
 			$parsed = json_decode($response);
 			
 			if($parsed === NULL) {
-				throw new AftershipException("Error processing request - received HTTP error code $code");
+				throw new AfterShipException("Error processing request - received HTTP error code $code");
 			}
 			
 			$err_code = '';

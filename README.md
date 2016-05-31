@@ -60,7 +60,7 @@ and restart the web server and PHP process.
 
 
 ## Testing
-1. Execute the file: 
+1. Execute the file:
  * If you are install manually, please execute 'test/testing.php' on your browser.
  * If you are install by composer, please execute 'vendor/aftersip/aftership-php-sdk/test/testing.php' on your browser.
 2. Insert your AfterShip API Key. [How to generate AfterShip API Key](http://aftership.uservoice.com/knowledgebase/articles/401963)
@@ -134,6 +134,23 @@ https://www.aftership.com/docs/api/4/trackings/get-trackings-slug-tracking_numbe
 ```php
 $trackings = new AfterShip\Trackings('AFTERSHIP_API_KEY');
 $response = $trackings->get('dhl', 'RA123456789US', array('title','order_id'));
+```
+
+##### Get tracking results of a single tracking by slug and tracking number with custom display fields
+https://www.aftership.com/docs/api/4/trackings/get-trackings-slug-tracking_number
+```php
+$trackings = new AfterShip\Trackings('AFTERSHIP_API_KEY');
+$response = $trackings->get('dhl', 'RA123456789US', array('fields' => 'title,order_id'));
+```
+
+##### Get tracking results of a single tracking by slug and tracking number in custom language
+https://www.aftership.com/docs/api/4/trackings/get-trackings-slug-tracking_number
+
+In case of `china-post` and `china-ems` it is possible to customize language of checkpoint messages.
+
+```php
+$trackings = new AfterShip\Trackings('AFTERSHIP_API_KEY');
+$response = $trackings->get('dhl', 'RA123456789US', array('lang' => 'en'));
 ```
 
 ##### Get tracking results of a single tracking by tracking ID
@@ -266,4 +283,3 @@ These amazing people have contributed code to this project:
 - akovalyov - [view contributions](https://github.com/AfterShip/aftership-php/commits?author=akovalyov)
 - Robert Basic - [view contributions](https://github.com/AfterShip/aftership-php/commits?author=robertbasic)
 - Marek Narozniak - [view contributions](https://github.com/AfterShip/aftership-php/commits?author=marekyggdrasil)
-

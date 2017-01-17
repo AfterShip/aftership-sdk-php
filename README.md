@@ -1,4 +1,9 @@
 # AfterShip API PHP SDK
+
+[![Latest Stable Version](https://poser.pugx.org/aftership/aftership-php-sdk/v/stable)](https://packagist.org/packages/aftership/aftership-php-sdk)
+[![Monthly Downloads](https://poser.pugx.org/aftership/aftership-php-sdk/d/monthly)](https://packagist.org/packages/aftership/aftership-php-sdk)
+[![License](https://poser.pugx.org/aftership/aftership-php-sdk/license)](https://packagist.org/packages/aftership/aftership-php-sdk)
+
 aftership-php is a PHP SDK (module) for [AfterShip API](https://www.aftership.com/docs/api/4/). Module provides clean and elegant way to access API endpoints. **Compatible with Afership API**
 
 Contact: <support@aftership.com>
@@ -260,14 +265,14 @@ $response = $notifications->get('dhl', '2254095771'));
 ```
 
 ##### Get notification of a single tracking by tracking ID
-https://www.aftership.com/docs/api/4/notifications/get-notifications  
+https://www.aftership.com/docs/api/4/notifications/get-notifications
 ```php
 $notifications = new AfterShip\Notifications('AFTERSHIP_API_KEY');
 $response = $notifications->get_by_id('53df4a90868a6df243b6efd8', array('fields' => 'customer_name'));
 ```
 
 ## Webhook
-https://www.aftership.com/docs/api/4/webhook  
+https://www.aftership.com/docs/api/4/webhook
 You could find the example code at [here](https://github.com/AfterShip/aftership-sdk-php/blob/master/examples/webhook.php)
 
 ## Contributors

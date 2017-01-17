@@ -49,18 +49,19 @@ print '</br>';
 print '<hr>';
 
 if (!$api_key) {
-	echo '</br>';
-	echo '<b>Plase input API key first</b>';
-	exit;
+    echo '</br>';
+    echo '<b>Plase input API key first</b>';
+    exit;
 }
 
-function p($arr) {
-	print '<div class="response">';
-	print '<pre style="width: 800px; height: 20pc; overflow-y: scroll; background-color:#CCCCCC">';
-	print_r($arr);
-	print '</pre>';
-	print '</div>';
-	print '</br>';
+function p($arr)
+{
+    print '<div class="response">';
+    print '<pre style="width: 800px; height: 20pc; overflow-y: scroll; background-color:#CCCCCC">';
+    print_r($arr);
+    print '</pre>';
+    print '</div>';
+    print '</br>';
 }
 
 
@@ -71,29 +72,29 @@ $couriers = new AfterShip\Couriers($api_key);
 echo '<h2>Couriers</h2>';
 echo '<input type="button" value="couriers_get" class="btn">' . 'get user\'s couriers' . '</br>';
 if ($request_all || $action == 'couriers_get') {
-	try{
-		p($couriers->get());
-	}catch(Exception $e){
-		p($e);
-	}
+    try {
+        p($couriers->get());
+    } catch (Exception $e) {
+        p($e);
+    }
 }
 
 echo '<input type="button" value="couriers_get_all" class="btn">' . 'get all couriers' . '</br>';
 if ($request_all || $action == 'couriers_get_all') {
-	try{
-		p($couriers->get_all());
-	}catch(Exception $e){
-		p($e);
-	}
+    try {
+        p($couriers->get_all());
+    } catch (Exception $e) {
+        p($e);
+    }
 }
 
 echo '<input type="button" value="couriers_detect" class="btn">' . 'detect courier by tracking number' . '</br>';
 if ($request_all || $action == 'couriers_detect') {
-	try{
-		p($couriers->detect('1ZV90R483A33906706'));
-	}catch(Exception $e){
-		p($e);
-	}
+    try {
+        p($couriers->detect('1ZV90R483A33906706'));
+    } catch (Exception $e) {
+        p($e);
+    }
 }
 
 
@@ -101,11 +102,11 @@ $trackings = new AfterShip\Trackings($api_key);
 echo '<h2>Trackings</h2>';
 echo '<input type="button" value="trackings_create" class="btn">' . 'create tracking' . '</br>';
 if ($request_all || $action == 'trackings_create') {
-	try{
-		p($trackings->create('1ZV90R483A33906705'));
-	}catch(Exception $e){
-		p($e);
-	}
+    try {
+        p($trackings->create('1ZV90R483A33906705'));
+    } catch (Exception $e) {
+        p($e);
+    }
 }
 
 /*
@@ -117,115 +118,115 @@ p($trackings->batch_create(array('1ZV90R483A33906706')));
 
 echo '<input type="button" value="trackings_delete" class="btn">' . 'delete tracking' . '</br>';
 if ($request_all || $action == 'trackings_delete') {
-	try{
-		p($trackings->delete('ups', '1ZV90R483A33906705'));
-	}catch(Exception $e){
-		p($e);
-	}
+    try {
+        p($trackings->delete('ups', '1ZV90R483A33906705'));
+    } catch (Exception $e) {
+        p($e);
+    }
 }
 
 echo '<input type="button" value="trackings_delete_by_id" class="btn">' . 'delete tracking by id' . '</br>';
 if ($request_all || $action == 'trackings_delete_by_id') {
-	try{
-		p($trackings->delete_by_id('53df4d66868a6df243b6f882'));
-	}catch(Exception $e){
-		p($e);
-	}
+    try {
+        p($trackings->delete_by_id('53df4d66868a6df243b6f882'));
+    } catch (Exception $e) {
+        p($e);
+    }
 }
 
 echo '<input type="button" value="trackings_get_all" class="btn">' . 'get all trackings' . '</br>';
 if ($request_all || $action == 'trackings_get_all') {
-	try{
-		p($trackings->get_all(array(
-			'slug' => 'ups',
-			'fields' => 'title,order_id,message,country_name'
-			)));
-	}catch(Exception $e){
-		p($e);
-	}
+    try {
+        p($trackings->get_all(array(
+            'slug' => 'ups',
+            'fields' => 'title,order_id,message,country_name'
+            )));
+    } catch (Exception $e) {
+        p($e);
+    }
 }
 
 echo '<input type="button" value="trackings_get" class="btn">' . 'get a tracking' . '</br>';
 if ($request_all || $action == 'trackings_get') {
-	try{
-		p($trackings->get('ups', '1ZV90R483A33906706'));
-	}catch(Exception $e){
-		p($e);
-	}
+    try {
+        p($trackings->get('ups', '1ZV90R483A33906706'));
+    } catch (Exception $e) {
+        p($e);
+    }
 }
 
 echo '<input type="button" value="trackings_get_by_id" class="btn">' . 'get a tracking by id' . '</br>';
 if ($request_all || $action == 'trackings_get_by_id') {
-	try{
-		p($trackings->get_by_id('53df4a90868a6df243b6efd8', array(
-			'fields' => 'customer_name'
-			)));
-	}catch(Exception $e){
-		p($e);
-	}
+    try {
+        p($trackings->get_by_id('53df4a90868a6df243b6efd8', array(
+            'fields' => 'customer_name'
+            )));
+    } catch (Exception $e) {
+        p($e);
+    }
 }
 
 echo '<input type="button" value="trackings_update" class="btn">' . 'update a tracking' . '</br>';
 if ($request_all || $action == 'trackings_update') {
-	try{
-		p($trackings->update('ups', '1ZV90R483A33906706', array(
-			'title' => 'haha'
-			)));
-	}catch(Exception $e){
-		p($e);
-	}
+    try {
+        p($trackings->update('ups', '1ZV90R483A33906706', array(
+            'title' => 'haha'
+            )));
+    } catch (Exception $e) {
+        p($e);
+    }
 }
 
 echo '<input type="button" value="trackings_update_by_id" class="btn">' . 'update a tracking by id' . '</br>';
 if ($request_all || $action == 'trackings_update_by_id') {
-	try{
-		p($trackings->update_by_id('53df4a90868a6df243b6efd8'), array(
-			'title' => 'T1',
-			'customer_name' => 'Sunny'
-			));
-	}catch(Exception $e){
-		p($e);
-	}
+    try {
+        p($trackings->update_by_id('53df4a90868a6df243b6efd8'), array(
+            'title' => 'T1',
+            'customer_name' => 'Sunny'
+            ));
+    } catch (Exception $e) {
+        p($e);
+    }
 }
 
 echo '<input type="button" value="trackings_retrack" class="btn">' . 'retrack a tracking' . '</br>';
 if ($request_all || $action == 'trackings_retrack') {
-	try{
-		p($trackings->retrack('ups', '1ZV90R483A33906706'));
-	}catch(Exception $e){
-		p($e);
-	}
+    try {
+        p($trackings->retrack('ups', '1ZV90R483A33906706'));
+    } catch (Exception $e) {
+        p($e);
+    }
 }
 
 echo '<input type="button" value="trackings_retrack_by_id" class="btn">' . 'retrack a tracking by id' . '</br>';
 if ($request_all || $action == 'trackings_retrack_by_id') {
-	try{
-		p($trackings->retrack_by_id('53df4a90868a6df243b6efd8'));
-	}catch(Exception $e){
-		p($e);
-	}
+    try {
+        p($trackings->retrack_by_id('53df4a90868a6df243b6efd8'));
+    } catch (Exception $e) {
+        p($e);
+    }
 }
 
 $last_check_point = new AfterShip\LastCheckPoint($api_key);
 echo '<h2>Last Check Point</h2>';
 echo '<input type="button" value="last_check_point_get" class="btn">' . 'get' . '</br>';
 if ($request_all || $action == 'last_check_point_get') {
-	try{
-		p($last_check_point->get('ups', '1ZV90R483A33906706'));
-	}catch(Exception $e){
-		p($e);
-	}
+    try {
+        p($last_check_point->get('ups', '1ZV90R483A33906706'));
+    } catch (Exception $e) {
+        p($e);
+    }
 }
 
 echo '<input type="button" value="last_check_point_get_by_id" class="btn">' . 'get by id' . '</br>';
 if ($request_all || $action == 'last_check_point_get_by_id') {
-	try{
-		p($last_check_point->get_by_id('53df4a90868a6df243b6efd8', array(
-			'fields' => 'city,zip,state'
-			)));
-	}catch(Exception $e){
-		p($e);
-	}
+    try {
+        p($last_check_point->get_by_id('53df4a90868a6df243b6efd8', array(
+            'fields' => 'city,zip,state'
+            )));
+    } catch (Exception $e) {
+        p($e);
+    }
 }
 
 
@@ -234,62 +235,62 @@ echo '<h2>Notifications</h2>';
 
 echo '<input type="button" value="notifications_create" class="btn">' . 'create notification' . '</br>';
 if ($request_all || $action == 'notifications_create') {
-	try{
-		p($notifications->create('ups', '1ZV90R483A33906706', array(
-			'emails' => ['youremail@yourdomain.com']
-			)));
-	}catch(Exception $e){
-		p($e);
-	}
+    try {
+        p($notifications->create('ups', '1ZV90R483A33906706', array(
+            'emails' => ['youremail@yourdomain.com']
+            )));
+    } catch (Exception $e) {
+        p($e);
+    }
 }
 
 echo '<input type="button" value="notifications_create_by_id" class="btn">' . 'create notification by id' . '</br>';
 if ($request_all || $action == 'notifications_create_by_id') {
-	try{
-		p($notifications->create_by_id('53df4a90868a6df243b6efd8'));
-	}catch(Exception $e){
-		p($e);
-	}
+    try {
+        p($notifications->create_by_id('53df4a90868a6df243b6efd8'));
+    } catch (Exception $e) {
+        p($e);
+    }
 }
 
 echo '<input type="button" value="notifications_delete" class="btn">' . 'delete notification' . '</br>';
 if ($request_all || $action == 'notifications_delete') {
-	try{
-		p($notifications->delete('ups', '1ZV90R483A33906706', array(
-			'emails' => ['youremail@yourdomain.com']
-			)));
-	}catch(Exception $e){
-		p($e);
-	}
+    try {
+        p($notifications->delete('ups', '1ZV90R483A33906706', array(
+            'emails' => ['youremail@yourdomain.com']
+            )));
+    } catch (Exception $e) {
+        p($e);
+    }
 }
 
 echo '<input type="button" value="notifications_delete_by_id" class="btn">' . 'delete notification by id' . '</br>';
 if ($request_all || $action == 'notifications_delete_by_id') {
-	try{
-		p($notifications->delete_by_id('53df4d66868a6df243b6f882'));
-	}catch(Exception $e){
-		p($e);
-	}
+    try {
+        p($notifications->delete_by_id('53df4d66868a6df243b6f882'));
+    } catch (Exception $e) {
+        p($e);
+    }
 }
 
 echo '<input type="button" value="notifications_get" class="btn">' . 'get a notification' . '</br>';
 if ($request_all || $action == 'notifications_get') {
-	try{
-		p($notifications->get('ups', '1ZV90R483A33906706'));
-	}catch(Exception $e){
-		p($e);
-	}
+    try {
+        p($notifications->get('ups', '1ZV90R483A33906706'));
+    } catch (Exception $e) {
+        p($e);
+    }
 }
 
 echo '<input type="button" value="notifications_get_by_id" class="btn">' . 'get a notification by id' . '</br>';
 if ($request_all || $action == 'notifications_get_by_id') {
-	try{
-		p($notifications->get_by_id('53df4a90868a6df243b6efd8', array(
-			'fields' => 'customer_name'
-			)));
-	}catch(Exception $e){
-		p($e);
-	}
+    try {
+        p($notifications->get_by_id('53df4a90868a6df243b6efd8', array(
+            'fields' => 'customer_name'
+            )));
+    } catch (Exception $e) {
+        p($e);
+    }
 }
 
 

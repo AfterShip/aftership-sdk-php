@@ -23,8 +23,8 @@ $last_check_point = new AfterShip\LastCheckPoint($key);
 //$response = $couriers->detect('41910575873');
 
 $tracking_info = array(
-	'slug'    => 'aramex',
-	'title'   => 'My Title',
+    'slug'    => 'aramex',
+    'title'   => 'My Title',
 );
 //$response = $trackings->create('41910575873', $tracking_info);
 
@@ -34,15 +34,14 @@ $response = null;
 
 // $response = $trackings->get_all('', array('slug' => 'austrian-post-registered'));
 
-try  {
-	$response = $trackings->create('', $tracking_info);
-} catch(AftershipException $e) {
-	echo $e->getMessage();
-} catch(Exception $e){
-	echo $e->getMessage();
+try {
+    $response = $trackings->create('', $tracking_info);
+} catch (AftershipException $e) {
+    echo $e->getMessage();
+} catch (Exception $e) {
+    echo $e->getMessage();
 }
 
 //$response = $last_check_point->get_by_id('5694783e6e61b7bd427c1b8a');
 
 print_r($response);
-?>

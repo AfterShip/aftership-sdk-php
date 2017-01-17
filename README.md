@@ -60,7 +60,7 @@ and restart the web server and PHP process.
 ## Testing
 1. Execute the file:
  * If you are install manually, please execute 'test/testing.php' on your browser.
- * If you are install by composer, please execute 'vendor/aftersip/aftership-php-sdk/test/testing.php' on your browser.
+ * If you are install by composer, please execute 'vendor/aftership/aftership-php-sdk/test/testing.php' on your browser.
 2. Insert your AfterShip API Key. [How to generate AfterShip API Key](http://aftership.uservoice.com/knowledgebase/articles/401963)
 3. Click the request all button or the button of the represented request.
 

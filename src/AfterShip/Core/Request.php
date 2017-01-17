@@ -11,6 +11,10 @@ class Request
     private $_api_version = 'v4';
     private $_client;
 
+    public function __construct()
+    {
+    }
+
     protected function send($url, $request_type, array $data = array())
     {
         $headers = array(

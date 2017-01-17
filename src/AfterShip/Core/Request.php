@@ -78,7 +78,7 @@ class Request
             $parsed = json_decode($response);
 
             if ($parsed === null) {
-                throw new AftershipException("Error processing request - received HTTP error code $code");
+                throw new AftershipException("Error processing request - received HTTP error code $code", $code);
             }
 
             $err_code = '';
@@ -93,7 +93,7 @@ class Request
             if (isset($parsed->meta->type)) {
                 $err_type = $parsed->meta->type;
             }
-            throw new AftershipException("$err_type: $err_code - $err_message");
+            throw new AftershipException("$err_type: $err_code - $err_message", $err_code);
         }
         curl_close($curl);
         return json_decode($response, true);

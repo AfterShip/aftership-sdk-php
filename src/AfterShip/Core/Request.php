@@ -6,133 +6,132 @@ use AfterShip\Exception\AftershipException;
 
 class Request
 {
-	private $_api_url = 'https://api.aftership.com';
-	protected $_api_key = '';
-	private $_api_version = 'v4';
-	private $_client;
+    private $_api_url = 'https://api.aftership.com';
+    protected $_api_key = '';
+    private $_api_version = 'v4';
+    private $_client;
 
-	protected function __construct()
-	{
-	}
+    protected function send($url, $request_type, array $data = array())
+    {
+        $headers = array(
+            'aftership-api-key' => $this->_api_key,
+            'content-type' => 'application/json'
+        );
 
-	protected function send($url, $request_type, array $data = array())
-	{
+        switch (strtoupper($request_type)) {
+            case "GET":
+                $request = $this->callGET($this->_api_url . '/' . $this->_api_version . '/' . $url, $headers, $data);
+                break;
+            case "POST":
+                $request = $this->callPOST($this->_api_url . '/' . $this->_api_version . '/' . $url, $headers, json_encode($data));
+                break;
+            case "PUT":
+                $request = $this->callPUT($this->_api_url . '/' . $this->_api_version . '/' . $url, $headers, json_encode($data));
+                break;
+            case "DELETE":
+                $request = $this->callDELETE($this->_api_url . '/' . $this->_api_version . '/' . $url, $headers, json_encode($data));
+                break;
+            default:
+                        throw new AftershipException("Method $request_type is currently not supported.");
+        }
 
-		$headers = array(
-			'aftership-api-key' => $this->_api_key,
-			'content-type' => 'application/json'
-		);
+        return $request;
+    }
 
-		switch (strtoupper($request_type)) {
-			case "GET":
-				$request = $this->callGET($this->_api_url . '/' . $this->_api_version . '/' . $url, $headers, $data);
-				break;
-			case "POST":
-				$request = $this->callPOST($this->_api_url . '/' . $this->_api_version . '/' . $url, $headers, json_encode($data));
-				break;
-			case "PUT":
-				$request = $this->callPUT($this->_api_url . '/' . $this->_api_version . '/' . $url, $headers, json_encode($data));
-				break;
-			case "DELETE":
-				$request = $this->callDELETE($this->_api_url . '/' . $this->_api_version . '/' . $url, $headers, json_encode($data));
-				break;
-			default:
-                		throw new AftershipException("Method $request_type is currently not supported.");
-		}
+    private function call($method, $parameters = array())
+    {
+        $body = '';
+        if (isset($parameters['body'])) {
+            $body = $parameters['body'];
+        }
+        $headers = array();
+        foreach ($parameters['headers'] as $key => $value) {
+            array_push($headers, "$key: $value");
+        }
+        $url = $parameters['url'];
+        if ($method != 'POST') {
+            if (isset($parameters['query'])) {
+                if (count($parameters['query']) > 0) {
+                    $url = $url . '?' . http_build_query($parameters['query']);
+                }
+            }
+        }
+        $curl = curl_init();
+        $curl_params = array(
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_URL => $url,
+            CURLOPT_CUSTOMREQUEST => $method,
+            CURLOPT_HTTPHEADER => $headers
+        );
+        if ($method != 'GET') {
+            $curl_params[CURLOPT_POSTFIELDS] = $body;
+        }
+        curl_setopt_array($curl, $curl_params);
+        $response = curl_exec($curl);
+        $err = curl_error($curl);
+        if ($err) {
+            throw new AftershipException("failed to request: $err");
+        }
+        $info = curl_getinfo($curl);
+        $code = $info['http_code'];
+        if ($code < 200 || $code >= 300) {
+            $parsed = json_decode($response);
 
-		return $request;
-	}
+            if ($parsed === null) {
+                throw new AftershipException("Error processing request - received HTTP error code $code");
+            }
 
-	private function call($method, $parameters = array()) {
-		$body = '';
-		if (isset($parameters['body'])) {
-			$body = $parameters['body'];
-		}
-		$headers = array();
-		foreach($parameters['headers'] as $key => $value) {
-			array_push($headers, "$key: $value");
-		}
-		$url = $parameters['url'];
-		if ($method != 'POST') {
-			if (isset($parameters['query'])) {
-				if (count($parameters['query']) > 0) {
-					$url = $url . '?' . http_build_query($parameters['query']);
-				}
-			}	
-		}
-		$curl = curl_init();
-		$curl_params = array(
-			CURLOPT_RETURNTRANSFER => true,
-			CURLOPT_URL => $url,
-			CURLOPT_CUSTOMREQUEST => $method,
-			CURLOPT_HTTPHEADER => $headers
-		);
-		if ($method != 'GET') {
-			$curl_params[CURLOPT_POSTFIELDS] = $body;
-		}
-		curl_setopt_array($curl, $curl_params);
-		$response = curl_exec($curl);
-		$err = curl_error($curl);
-		if ($err) {
-			throw new AftershipException("failed to request: $err");
-		}
-		$info = curl_getinfo($curl);
-		$code = $info['http_code'];
-		if ($code < 200 || $code >= 300) {
-			$parsed = json_decode($response);
-			
-			if($parsed === NULL) {
-				throw new AftershipException("Error processing request - received HTTP error code $code");
-			}
+            $err_code = '';
+            $err_message = '';
+            $err_type = '';
+            if (isset($parsed->meta->code)) {
+                $err_code = $parsed->meta->code;
+            }
+            if (isset($parsed->meta->message)) {
+                $err_message = $parsed->meta->message;
+            }
+            if (isset($parsed->meta->type)) {
+                $err_type = $parsed->meta->type;
+            }
+            throw new AftershipException("$err_type: $err_code - $err_message");
+        }
+        curl_close($curl);
+        return json_decode($response, true);
+    }
 
-			$err_code = '';
-			$err_message = '';
-			$err_type = '';
-			if (isset($parsed->meta->code)) {
-				$err_code = $parsed->meta->code;
-			}
-			if (isset($parsed->meta->message)) {
-				$err_message = $parsed->meta->message;
-			}
-			if (isset($parsed->meta->type)) {
-				$err_type = $parsed->meta->type;
-			}
-			throw new AftershipException("$err_type: $err_code - $err_message");
-		}
-		curl_close($curl);
-		return json_decode($response, true);
-	}
+    private function callGET($url, $headers, $body)
+    {
+        $parameters = array();
+        $parameters['query'] = $body;
+        $parameters['headers'] = $headers;
+        $parameters['url'] = $url;
+        return $this->call('GET', $parameters);
+    }
 
-	private function callGET($url, $headers, $body) {
-		$parameters = array();
-		$parameters['query'] = $body;
-		$parameters['headers'] = $headers;
-		$parameters['url'] = $url;
-		return $this->call('GET', $parameters);
-	}
+    private function callPOST($url, $headers, $body)
+    {
+        $parameters = array();
+        $parameters['body'] = $body;
+        $parameters['headers'] = $headers;
+        $parameters['url'] = $url;
+        return $this->call('POST', $parameters);
+    }
 
-	private function callPOST($url, $headers, $body) {
-		$parameters = array();
-		$parameters['body'] = $body;
-		$parameters['headers'] = $headers;
-		$parameters['url'] = $url;
-		return $this->call('POST', $parameters);
-	}
+    private function callPUT($url, $headers, $body)
+    {
+        $parameters = array();
+        $parameters['body'] = $body;
+        $parameters['headers'] = $headers;
+        $parameters['url'] = $url;
+        return $this->call('PUT', $parameters);
+    }
 
-	private function callPUT($url, $headers, $body) {
-		$parameters = array();
-		$parameters['body'] = $body;
-		$parameters['headers'] = $headers;
-		$parameters['url'] = $url;
-		return $this->call('PUT', $parameters);
-	}
-
-	private function callDELETE($url, $headers, $body) {
-		$parameters = array();
-		$parameters['body'] = $body;
-		$parameters['headers'] = $headers;
-		$parameters['url'] = $url;
-		return $this->call('DELETE', $parameters);
-	}
-
+    private function callDELETE($url, $headers, $body)
+    {
+        $parameters = array();
+        $parameters['body'] = $body;
+        $parameters['headers'] = $headers;
+        $parameters['url'] = $url;
+        return $this->call('DELETE', $parameters);
+    }
 }

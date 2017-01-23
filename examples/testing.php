@@ -19,12 +19,12 @@ $(function(){
 <body>
 ';
 
-require('../src/AfterShip/Exception/AftershipException.php');
-require('../src/AfterShip/Core/Request.php');
-require('../src/AfterShip/Couriers.php');
-require('../src/AfterShip/Trackings.php');
-require('../src/AfterShip/Notifications.php');
-require('../src/AfterShip/LastCheckPoint.php');
+require('../src/Exception/AftershipException.php');
+require('../src/Core/Request.php');
+require('../src/Couriers.php');
+require('../src/Trackings.php');
+require('../src/Notifications.php');
+require('../src/LastCheckPoint.php');
 
 $action = isset($_GET['action']) ? $_GET['action'] : '';
 $api_key = isset($_GET['api_key']) ? $_GET['api_key'] : '';

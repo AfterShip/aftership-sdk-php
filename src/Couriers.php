@@ -3,7 +3,7 @@
 namespace AfterShip;
 
 use AfterShip\Core\Request;
-use AfterShip\Exception\AftershipException;
+use AfterShip\Exception;
 
 class Couriers extends Request
 {
@@ -13,12 +13,12 @@ class Couriers extends Request
      *
      * @param string $api_key The AfterShip API Key.
      *
-     * @throws \AftershipException
+     * @throws \Exception
      */
     public function __construct($api_key)
     {
         if (empty($api_key)) {
-            throw new AftershipException('API Key is missing');
+            throw new Exception('API Key is missing');
         }
 
         $this->_api_key = $api_key;
@@ -43,7 +43,7 @@ class Couriers extends Request
      * https://www.aftership.com/docs/api/4/couriers/get-couriers-all
      * @return array Response body
      */
-    public function get_all()
+    public function all()
     {
         return $this->send('couriers/all', 'GET');
     }
@@ -56,12 +56,12 @@ class Couriers extends Request
      * @param string $tracking_number The tracking number which is provider by tracking provider
      * @param array $params The optional parameters
      * @return array Response Body
-     * @throws \AftershipException
+     * @throws \Exception
      */
     public function detect($tracking_number, array $params = array())
     {
         if (empty($tracking_number)) {
-            throw new AftershipException('Tracking number cannot be empty');
+            throw new Exception('Tracking number cannot be empty');
         }
 
         // Fill the tracking number into the params array

@@ -3,7 +3,7 @@
 namespace AfterShip;
 
 use AfterShip\Core\Request;
-use AfterShip\Exception\AftershipException;
+use AfterShip\Exception;
 
 /**
  * Get tracking information of the last checkpoint of a tracking.
@@ -18,12 +18,12 @@ class LastCheckPoint extends Request
      *
      * @param string $api_key The AfterShip API Key.
      *
-     * @throws \AftershipException
+     * @throws \Exception
      */
     public function __construct($api_key)
     {
         if (empty($api_key)) {
-            throw new AftershipException('API Key is missing');
+            throw new Exception('API Key is missing');
         }
 
         $this->_api_key = $api_key;
@@ -38,16 +38,16 @@ class LastCheckPoint extends Request
      * @param string $tracking_number The tracking number which is provider by tracking provider
      * @param array $params The optional parameters
      * @return array Response body
-     * @throws \AftershipException
+     * @throws \Exception
      */
     public function get($slug, $tracking_number, array $params = array())
     {
         if (empty($slug)) {
-            throw new AftershipException("Slug cannot be empty");
+            throw new Exception("Slug cannot be empty");
         }
 
         if (empty($tracking_number)) {
-            throw new AftershipException('Tracking number cannot be empty');
+            throw new Exception('Tracking number cannot be empty');
         }
 
         return $this->send('last_checkpoint/' . $slug . '/' . $tracking_number, 'GET', $params);
@@ -59,12 +59,12 @@ class LastCheckPoint extends Request
      * @param string $id The tracking ID which is provided by AfterShip
      * @param array $params The optional parameters
      * @return array Response body
-     * @throws \AftershipException
+     * @throws \Exception
      */
-    public function get_by_id($id, array $params = array())
+    public function findById($id, array $params = [])
     {
         if (empty($id)) {
-            throw new AftershipException('Tracking ID cannot be empty');
+            throw new Exception('Tracking ID cannot be empty');
         }
 
         return $this->send('last_checkpoint/' . $id, 'GET', $params);

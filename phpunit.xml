@@ -5,4 +5,7 @@
    colors="true"
    verbose="true"
 >
+    <logging>
+        <log type="coverage-text" target="php://stdout" showUncoveredFiles="true"/>
+    </logging>
 </phpunit>

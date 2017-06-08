@@ -3,11 +3,11 @@
 namespace AfterShip;
 
 use AfterShip\Core\Request;
-use AfterShip\Exception;
 
 /**
  * Get tracking information of the last checkpoint of a tracking.
  * Class LastCheckPoint
+ * @property string _api_key
  * @package AfterShip
  */
 class LastCheckPoint extends Request

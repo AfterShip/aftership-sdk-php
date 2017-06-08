@@ -9,7 +9,6 @@ class Request
     private $_api_url = 'https://api.aftership.com';
     protected $_api_key = '';
     private $_api_version = 'v4';
-    private $_client;
 
     public function __construct()
     {
@@ -23,32 +22,26 @@ class Request
         );
 
         switch (strtoupper($request_type)) {
-            case "GET":
-                $request = $this->callGET($this->_api_url . '/' . $this->_api_version . '/' . $url, $headers, $data);
-                break;
-            case "POST":
-                $request = $this->callPOST($this->_api_url . '/' . $this->_api_version . '/' . $url, $headers, json_encode($data));
-                break;
-            case "PUT":
-                $request = $this->callPUT($this->_api_url . '/' . $this->_api_version . '/' . $url, $headers, json_encode($data));
-                break;
-            case "DELETE":
-                $request = $this->callDELETE($this->_api_url . '/' . $this->_api_version . '/' . $url, $headers, json_encode($data));
-                break;
+            case 'GET':
+                return $this->callGET($this->_api_url . '/' . $this->_api_version . '/' . $url, $headers, $data);
+            case 'POST':
+                return $this->callPOST($this->_api_url . '/' . $this->_api_version . '/' . $url, $headers, json_encode($data));
+            case 'PUT':
+                return $this->callPUT($this->_api_url . '/' . $this->_api_version . '/' . $url, $headers, json_encode($data));
+            case 'DELETE':
+                return $this->callDELETE($this->_api_url . '/' . $this->_api_version . '/' . $url, $headers, json_encode($data));
             default:
                 throw new Exception("Method $request_type is currently not supported.");
         }
-
-        return $request;
     }
 
-    private function call($method, $parameters = array())
+    private function call($method, $parameters = [])
     {
         $body = '';
         if (isset($parameters['body'])) {
             $body = $parameters['body'];
         }
-        $headers = array();
+        $headers = [];
         foreach ($parameters['headers'] as $key => $value) {
             array_push($headers, "$key: $value");
         }
@@ -61,12 +54,12 @@ class Request
             }
         }
         $curl = curl_init();
-        $curl_params = array(
+        $curl_params = [
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_URL => $url,
             CURLOPT_CUSTOMREQUEST => $method,
             CURLOPT_HTTPHEADER => $headers
-        );
+        ];
         if ($method != 'GET') {
             $curl_params[CURLOPT_POSTFIELDS] = $body;
         }
@@ -105,37 +98,29 @@ class Request
 
     private function callGET($url, $headers, $body)
     {
-        $parameters = array();
-        $parameters['query'] = $body;
-        $parameters['headers'] = $headers;
-        $parameters['url'] = $url;
+        $parameters = [
+            'query' => $body,
+            'headers' => $headers,
+            'url' => $url
+        ];
         return $this->call('GET', $parameters);
     }
 
     private function callPOST($url, $headers, $body)
     {
-        $parameters = array();
-        $parameters['body'] = $body;
-        $parameters['headers'] = $headers;
-        $parameters['url'] = $url;
+        $parameters = compact('url', 'headers', 'body');
         return $this->call('POST', $parameters);
     }
 
     private function callPUT($url, $headers, $body)
     {
-        $parameters = array();
-        $parameters['body'] = $body;
-        $parameters['headers'] = $headers;
-        $parameters['url'] = $url;
+        $parameters = compact('url', 'headers', 'body');
         return $this->call('PUT', $parameters);
     }
 
     private function callDELETE($url, $headers, $body)
     {
-        $parameters = array();
-        $parameters['body'] = $body;
-        $parameters['headers'] = $headers;
-        $parameters['url'] = $url;
+        $parameters = compact('url', 'headers', 'body');
         return $this->call('DELETE', $parameters);
     }
 }

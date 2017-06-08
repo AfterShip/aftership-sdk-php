@@ -1,7 +1,6 @@
 <?php
 
 use AfterShip\Trackings;
-use AfterShip\Exception;
 
 class TrackingsTest extends PHPUnit_Framework_TestCase
 {
@@ -9,11 +8,18 @@ class TrackingsTest extends PHPUnit_Framework_TestCase
     public function it_could_not_be_instantiated_without_api_keys()
     {
         try {
-            $trackings = new Trackings();
+            new Trackings();
         } catch (\Exception $e) {
-            $this->assertInstanceOf(Exception::class, $e);
+            $this->assertInstanceOf('\Aftership\Exception', $e);
             $this->assertEquals($e->getMessage(), 'API Key is missing');
         }
     }
+
+    /** @test */
+    public function it_could_be_initialized_with_api_keys()
+    {
+
+    }
+
 
 }

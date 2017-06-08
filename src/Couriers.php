@@ -3,8 +3,10 @@
 namespace AfterShip;
 
 use AfterShip\Core\Request;
-use AfterShip\Exception;
 
+/**
+ * @property string _api_key
+ */
 class Couriers extends Request
 {
 

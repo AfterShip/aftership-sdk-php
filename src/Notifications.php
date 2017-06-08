@@ -3,8 +3,10 @@
 namespace AfterShip;
 
 use AfterShip\Core\Request;
-use AfterShip\Exception;
 
+/**
+ * @property string _api_key
+ */
 class Notifications extends Request
 {
 
@@ -29,10 +31,11 @@ class Notifications extends Request
     /**
      * Create a notification by slug and tracking number.
      * https://www.aftership.com/docs/api/4/notifications/post-add-notifications
+     * @param $slug
      * @param string $tracking_number The tracking number which is provider by tracking provider
      * @param array $params The optional parameters
-     * @return array Reponse Body
-     * @throws \Exception
+     * @return array Response Body
+     * @throws Exception
      */
     public function create($slug, $tracking_number, array $params = array())
     {
@@ -44,15 +47,17 @@ class Notifications extends Request
             throw new Exception('Tracking number cannot be empty');
         }
 
-        return $this->send('notifications/' . $slug . '/' . $tracking_number . '/add', 'POST', array('notification' => $params));
+        return $this->send('notifications/' . $slug . '/' . $tracking_number . '/add', 'POST',
+            array('notification' => $params));
     }
 
     /**
      * Create a notification by tracking ID.
      * https://www.aftership.com/docs/api/4/notifications/post-add-notifications
      * @param string $id The tracking ID which is provided by AfterShip
+     * @param array $params
      * @return array Response body
-     * @throws \Exception
+     * @throws Exception
      */
     public function createById($id, array $params = [])
     {
@@ -68,8 +73,9 @@ class Notifications extends Request
      * https://www.aftership.com/docs/api/4/notifications/post-remove-notifications
      * @param string $slug The slug of the tracking provider
      * @param string $tracking_number The tracking number which is provider by tracking provider
+     * @param array $params
      * @return array Response body
-     * @throws \Exception
+     * @throws Exception
      */
     public function delete($slug, $tracking_number, array $params = array())
     {
@@ -81,15 +87,17 @@ class Notifications extends Request
             throw new Exception('Tracking number cannot be empty');
         }
 
-        return $this->send('notifications/' . $slug . '/' . $tracking_number . '/remove', 'POST', array('notification' => $params));
+        return $this->send('notifications/' . $slug . '/' . $tracking_number . '/remove', 'POST',
+            array('notification' => $params));
     }
 
     /**
      * Delete a notification by tracking ID.
      * https://www.aftership.com/docs/api/4/notifications/post-remove-notifications
      * @param string $id The tracking ID which is provided by AfterShip
+     * @param array $params
      * @return array Response body
-     * @throws \Exception
+     * @throws Exception
      */
     public function deleteById($id, array $params = [])
     {

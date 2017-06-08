@@ -1,12 +1,8 @@
 <?php
-require('../src/AfterShip/Exception/AftershipException.php');
-require('../src/AfterShip/Core/Request.php');
-require('../src/AfterShip/Couriers.php');
-require('../src/AfterShip/Trackings.php');
-require('../src/AfterShip/LastCheckPoint.php');
+require('../vendor/autoload.php');
 
 
-use \AfterShip\Exception\AftershipException;
+use \AfterShip\AfterShipException;
 
 $key = '';
 
@@ -22,10 +18,10 @@ $last_check_point = new AfterShip\LastCheckPoint($key);
 
 //$response = $couriers->detect('41910575873');
 
-$tracking_info = array(
+$tracking_info = [
     'slug'    => 'aramex',
     'title'   => 'My Title',
-);
+];
 //$response = $trackings->create('41910575873', $tracking_info);
 
 //$response = $trackings->delete('rocketparcel', '100006802232');
@@ -36,9 +32,7 @@ $response = null;
 
 try {
     $response = $trackings->create('', $tracking_info);
-} catch (AftershipException $e) {
-    echo $e->getMessage();
-} catch (Exception $e) {
+} catch (AfterShipException $e) {
     echo $e->getMessage();
 }
 

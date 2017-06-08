@@ -2,30 +2,27 @@
 
 namespace AfterShip;
 
-use AfterShip\Core\Request;
-
 /**
- * @property string _api_key
+ * Class Notifications
+ * @package AfterShip
  */
-class Notifications extends Request
+class Notifications
 {
+    private $request;
 
     /**
-     * The Notifications constructor.
-     *
-     * @param string $api_key The AfterShip API Key.
-     *
-     * @throws \Exception
+     * Notifications constructor.
+     * @param $api_key
+     * @param Requestable|null $request
+     * @throws AfterShipException
      */
-    public function __construct($api_key)
+    public function __construct($api_key, Requestable $request = null)
     {
         if (empty($api_key)) {
-            throw new Exception('API Key is missing');
+            throw new AfterShipException('API Key is missing');
         }
 
-        $this->_api_key = $api_key;
-
-        parent::__construct();
+        $this->request = $request ? $request : new Request($api_key);
     }
 
     /**
@@ -35,19 +32,19 @@ class Notifications extends Request
      * @param string $tracking_number The tracking number which is provider by tracking provider
      * @param array $params The optional parameters
      * @return array Response Body
-     * @throws Exception
+     * @throws AfterShipException
      */
     public function create($slug, $tracking_number, array $params = array())
     {
         if (empty($slug)) {
-            throw new Exception('Slug cannot be empty');
+            throw new AfterShipException('Slug cannot be empty');
         }
 
         if (empty($tracking_number)) {
-            throw new Exception('Tracking number cannot be empty');
+            throw new AfterShipException('Tracking number cannot be empty');
         }
 
-        return $this->send('notifications/' . $slug . '/' . $tracking_number . '/add', 'POST',
+        return $this->request->send('notifications/' . $slug . '/' . $tracking_number . '/add', 'POST',
             array('notification' => $params));
     }
 
@@ -57,15 +54,15 @@ class Notifications extends Request
      * @param string $id The tracking ID which is provided by AfterShip
      * @param array $params
      * @return array Response body
-     * @throws Exception
+     * @throws AfterShipException
      */
     public function createById($id, array $params = [])
     {
         if (empty($id)) {
-            throw new Exception('Tracking ID cannot be empty');
+            throw new AfterShipException('Tracking ID cannot be empty');
         }
 
-        return $this->send('notifications/' . $id . '/add', 'POST', array('notification' => $params));
+        return $this->request->send('notifications/' . $id . '/add', 'POST', array('notification' => $params));
     }
 
     /**
@@ -75,16 +72,16 @@ class Notifications extends Request
      * @param string $tracking_number The tracking number which is provider by tracking provider
      * @param array $params
      * @return array Response body
-     * @throws Exception
+     * @throws AfterShipException
      */
     public function delete($slug, $tracking_number, array $params = array())
     {
         if (empty($slug)) {
-            throw new Exception('Slug cannot be empty');
+            throw new AfterShipException('Slug cannot be empty');
         }
 
         if (empty($tracking_number)) {
-            throw new Exception('Tracking number cannot be empty');
+            throw new AfterShipException('Tracking number cannot be empty');
         }
 
         return $this->send('notifications/' . $slug . '/' . $tracking_number . '/remove', 'POST',
@@ -97,15 +94,15 @@ class Notifications extends Request
      * @param string $id The tracking ID which is provided by AfterShip
      * @param array $params
      * @return array Response body
-     * @throws Exception
+     * @throws AfterShipException
      */
     public function deleteById($id, array $params = [])
     {
         if (empty($id)) {
-            throw new Exception('Tracking ID cannot be empty');
+            throw new AfterShipException('Tracking ID cannot be empty');
         }
 
-        return $this->send('notifications/' . $id . '/remove', 'POST', array('notification' => $params));
+        return $this->request->send('notifications/' . $id . '/remove', 'POST', array('notification' => $params));
     }
 
     /**
@@ -120,14 +117,14 @@ class Notifications extends Request
     public function get($slug, $tracking_number, array $params = array())
     {
         if (empty($slug)) {
-            throw new Exception('Slug cannot be empty');
+            throw new AfterShipException('Slug cannot be empty');
         }
 
         if (empty($tracking_number)) {
-            throw new Exception('Tracking number cannot be empty');
+            throw new AfterShipException('Tracking number cannot be empty');
         }
 
-        return $this->send('notifications/' . $slug . '/' . $tracking_number, 'GET', $params);
+        return $this->request->send('notifications/' . $slug . '/' . $tracking_number, 'GET', $params);
     }
 
     /**
@@ -136,12 +133,12 @@ class Notifications extends Request
      * @param string $id The tracking ID which is provided by AfterShip
      * @param array $params The optional parameters
      * @return array Response body
-     * @throws \Exception
+     * @throws AfterShipException
      */
     public function getById($id, array $params = array())
     {
         if (empty($id)) {
-            throw new Exception('Tracking ID cannot be empty');
+            throw new AfterShipException('Tracking ID cannot be empty');
         }
 
         return $this->send('notifications/' . $id, 'GET', $params);

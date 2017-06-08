@@ -1,10 +1,7 @@
-<?php
-
-echo '
 <html>
 <head>
 <title>Testing</title>
-<script type="text/javascript" src="jquery-2.1.1.min.js"></script>
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script type="text/javascript">
 $(function(){
 	$(".btn").click(function(){
@@ -17,43 +14,39 @@ $(function(){
 </head>
 
 <body>
-';
-
-require('../src/Exception/AftershipException.php');
-require('../src/Core/Request.php');
-require('../src/Couriers.php');
-require('../src/Trackings.php');
-require('../src/Notifications.php');
-require('../src/LastCheckPoint.php');
+<?php
+require('../vendor/autoload.php');
 
 $action = isset($_GET['action']) ? $_GET['action'] : '';
 $api_key = isset($_GET['api_key']) ? $_GET['api_key'] : '';
 $request_all = ($action == 'ALL');
+?>
 
-echo '<h1>AfterShip API PHP SDK Testing</h1>';
-echo 'This is the offical PHP SDK of AfterShip API. Provided by AfterShip ';
-echo '<a href="support@aftership.com">support@aftership.com</a>';
-print '</br>';
+<h1>AfterShip API PHP SDK Testing</h1>
+This is the official PHP SDK of AfterShip API. Provided by AfterShip
+<a href="support@aftership.com">support@aftership.com</a>
+</br>
 
-echo '<form action="testing.php" method="get" id="form">';
-echo 'API KEY: ';
-print '<input type="text" value="' . $api_key . '" name="api_key" size="45"/>';
-print ' <a href="http://aftership.uservoice.com/knowledgebase/articles/401963">How to generate AfterShip API Key?</a>';
-print '</br>';
-echo 'Request All: ';
-print '<input type="button" value="ALL" class="btn"/>';
-print '</br>';
-echo 'ACTION: ' . $action;
-print '</br>';
+<form action="testing.php" method="GET" id="form">
+API KEY:
+<input type="text" value="<?= $api_key ?>" name="api_key" size="45"/>
+ <a href="http://aftership.uservoice.com/knowledgebase/articles/401963">How to generate AfterShip API Key?</a>
+<br />
+Request All:
+<input type="button" value="ALL" class="btn"/>
+<br />
+ACTION: <?= $action ?>;
+<br />
 
-print '<hr>';
+<hr>
 
-if (!$api_key) {
-    echo '</br>';
-    echo '<b>Plase input API key first</b>';
-    exit;
-}
+<?php if (!$api_key): ?>
+<br />
+<b>Plase input API key first</b>
+<?php exit ?>
+<?php endif; ?>
 
+<?php
 function p($arr)
 {
     print '<div class="response">';
@@ -292,10 +285,10 @@ if ($request_all || $action == 'notifications_get_by_id') {
         p($e);
     }
 }
+?>
 
 
-echo '</form>';
+</form>
 
-echo '
 </body>
-</html>';
+</html>

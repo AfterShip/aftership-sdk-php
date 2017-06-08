@@ -2,33 +2,31 @@
 
 namespace AfterShip;
 
-use AfterShip\Core\Request;
-
 /**
  * Get tracking information of the last checkpoint of a tracking.
  * Class LastCheckPoint
  * @property string _api_key
  * @package AfterShip
  */
-class LastCheckPoint extends Request
+class LastCheckPoint
 {
+    private $request;
 
     /**
      * The LastCheckPoint constructor.
      *
      * @param string $api_key The AfterShip API Key.
      *
-     * @throws \Exception
+     * @param Requestable|null $request
+     * @throws AfterShipException
      */
-    public function __construct($api_key)
+    public function __construct($api_key, Requestable $request = null)
     {
         if (empty($api_key)) {
-            throw new Exception('API Key is missing');
+            throw new AfterShipException('API Key is missing');
         }
 
-        $this->_api_key = $api_key;
-
-        parent::__construct();
+        $this->request = $request ? $request : new Request($api_key);
     }
 
     /**
@@ -43,14 +41,14 @@ class LastCheckPoint extends Request
     public function get($slug, $tracking_number, array $params = array())
     {
         if (empty($slug)) {
-            throw new Exception("Slug cannot be empty");
+            throw new AfterShipException("Slug cannot be empty");
         }
 
         if (empty($tracking_number)) {
-            throw new Exception('Tracking number cannot be empty');
+            throw new AfterShipException('Tracking number cannot be empty');
         }
 
-        return $this->send('last_checkpoint/' . $slug . '/' . $tracking_number, 'GET', $params);
+        return $this->request->send('last_checkpoint/' . $slug . '/' . $tracking_number, 'GET', $params);
     }
 
     /**
@@ -64,9 +62,16 @@ class LastCheckPoint extends Request
     public function findById($id, array $params = [])
     {
         if (empty($id)) {
-            throw new Exception('Tracking ID cannot be empty');
+            throw new AfterShipException('Tracking ID cannot be empty');
         }
 
-        return $this->send('last_checkpoint/' . $id, 'GET', $params);
+        return $this->request->send('last_checkpoint/' . $id, 'GET', $params);
+    }
+
+    function __call($name, $arguments)
+    {
+        $method = lcfirst(str_replace('_', '', ucwords('get_by_id', '_')));
+
+        call_user_func_array([$this, $method], $arguments);
     }
 }

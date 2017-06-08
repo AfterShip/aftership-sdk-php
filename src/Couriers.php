@@ -2,30 +2,28 @@
 
 namespace AfterShip;
 
-use AfterShip\Core\Request;
-
 /**
- * @property string _api_key
+ * @property string $api_key
  */
-class Couriers extends Request
+class Couriers extends BackwardCompatible
 {
+    private $request;
 
     /**
      * The Couriers Constructor.
      *
      * @param string $api_key The AfterShip API Key.
      *
-     * @throws \Exception
+     * @param Requestable|null $request
+     * @throws AfterShipException
      */
-    public function __construct($api_key)
+    public function __construct($api_key, Requestable $request = null)
     {
         if (empty($api_key)) {
-            throw new Exception('API Key is missing');
+            throw new AfterShipException('API Key is missing');
         }
 
-        $this->_api_key = $api_key;
-
-        parent::__construct();
+        $this->request = $request ? $request : new Request($api_key);
     }
 
     /**
@@ -36,7 +34,7 @@ class Couriers extends Request
      */
     public function get()
     {
-        return $this->send('couriers', 'GET');
+        return $this->request->send('couriers', 'GET');
     }
 
     /**
@@ -47,7 +45,7 @@ class Couriers extends Request
      */
     public function all()
     {
-        return $this->send('couriers/all', 'GET');
+        return $this->request->send('couriers/all', 'GET');
     }
 
     /**
@@ -63,11 +61,11 @@ class Couriers extends Request
     public function detect($tracking_number, array $params = array())
     {
         if (empty($tracking_number)) {
-            throw new Exception('Tracking number cannot be empty');
+            throw new AfterShipException('Tracking number cannot be empty');
         }
 
         // Fill the tracking number into the params array
         $params['tracking_number'] = $tracking_number;
-        return $this->send('couriers/detect/', 'POST', array('tracking' => $params));
+        return $this->request->send('couriers/detect/', 'POST', ['tracking' => $params]);
     }
 }

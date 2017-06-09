@@ -15,11 +15,11 @@ class Request implements Requestable
     /**
      * @var string
      */
-    private $API_URL = 'https://api.aftership.com';
+    const API_URL = 'https://api.aftership.com';
     /**
      * @var string
      */
-    private $API_VERSION = 'v4';
+    const API_VERSION = 'v4';
     /**
      * @var string
      */
@@ -48,18 +48,18 @@ class Request implements Requestable
             'content-type'      => 'application/json'
         ];
 
-        $method_upper = strtoupper($method);
+        $methodUpper = strtoupper($method);
         $parameters = [
-            'url' => "{$this->API_URL}/{$this->API_VERSION}/{$url}",
+            'url' => self::API_URL. '/' . self::API_VERSION . '/' . $url,
             'headers' => $headers,
         ];
-        if ($method_upper == 'GET') {
+        if ($methodUpper == 'GET') {
             $parameters['query'] = $data;
         } else {
             $parameters['body'] = json_encode($data);
         }
 
-        return $this->call($method_upper, $parameters);
+        return $this->call($methodUpper, $parameters);
     }
 
     private function call($method, $parameters = [])
@@ -78,16 +78,16 @@ class Request implements Requestable
             }
         }
         $curl = curl_init();
-        $curl_params = [
+        $curlParams = [
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_URL            => $url,
             CURLOPT_CUSTOMREQUEST  => $method,
             CURLOPT_HTTPHEADER     => $headers
         ];
         if ($method != 'GET') {
-            $curl_params[CURLOPT_POSTFIELDS] = $parameters['body'];
+            $curlParams[CURLOPT_POSTFIELDS] = $parameters['body'];
         }
-        curl_setopt_array($curl, $curl_params);
+        curl_setopt_array($curl, $curlParams);
         $response = curl_exec($curl);
         $err = curl_error($curl);
         if ($err) {
@@ -102,19 +102,19 @@ class Request implements Requestable
                 throw new AfterShipException("Error processing request - received HTTP error code $code", $code);
             }
 
-            $err_code = '';
-            $err_message = '';
-            $err_type = '';
+            $errCode = '';
+            $errMessage = '';
+            $errType = '';
             if (isset($parsed->meta->code)) {
-                $err_code = $parsed->meta->code;
+                $errCode = $parsed->meta->code;
             }
             if (isset($parsed->meta->message)) {
-                $err_message = $parsed->meta->message;
+                $errMessage = $parsed->meta->message;
             }
             if (isset($parsed->meta->type)) {
-                $err_type = $parsed->meta->type;
+                $errType = $parsed->meta->type;
             }
-            throw new AfterShipException("$err_type: $err_code - $err_message", $err_code);
+            throw new AfterShipException("$errType: $errCode - $errMessage", $errCode);
         }
         curl_close($curl);
         return json_decode($response, true);

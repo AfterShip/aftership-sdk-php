@@ -110,22 +110,22 @@ class Trackings extends BackwardCompatible
      * Get tracking results of a single tracking by slug and tracking number.
      * https://www.aftership.com/docs/api/4/trackings/get-trackings-slug-tracking_number
      * @param string $slug The slug of the tracking provider
-     * @param string $tracking_number The tracking number which is provider by tracking provider
+     * @param string $trackingNumber The tracking number which is provider by tracking provider
      * @param array $params The optional parameters
      * @return array Response body
      * @throws AfterShipException
      */
-    public function get($slug, $tracking_number, array $params = [])
+    public function get($slug, $trackingNumber, array $params = [])
     {
         if (empty($slug)) {
             throw new AfterShipException('Slug cannot be empty');
         }
 
-        if (empty($tracking_number)) {
+        if (empty($trackingNumber)) {
             throw new AfterShipException('Tracking number cannot be empty');
         }
 
-        return $this->request->send('trackings/' . $slug . '/' . $tracking_number, 'GET', $params);
+        return $this->request->send('trackings/' . $slug . '/' . $trackingNumber, 'GET', $params);
     }
 
     /**
@@ -149,22 +149,22 @@ class Trackings extends BackwardCompatible
      * Update a tracking by slug and tracking number.
      * https://www.aftership.com/docs/api/4/trackings/put-trackings-slug-tracking_number
      * @param string $slug The slug of the tracking provider
-     * @param string $tracking_number The tracking number which is provider by tracking provider
+     * @param string $trackingNumber The tracking number which is provider by tracking provider
      * @param array $params The optional parameters
      * @return array Response body
      * @throws AfterShipException
      */
-    public function update($slug, $tracking_number, array $params = [])
+    public function update($slug, $trackingNumber, array $params = [])
     {
         if (empty($slug)) {
             throw new AfterShipException("Slug cannot be empty");
         }
 
-        if (empty($tracking_number)) {
+        if (empty($trackingNumber)) {
             throw new AfterShipException('Tracking number cannot be empty');
         }
 
-        return $this->request->send('trackings/' . $slug . '/' . $tracking_number, 'PUT', ['tracking' => $params]);
+        return $this->request->send('trackings/' . $slug . '/' . $trackingNumber, 'PUT', ['tracking' => $params]);
     }
 
     /**

@@ -101,11 +101,6 @@ class Trackings extends BackwardCompatible
         return $this->request->send('trackings', 'GET', $params);
     }
 
-    public function get_all($params)
-    {
-        return $this->all($params);
-    }
-
     /**
      * Get tracking results of a single tracking by slug and tracking number.
      * https://www.aftership.com/docs/api/4/trackings/get-trackings-slug-tracking_number

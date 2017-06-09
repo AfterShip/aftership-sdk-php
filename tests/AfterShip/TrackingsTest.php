@@ -118,6 +118,20 @@ class TrackingsTest extends TestCase
     }
 
     /** @test */
+    public function it_could_backward_support_delete_by_id_call()
+    {
+        list($request, $tracking) = $this->buildTracking();
+
+        $request
+            ->with(
+                $this->equalTo('trackings/tracking_id'),
+                $this->equalTo('DELETE')
+            );
+
+        $tracking->delete_by_id('tracking_id');
+    }
+
+    /** @test */
     public function it_could_get_all_trackings()
     {
         list($request, $tracking) = $this->buildTracking();
@@ -130,6 +144,21 @@ class TrackingsTest extends TestCase
             );
 
         $tracking->all();
+    }
+
+    /** @test */
+    public function it_could_backward_support_get_all_call()
+    {
+        list($request, $tracking) = $this->buildTracking();
+
+        $request
+            ->with(
+                $this->equalTo('trackings'),
+                $this->equalTo('GET'),
+                $this->equalTo([])
+            );
+
+        $tracking->get_all();
     }
 
     /** @test */
@@ -178,6 +207,21 @@ class TrackingsTest extends TestCase
             );
 
         $tracking->getById('tracking_id');
+    }
+
+    /** @test */
+    public function it_could_backward_support_get_by_id_call()
+    {
+        list($request, $tracking) = $this->buildTracking();
+
+        $request
+            ->with(
+                $this->equalTo('trackings/tracking_id'),
+                $this->equalTo('GET'),
+                $this->equalTo([])
+            );
+
+        $tracking->get_by_id('tracking_id');
     }
 
 

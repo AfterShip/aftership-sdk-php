@@ -17,8 +17,7 @@ abstract class BackwardCompatible
     {
         $method = $name == 'get_all' ?
             'all' :
-            lcfirst(str_replace('_', '', ucwords('get_by_id', '_')));
-
+            lcfirst(str_replace('_', '', ucwords($name, '_')));
         call_user_func_array([$this, $method], $arguments);
     }
 }

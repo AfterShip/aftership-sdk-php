@@ -23,16 +23,16 @@ class Request implements Requestable
     /**
      * @var string
      */
-    protected $api_key = '';
+    protected $apiKey = '';
 
 
     /**
      * Request constructor.
-     * @param $api_key
+     * @param $apiKey
      */
-    function __construct($api_key)
+    function __construct($apiKey)
     {
-        $this->api_key = $api_key;
+        $this->apiKey = $apiKey;
     }
 
     /**
@@ -44,7 +44,7 @@ class Request implements Requestable
     public function send($url, $method, array $data = [])
     {
         $headers = [
-            'aftership-api-key' => $this->api_key,
+            'aftership-api-key' => $this->apiKey,
             'content-type'      => 'application/json'
         ];
 

@@ -53,12 +53,6 @@ class Trackings extends BackwardCompatible
         throw new AfterShipException('Sorry! It will be available soon.');
     }
 
-    /** @deprecated */
-    public function create_multiple()
-    {
-        return $this->createMultiple();
-    }
-
     /**
      * Delete a tracking number by slug and tracking number.
      * https://www.aftership.com/docs/api/4/trackings/delete-trackings
@@ -83,17 +77,17 @@ class Trackings extends BackwardCompatible
     /**
      * Delete a tracking number by tracking ID.
      * https://www.aftership.com/docs/api/4/trackings/delete-trackings
-     * @param string $id The tracking ID which is provided by AfterShip
+     * @param string $trackingId The tracking ID which is provided by AfterShip
      * @return array Response body
      * @throws AfterShipException
      */
-    public function deleteById($id)
+    public function deleteById($trackingId)
     {
-        if (empty($id)) {
+        if (empty($trackingId)) {
             throw new AfterShipException('Tracking ID cannot be empty');
         }
 
-        return $this->request->send('trackings/' . $id, 'DELETE');
+        return $this->request->send('trackings/' . $trackingId, 'DELETE');
     }
 
     /**
@@ -137,18 +131,18 @@ class Trackings extends BackwardCompatible
     /**
      * Get tracking results of a single tracking by tracking ID.
      * https://www.aftership.com/docs/api/4/trackings/get-trackings-slug-tracking_number
-     * @param string $id The tracking ID which is provided by AfterShip
+     * @param string $trackingId The tracking ID which is provided by AfterShip
      * @param array $params The optional parameters
      * @return array Response body
      * @throws AfterShipException
      */
-    public function getById($id, array $params = [])
+    public function getById($trackingId, array $params = [])
     {
-        if (empty($id)) {
+        if (empty($trackingId)) {
             throw new AfterShipException('Tracking ID cannot be empty');
         }
 
-        return $this->request->send('trackings/' . $id, 'GET', $params);
+        return $this->request->send('trackings/' . $trackingId, 'GET', $params);
     }
 
     /**
@@ -176,18 +170,18 @@ class Trackings extends BackwardCompatible
     /**
      * Update a tracking by tracking ID.
      * https://www.aftership.com/docs/api/4/trackings/put-trackings-slug-tracking_number
-     * @param string $id The tracking ID which is provided by AfterShip
+     * @param string $trackingId The tracking ID which is provided by AfterShip
      * @param array $params The optional parameters
      * @return array Response body
      * @throws AfterShipException
      */
-    public function updateById($id, array $params = [])
+    public function updateById($trackingId, array $params = [])
     {
-        if (empty($id)) {
+        if (empty($trackingId)) {
             throw new AfterShipException('Tracking ID cannot be empty');
         }
 
-        return $this->request->send('trackings/' . $id, 'PUT', ['tracking' => $params]);
+        return $this->request->send('trackings/' . $trackingId, 'PUT', ['tracking' => $params]);
     }
 
     /**
@@ -214,17 +208,17 @@ class Trackings extends BackwardCompatible
     /**
      * Retrack an expired tracking once by tracking ID.
      * https://www.aftership.com/docs/api/4/trackings/post-trackings-slug-tracking_number-retrack
-     * @param string $id The tracking ID which is provided by AfterShip
+     * @param string $trackingId The tracking ID which is provided by AfterShip
      * @return array Response body
      * @throws \AfterShip\AfterShipException
      */
-    public function retrackById($id)
+    public function retrackById($trackingId)
     {
-        if (empty($id)) {
+        if (empty($trackingId)) {
             throw new AfterShipException('Tracking ID cannot be empty');
         }
 
-        return $this->request->send('trackings/' . $id . '/retrack', 'POST');
+        return $this->request->send('trackings/' . $trackingId . '/retrack', 'POST');
     }
 
 }

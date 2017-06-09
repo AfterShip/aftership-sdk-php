@@ -190,13 +190,13 @@ class TrackingsTest extends TestCase
     }
 
     /**
-     * @param string $api_key
+     * @param string $apiKey
      * @return array
      */
-    private function buildTracking($api_key = 'test_key')
+    private function buildTracking($apiKey = 'test_key')
     {
         $request = $this->buildRequest();
-        $tracking = new Trackings($api_key, $request);
+        $tracking = new Trackings($apiKey, $request);
 
         return [
             $request
@@ -206,7 +206,7 @@ class TrackingsTest extends TestCase
         ];
     }
 
-    private function throwsError($method, $args, $error_message)
+    private function throwsError($method, $args, $errorMessage)
     {
         $tracking = new Trackings('test_key');
 
@@ -214,7 +214,7 @@ class TrackingsTest extends TestCase
             call_user_func_array([$tracking, $method], $args);
         } catch (\Exception $e) {
             $this->assertInstanceOf(AfterShipException::class, $e);
-            $this->assertEquals($e->getMessage(), $error_message);
+            $this->assertEquals($e->getMessage(), $errorMessage);
         }
     }
 }

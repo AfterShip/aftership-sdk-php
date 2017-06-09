@@ -9,35 +9,35 @@ class Trackings extends BackwardCompatible
     /**
      * The Trackings constructor.
      *
-     * @param string $api_key The AfterShip API Key.
+     * @param string $apiKey The AfterShip API Key.
      *
      * @param Requestable $request
      * @throws AfterShipException
      */
-    public function __construct($api_key = '', Requestable $request = null)
+    public function __construct($apiKey = '', Requestable $request = null)
     {
-        if (empty($api_key)) {
+        if (empty($apiKey)) {
             throw new AfterShipException('API Key is missing');
         }
 
-        $this->request = $request ? $request : new Request($api_key);
+        $this->request = $request ? $request : new Request($apiKey);
     }
 
     /**
      * Create a tracking.
      * https://www.aftership.com/docs/api/4/trackings/post-trackings
-     * @param string $tracking_number The tracking number which is provider by tracking provider
+     * @param string $trackingNumber The tracking number which is provider by tracking provider
      * @param array $params The optional parameters
      * @return array Response Body
      * @throws AfterShipException
      */
-    public function create($tracking_number, array $params = [])
+    public function create($trackingNumber, array $params = [])
     {
-        if (empty($tracking_number)) {
+        if (empty($trackingNumber)) {
             throw new AfterShipException('Tracking number cannot be empty');
         }
 
-        $params['tracking_number'] = $tracking_number;
+        $params['tracking_number'] = $trackingNumber;
         return $this->request->send('trackings', 'POST', ['tracking' => $params]);
     }
 
@@ -63,21 +63,21 @@ class Trackings extends BackwardCompatible
      * Delete a tracking number by slug and tracking number.
      * https://www.aftership.com/docs/api/4/trackings/delete-trackings
      * @param string $slug The slug of the tracking provider
-     * @param string $tracking_number The tracking number which is provider by tracking provider
+     * @param string $trackingNumber The tracking number which is provider by tracking provider
      * @return array Response body
      * @throws AfterShipException
      */
-    public function delete($slug, $tracking_number)
+    public function delete($slug, $trackingNumber)
     {
         if (empty($slug)) {
             throw new AfterShipException('Slug cannot be empty');
         }
 
-        if (empty($tracking_number)) {
+        if (empty($trackingNumber)) {
             throw new AfterShipException('Tracking number cannot be empty');
         }
 
-        return $this->request->send('trackings/' . $slug . '/' . $tracking_number, 'DELETE');
+        return $this->request->send('trackings/' . $slug . '/' . $trackingNumber, 'DELETE');
     }
 
     /**
@@ -194,21 +194,21 @@ class Trackings extends BackwardCompatible
      * Retrack an expired tracking once by slug and tracking number.
      * https://www.aftership.com/docs/api/4/trackings/post-trackings-slug-tracking_number-retrack
      * @param string $slug The slug of tracking provider
-     * @param string $tracking_number The tracking number which is provider by tracking provider
+     * @param string $trackingNumber The tracking number which is provider by tracking provider
      * @return array Response body
      * @throws AfterShipException
      */
-    public function retrack($slug, $tracking_number)
+    public function retrack($slug, $trackingNumber)
     {
         if (empty($slug)) {
             throw new AfterShipException("Slug cannot be empty");
         }
 
-        if (empty($tracking_number)) {
+        if (empty($trackingNumber)) {
             throw new AfterShipException('Tracking number cannot be empty');
         }
 
-        return $this->request->send('trackings/' . $slug . '/' . $tracking_number . '/retrack', 'POST');
+        return $this->request->send('trackings/' . $slug . '/' . $trackingNumber . '/retrack', 'POST');
     }
 
     /**

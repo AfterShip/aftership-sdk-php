@@ -1,6 +1,7 @@
 # AfterShip API PHP SDK
 
 [![Build Status](https://travis-ci.org/AfterShip/aftership-sdk-php.svg?branch=master)](https://travis-ci.org/AfterShip/aftership-sdk-php)
+[![Code Climate](https://codeclimate.com/github/codeclimate/codeclimate/badges/gpa.svg)](https://codeclimate.com/github/AfterShip/aftership-sdk-php)
 [![codecov](https://codecov.io/gh/AfterShip/aftership-sdk-php/branch/master/graph/badge.svg)](https://codecov.io/gh/AfterShip/aftership-sdk-php)
 [![Latest Stable Version](https://poser.pugx.org/aftership/aftership-php-sdk/v/stable)](https://packagist.org/packages/aftership/aftership-php-sdk)
 [![Monthly Downloads](https://poser.pugx.org/aftership/aftership-php-sdk/d/monthly)](https://packagist.org/packages/aftership/aftership-php-sdk)

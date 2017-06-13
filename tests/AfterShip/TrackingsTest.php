@@ -225,6 +225,119 @@ class TrackingsTest extends TestCase
     }
 
 
+    /** @test */
+    public function it_throws_error_when_update_by_empty_slug()
+    {
+        $this->throwsError('update', ['', 'tracking_number'], 'Slug cannot be empty');
+    }
+
+    /** @test */
+    public function it_throws_error_when_update_by_empty_tracking_number()
+    {
+        $this->throwsError('update', ['dhl', ''], 'Tracking number cannot be empty');
+    }
+
+    /** @test */
+    public function it_could_update_by_slug_and_courier()
+    {
+        list($request, $tracking) = $this->buildTracking();
+
+        $request
+            ->with(
+                $this->equalTo('trackings/dhl/test_number'),
+                $this->equalTo('PUT'),
+                $this->equalTo([
+                    'tracking' => [
+                        'some_params'
+                    ]
+                ])
+            );
+
+        $tracking->update('dhl', 'test_number', [
+            'some_params'
+        ]);
+    }
+
+    /** @test */
+    public function it_throws_error_when_update_by_empty_id()
+    {
+        $this->throwsError('updateById', [''], 'Tracking ID cannot be empty');
+    }
+
+    /** @test */
+    public function it_could_update_by_id()
+    {
+        list($request, $tracking) = $this->buildTracking();
+
+        $request
+            ->with(
+                $this->equalTo('trackings/tracking_id'),
+                $this->equalTo('PUT'),
+                $this->equalTo([
+                    'tracking' => [
+                        'some_params'
+                    ]
+                ])
+            );
+
+        $tracking->updateById('tracking_id', [
+            'some_params'
+        ]);
+    }
+
+    /** @test */
+    public function it_throws_error_when_retrack_empty_slug()
+    {
+        $this->throwsError('retrack', ['', 'tracking_number'], 'Slug cannot be empty');
+    }
+
+    /** @test */
+    public function it_throws_error_when_retrack_empty_tracking_number()
+    {
+        $this->throwsError('retrack', ['slug', ''], 'Tracking number cannot be empty');
+    }
+
+    /** @test */
+    public function it_could_retrack_by_slug_and_tracking_number()
+    {
+        list($request, $tracking) = $this->buildTracking();
+
+        $request
+            ->with(
+                $this->equalTo('trackings/dhl/tracking_number/retrack'),
+                $this->equalTo('POST')
+            );
+
+        $tracking->retrack('dhl', 'tracking_number');
+    }
+
+    /** @test */
+    public function create_multiple_is_not_implemented_yet()
+    {
+        $this->throwsError('createMultiple', [], 'Sorry! It will be available soon.');
+    }
+
+    /** @test */
+    public function retrack_by_id_will_yields_exception_if_id_is_empty()
+    {
+        $this->throwsError('retrackById', [''], 'Tracking ID cannot be empty');
+    }
+
+    /** @test */
+    public function it_could_retrack_by_id()
+    {
+        list($request, $tracking) = $this->buildTracking();
+
+        $request
+            ->with(
+                $this->equalTo('trackings/tracking_id/retrack'),
+                $this->equalTo('POST')
+            );
+
+        $tracking->retrackById('tracking_id');
+    }
+
+
     private function buildRequest()
     {
         return $this

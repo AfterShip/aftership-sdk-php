@@ -45,7 +45,7 @@ class Notifications
         }
 
         return $this->request->send('notifications/' . $slug . '/' . $trackingNumber . '/add', 'POST',
-            array('notification' => $params));
+            ['notification' => $params]);
     }
 
     /**
@@ -84,7 +84,7 @@ class Notifications
             throw new AfterShipException('Tracking number cannot be empty');
         }
 
-        return $this->send('notifications/' . $slug . '/' . $trackingNumber . '/remove', 'POST',
+        return $this->request->send('notifications/' . $slug . '/' . $trackingNumber . '/remove', 'POST',
             array('notification' => $params));
     }
 
@@ -141,6 +141,6 @@ class Notifications
             throw new AfterShipException('Tracking ID cannot be empty');
         }
 
-        return $this->send('notifications/' . $trackingId, 'GET', $params);
+        return $this->request->send('notifications/' . $trackingId, 'GET', $params);
     }
 }

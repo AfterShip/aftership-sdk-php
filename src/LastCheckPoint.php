@@ -20,7 +20,7 @@ class LastCheckPoint extends BackwardCompatible
      * @param Requestable|null $request
      * @throws AfterShipException
      */
-    public function __construct($apiKey, Requestable $request = null)
+    public function __construct($apiKey = '', Requestable $request = null)
     {
         if (empty($apiKey)) {
             throw new AfterShipException('API Key is missing');

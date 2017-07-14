@@ -43,15 +43,13 @@ class Request implements Requestable
      */
     public function send($url, $method, array $data = [])
     {
-        $headers = [
-            'aftership-api-key' => $this->apiKey,
-            'content-type'      => 'application/json'
-        ];
-
         $methodUpper = strtoupper($method);
         $parameters = [
             'url' => self::API_URL. '/' . self::API_VERSION . '/' . $url,
-            'headers' => $headers,
+            'headers' => [
+                'aftership-api-key' => $this->apiKey,
+                'content-type'      => 'application/json'
+            ]
         ];
         if ($methodUpper == 'GET') {
             $parameters['query'] = $data;

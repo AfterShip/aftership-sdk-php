@@ -59,7 +59,7 @@ class LastCheckPoint extends BackwardCompatible
      * @return array Response body
      * @throws \Exception
      */
-    public function findById($trackingId, array $params = [])
+    public function getById($trackingId, array $params = [])
     {
         if (empty($trackingId)) {
             throw new AfterShipException('Tracking ID cannot be empty');

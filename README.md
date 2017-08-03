@@ -46,13 +46,13 @@ $last_check_point = new AfterShip\LastCheckPoint($key);
 2. Reference files of this SDK in your project. Absolute path should be prefered.
 
 ```php
-require('/path/to/repository/src/AftershipException.php');
+require('/path/to/repository/src/AfterShipException.php');
 require('/path/to/repository/src/BackwardCompatible.php');
 require('/path/to/repository/src/Couriers.php');
 require('/path/to/repository/src/LastCheckPoint.php');
 require('/path/to/repository/src/Notifications.php');
-require('/path/to/repository/src/Request.php');
 require('/path/to/repository/src/Requestable.php');
+require('/path/to/repository/src/Request.php');
 require('/path/to/repository/src/Trackings.php');
 
 $key = 'AFTERSHIP API KEY';

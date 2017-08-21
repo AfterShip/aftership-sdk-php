@@ -28,6 +28,7 @@ class Request implements Requestable
 
     /**
      * Request constructor.
+     *
      * @param $apiKey
      */
     function __construct($apiKey)
@@ -39,13 +40,14 @@ class Request implements Requestable
      * @param $url
      * @param $method
      * @param array $data
+     *
      * @return mixed
      */
     public function send($url, $method, array $data = [])
     {
         $methodUpper = strtoupper($method);
-        $parameters = [
-            'url' => self::API_URL. '/' . self::API_VERSION . '/' . $url,
+        $parameters  = [
+            'url'     => self::API_URL . '/' . self::API_VERSION . '/' . $url,
             'headers' => [
                 'aftership-api-key' => $this->apiKey,
                 'content-type'      => 'application/json'
@@ -54,7 +56,7 @@ class Request implements Requestable
         if ($methodUpper == 'GET') {
             $parameters['query'] = $data;
         } else {
-            $parameters['body'] = json_encode($data);
+            $parameters['body'] = $this->safeJsonEncode($data);
         }
 
         return $this->call($methodUpper, $parameters);
@@ -62,10 +64,10 @@ class Request implements Requestable
 
     private function call($method, $parameters = [])
     {
-        $url = $parameters['url'];
+        $url     = $parameters['url'];
         $headers = $parameters['headers'];
 
-        $headers = array_map(function($key, $value) {
+        $headers = array_map(function ($key, $value) {
             return "$key: $value";
         }, array_keys($headers), $headers);
 
@@ -75,7 +77,7 @@ class Request implements Requestable
                 $url = $url . '?' . http_build_query($query);
             }
         }
-        $curl = curl_init();
+        $curl       = curl_init();
         $curlParams = [
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_URL            => $url,
@@ -87,7 +89,7 @@ class Request implements Requestable
         }
         curl_setopt_array($curl, $curlParams);
         $response = curl_exec($curl);
-        $err = curl_error($curl);
+        $err      = curl_error($curl);
         if ($err) {
             throw new AfterShipException("failed to request: $err");
         }
@@ -100,9 +102,9 @@ class Request implements Requestable
                 throw new AfterShipException("Error processing request - received HTTP error code $code", $code);
             }
 
-            $errCode = '';
+            $errCode    = '';
             $errMessage = '';
-            $errType = '';
+            $errType    = '';
             if (isset($parsed->meta->code)) {
                 $errCode = $parsed->meta->code;
             }
@@ -115,6 +117,44 @@ class Request implements Requestable
             throw new AfterShipException("$errType: $errCode - $errMessage", $errCode);
         }
         curl_close($curl);
+
         return json_decode($response, true);
+    }
+
+    private function safeJsonEncode($mixed)
+    {
+        $encoded = json_encode($mixed);
+        switch (json_last_error()) {
+            case JSON_ERROR_NONE:
+                return $encoded;
+            case JSON_ERROR_DEPTH:
+                return 'Maximum stack depth exceeded'; // or trigger_error() or throw new Exception()
+            case JSON_ERROR_STATE_MISMATCH:
+                return 'Underflow or the modes mismatch'; // or trigger_error() or throw new Exception()
+            case JSON_ERROR_CTRL_CHAR:
+                return 'Unexpected control character found';
+            case JSON_ERROR_SYNTAX:
+                return 'Syntax error, malformed JSON'; // or trigger_error() or throw new Exception()
+            case JSON_ERROR_UTF8:
+                $clean = $this->utf8ize($mixed);
+
+                return $this->safeJsonEncode($clean);
+            default:
+                return 'Unknown error'; // or trigger_error() or throw new Exception()
+
+        }
+    }
+
+    private function utf8ize($mixed)
+    {
+        if (is_array($mixed)) {
+            foreach ($mixed as $key => $value) {
+                $mixed[$key] = $this->utf8ize($value);
+            }
+        } else if (is_string($mixed)) {
+            return utf8_encode($mixed);
+        }
+
+        return $mixed;
     }
 }

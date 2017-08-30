@@ -48,7 +48,7 @@ class LastCheckPoint extends BackwardCompatible
             throw new AfterShipException('Tracking number cannot be empty');
         }
 
-        return $this->request->send('last_checkpoint/' . $slug . '/' . $trackingNumber, 'GET', $params);
+        return $this->request->send('GET', 'last_checkpoint/' . $slug . '/' . $trackingNumber, $params);
     }
 
     /**
@@ -65,6 +65,6 @@ class LastCheckPoint extends BackwardCompatible
             throw new AfterShipException('Tracking ID cannot be empty');
         }
 
-        return $this->request->send('last_checkpoint/' . $trackingId, 'GET', $params);
+        return $this->request->send('GET', 'last_checkpoint/' . $trackingId, $params);
     }
 }

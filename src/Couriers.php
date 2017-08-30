@@ -34,7 +34,7 @@ class Couriers extends BackwardCompatible
      */
     public function get()
     {
-        return $this->request->send('couriers', 'GET');
+        return $this->request->send('GET', 'couriers');
     }
 
     /**
@@ -45,7 +45,7 @@ class Couriers extends BackwardCompatible
      */
     public function all()
     {
-        return $this->request->send('couriers/all', 'GET');
+        return $this->request->send('GET', 'couriers/all');
     }
 
     /**
@@ -66,6 +66,6 @@ class Couriers extends BackwardCompatible
 
         // Fill the tracking number into the params array
         $params['tracking_number'] = $trackingNumber;
-        return $this->request->send('couriers/detect/', 'POST', ['tracking' => $params]);
+        return $this->request->send('POST', 'couriers/detect/', ['tracking' => $params]);
     }
 }

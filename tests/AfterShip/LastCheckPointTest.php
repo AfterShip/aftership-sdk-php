@@ -36,8 +36,8 @@ class LastCheckPointTest extends TestCase
         list($request, $lastTrackingNumber) = $this->buildLastCheckPoint();
         $request
             ->with(
-                $this->equalTo('last_checkpoint/ups/tracking_number'),
-                $this->equalTo('GET')
+                $this->equalTo('GET'),
+                $this->equalTo('last_checkpoint/ups/tracking_number')
             );
         $lastTrackingNumber->get('ups', 'tracking_number');
     }
@@ -54,8 +54,8 @@ class LastCheckPointTest extends TestCase
         list($request, $lastTrackingNumber) = $this->buildLastCheckPoint();
         $request
             ->with(
-                $this->equalTo('last_checkpoint/last_checkpoint_id'),
-                $this->equalTo('GET')
+                $this->equalTo('GET'),
+                $this->equalTo('last_checkpoint/last_checkpoint_id')
             );
         $lastTrackingNumber->getById('last_checkpoint_id');
     }

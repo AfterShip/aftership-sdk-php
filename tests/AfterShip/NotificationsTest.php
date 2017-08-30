@@ -24,8 +24,8 @@ class NotificationsTest extends TestCase
 
         $request
             ->with(
-                $this->equalTo('notifications/dhl/tracking_number/add'),
                 $this->equalTo('POST'),
+                $this->equalTo('notifications/dhl/tracking_number/add'),
                 $this->equalTo([
                     'notification' => []
                 ])
@@ -33,7 +33,7 @@ class NotificationsTest extends TestCase
 
         $notification->create('dhl', 'tracking_number');
     }
-    
+
     /** @test */
     public function create_throws_an_error_when_empty_slug()
     {
@@ -53,8 +53,8 @@ class NotificationsTest extends TestCase
 
         $request
             ->with(
-                $this->equalTo('notifications/tracking_id/add'),
                 $this->equalTo('POST'),
+                $this->equalTo('notifications/tracking_id/add'),
                 $this->equalTo([
                     'notification' => []
                 ])
@@ -76,8 +76,8 @@ class NotificationsTest extends TestCase
 
         $request
             ->with(
-                $this->equalTo('notifications/dhl/tracking_number/remove'),
                 $this->equalTo('POST'),
+                $this->equalTo('notifications/dhl/tracking_number/remove'),
                 $this->equalTo([
                     'notification' => []
                 ])
@@ -105,8 +105,8 @@ class NotificationsTest extends TestCase
 
         $request
             ->with(
-                $this->equalTo('notifications/tracking_id/remove'),
                 $this->equalTo('POST'),
+                $this->equalTo('notifications/tracking_id/remove'),
                 $this->equalTo([
                     'notification' => []
                 ])
@@ -128,8 +128,8 @@ class NotificationsTest extends TestCase
 
         $request
             ->with(
-                $this->equalTo('notifications/dhl/tracking_number'),
-                $this->equalTo('GET')
+                $this->equalTo('GET'),
+                $this->equalTo('notifications/dhl/tracking_number')
             );
 
         $notification->get('dhl', 'tracking_number');
@@ -154,8 +154,8 @@ class NotificationsTest extends TestCase
 
         $request
             ->with(
-                $this->equalTo('notifications/tracking_id'),
-                $this->equalTo('GET')
+                $this->equalTo('GET'),
+                $this->equalTo('notifications/tracking_id')
             );
 
         $notification->getById('tracking_id');

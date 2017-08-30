@@ -6,10 +6,6 @@ namespace AfterShip;
  * Class Request
  * @package AfterShip
  */
-/**
- * Class Request
- * @package AfterShip
- */
 class Request implements Requestable
 {
     /**
@@ -37,13 +33,13 @@ class Request implements Requestable
     }
 
     /**
-     * @param $url
      * @param $method
+     * @param $url
      * @param array $data
      *
      * @return mixed
      */
-    public function send($url, $method, array $data = [])
+    public function send($method, $url, array $data = [])
     {
         $methodUpper = strtoupper($method);
         $parameters  = [

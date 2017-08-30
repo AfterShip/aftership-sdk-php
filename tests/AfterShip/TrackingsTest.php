@@ -31,8 +31,8 @@ class TrackingsTest extends TestCase
 
         $request
             ->with(
-                $this->equalTo('trackings'),
                 $this->equalTo('POST'),
+                $this->equalTo('trackings'),
                 $this->equalTo([
                     'tracking' => [
                         'tracking_number' => 'tracking_number'
@@ -50,8 +50,8 @@ class TrackingsTest extends TestCase
 
         $request
             ->with(
-                $this->equalTo('trackings'),
                 $this->equalTo('POST'),
+                $this->equalTo('trackings'),
                 $this->equalTo([
                     'tracking' => [
                         'tracking_number' => 'tracking_number',
@@ -82,8 +82,8 @@ class TrackingsTest extends TestCase
 
         $request
             ->with(
-                $this->equalTo('trackings/dhl/tracking_number'),
-                $this->equalTo('DELETE')
+                $this->equalTo('DELETE'),
+                $this->equalTo('trackings/dhl/tracking_number')
             );
 
         $tracking->delete('dhl', 'tracking_number');
@@ -110,8 +110,8 @@ class TrackingsTest extends TestCase
 
         $request
             ->with(
-                $this->equalTo('trackings/tracking_id'),
-                $this->equalTo('DELETE')
+                $this->equalTo('DELETE'),
+                $this->equalTo('trackings/tracking_id')
             );
 
         $tracking->deleteById('tracking_id');
@@ -124,8 +124,8 @@ class TrackingsTest extends TestCase
 
         $request
             ->with(
-                $this->equalTo('trackings/tracking_id'),
-                $this->equalTo('DELETE')
+                $this->equalTo('DELETE'),
+                $this->equalTo('trackings/tracking_id')
             );
 
         $tracking->delete_by_id('tracking_id');
@@ -138,8 +138,8 @@ class TrackingsTest extends TestCase
 
         $request
             ->with(
-                $this->equalTo('trackings'),
                 $this->equalTo('GET'),
+                $this->equalTo('trackings'),
                 $this->equalTo([])
             );
 
@@ -153,8 +153,8 @@ class TrackingsTest extends TestCase
 
         $request
             ->with(
-                $this->equalTo('trackings'),
                 $this->equalTo('GET'),
+                $this->equalTo('trackings'),
                 $this->equalTo([])
             );
 
@@ -180,8 +180,8 @@ class TrackingsTest extends TestCase
 
         $request
             ->with(
-                $this->equalTo('trackings/dhl/tracking_number'),
                 $this->equalTo('GET'),
+                $this->equalTo('trackings/dhl/tracking_number'),
                 $this->equalTo([])
             );
 
@@ -201,8 +201,8 @@ class TrackingsTest extends TestCase
 
         $request
             ->with(
-                $this->equalTo('trackings/tracking_id'),
                 $this->equalTo('GET'),
+                $this->equalTo('trackings/tracking_id'),
                 $this->equalTo([])
             );
 
@@ -216,8 +216,8 @@ class TrackingsTest extends TestCase
 
         $request
             ->with(
-                $this->equalTo('trackings/tracking_id'),
                 $this->equalTo('GET'),
+                $this->equalTo('trackings/tracking_id'),
                 $this->equalTo([])
             );
 
@@ -244,8 +244,8 @@ class TrackingsTest extends TestCase
 
         $request
             ->with(
-                $this->equalTo('trackings/dhl/test_number'),
                 $this->equalTo('PUT'),
+                $this->equalTo('trackings/dhl/test_number'),
                 $this->equalTo([
                     'tracking' => [
                         'some_params'
@@ -271,8 +271,8 @@ class TrackingsTest extends TestCase
 
         $request
             ->with(
-                $this->equalTo('trackings/tracking_id'),
                 $this->equalTo('PUT'),
+                $this->equalTo('trackings/tracking_id'),
                 $this->equalTo([
                     'tracking' => [
                         'some_params'
@@ -304,8 +304,8 @@ class TrackingsTest extends TestCase
 
         $request
             ->with(
-                $this->equalTo('trackings/dhl/tracking_number/retrack'),
-                $this->equalTo('POST')
+                $this->equalTo('POST'),
+                $this->equalTo('trackings/dhl/tracking_number/retrack')
             );
 
         $tracking->retrack('dhl', 'tracking_number');
@@ -330,8 +330,8 @@ class TrackingsTest extends TestCase
 
         $request
             ->with(
-                $this->equalTo('trackings/tracking_id/retrack'),
-                $this->equalTo('POST')
+                $this->equalTo('POST'),
+                $this->equalTo('trackings/tracking_id/retrack')
             );
 
         $tracking->retrackById('tracking_id');

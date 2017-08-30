@@ -4,5 +4,5 @@ namespace AfterShip;
 
 interface Requestable
 {
-    public function send($url, $method, array $data = []);
+    public function send($method, $url, array $data = []);
 }

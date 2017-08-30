@@ -25,8 +25,8 @@ class CouriersTest extends TestCase
 
         $request
             ->with(
-                $this->equalTo('couriers'),
-                $this->equalTo('GET')
+                $this->equalTo('GET'),
+                $this->equalTo('couriers')
             );
 
         $couriers->get();
@@ -39,8 +39,8 @@ class CouriersTest extends TestCase
 
         $request
             ->with(
-                $this->equalTo('couriers/all'),
-                $this->equalTo('GET')
+                $this->equalTo('GET'),
+                $this->equalTo('couriers/all')
             );
 
         $couriers->all();
@@ -60,8 +60,8 @@ class CouriersTest extends TestCase
 
         $request
             ->with(
-                $this->equalTo('couriers/detect/'),
                 $this->equalTo('POST'),
+                $this->equalTo('couriers/detect/'),
                 $this->equalTo([
                     'tracking' => [
                         'tracking_number' => 'tracking_number',

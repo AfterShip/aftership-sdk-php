@@ -44,7 +44,7 @@ class Notifications
             throw new AfterShipException('Tracking number cannot be empty');
         }
 
-        return $this->request->send('notifications/' . $slug . '/' . $trackingNumber . '/add', 'POST',
+        return $this->request->send('POST', 'notifications/' . $slug . '/' . $trackingNumber . '/add',
             ['notification' => $params]);
     }
 
@@ -62,7 +62,7 @@ class Notifications
             throw new AfterShipException('Tracking ID cannot be empty');
         }
 
-        return $this->request->send('notifications/' . $trackingId . '/add', 'POST', array('notification' => $params));
+        return $this->request->send('POST', 'notifications/' . $trackingId . '/add', ['notification' => $params]);
     }
 
     /**
@@ -74,7 +74,7 @@ class Notifications
      * @return array Response body
      * @throws AfterShipException
      */
-    public function delete($slug, $trackingNumber, array $params = array())
+    public function delete($slug, $trackingNumber, array $params = [])
     {
         if (empty($slug)) {
             throw new AfterShipException('Slug cannot be empty');
@@ -84,8 +84,8 @@ class Notifications
             throw new AfterShipException('Tracking number cannot be empty');
         }
 
-        return $this->request->send('notifications/' . $slug . '/' . $trackingNumber . '/remove', 'POST',
-            array('notification' => $params));
+        return $this->request->send('POST', 'notifications/' . $slug . '/' . $trackingNumber . '/remove',
+            ['notification' => $params]);
     }
 
     /**
@@ -102,7 +102,7 @@ class Notifications
             throw new AfterShipException('Tracking ID cannot be empty');
         }
 
-        return $this->request->send('notifications/' . $trackingId . '/remove', 'POST', array('notification' => $params));
+        return $this->request->send('POST', 'notifications/' . $trackingId . '/remove', ['notification' => $params]);
     }
 
     /**
@@ -114,7 +114,7 @@ class Notifications
      * @return array Response body
      * @throws \Exception
      */
-    public function get($slug, $trackingNumber, array $params = array())
+    public function get($slug, $trackingNumber, array $params = [])
     {
         if (empty($slug)) {
             throw new AfterShipException('Slug cannot be empty');
@@ -124,7 +124,7 @@ class Notifications
             throw new AfterShipException('Tracking number cannot be empty');
         }
 
-        return $this->request->send('notifications/' . $slug . '/' . $trackingNumber, 'GET', $params);
+        return $this->request->send('GET', 'notifications/' . $slug . '/' . $trackingNumber, $params);
     }
 
     /**
@@ -141,6 +141,6 @@ class Notifications
             throw new AfterShipException('Tracking ID cannot be empty');
         }
 
-        return $this->request->send('notifications/' . $trackingId, 'GET', $params);
+        return $this->request->send('GET', 'notifications/' . $trackingId, $params);
     }
 }

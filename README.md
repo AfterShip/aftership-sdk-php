@@ -137,7 +137,7 @@ $options = [
     'page'  => 1,
     'limit' => 10
 ];
-$response = $trackings->all($options)
+$response = $trackings->all($options);
 ```
 
 ##### Get tracking results of a single tracking by slug and tracking number

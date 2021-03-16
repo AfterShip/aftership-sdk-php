@@ -77,6 +77,19 @@ and restart the web server and PHP process.
 2. Insert your AfterShip API Key. [How to generate AfterShip API Key](https://help.aftership.com/hc/en-us/articles/115008353227-How-to-generate-AfterShip-API-Key-)
 3. Click the request all button or the button of the represented request.
 
+## Error handling
+
+Simply add a try-catch block
+
+```php
+try {
+  $couriers = new AfterShip\Couriers('AFTERSHIP_API_KEY');
+  $response = $couriers->get();
+}catch(\AfterShipException $e) {
+    echo $e->getMessage();
+}
+
+```
 
 ## Couriers
 ##### Get your selected couriers list

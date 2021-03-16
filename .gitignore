@@ -31,3 +31,4 @@ dump.rdb
 composer.phar
 vendor
 composer.lock
+coverage

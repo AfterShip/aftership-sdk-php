@@ -8,7 +8,7 @@
 [![Monthly Downloads](https://poser.pugx.org/aftership/aftership-php-sdk/d/monthly)](https://packagist.org/packages/aftership/aftership-php-sdk)
 [![License](https://poser.pugx.org/aftership/aftership-php-sdk/license)](https://packagist.org/packages/aftership/aftership-php-sdk)
 
-aftership-php is a PHP SDK (module) for [AfterShip API](https://www.aftership.com/docs/api/4/). Module provides clean and elegant way to access API endpoints. **Compatible with Afership API**
+aftership-php is a PHP SDK (module) for [AfterShip API](https://www.aftership.com/docs/api/4/). Module provides clean and elegant way to access API endpoints. 
 
 Contact: <support@aftership.com>
 

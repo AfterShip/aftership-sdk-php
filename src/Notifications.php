@@ -31,10 +31,11 @@ class Notifications
      * @param $slug
      * @param string $trackingNumber The tracking number which is provider by tracking provider
      * @param array $params The optional parameters
+     * @param array $additionalFields The tracking additional_fields required by some courier
      * @return array Response Body
      * @throws AfterShipException
      */
-    public function create($slug, $trackingNumber, array $params = array())
+    public function create($slug, $trackingNumber, array $params = array(), $additionalFields = [])
     {
         if (empty($slug)) {
             throw new AfterShipException('Slug cannot be empty');
@@ -44,7 +45,7 @@ class Notifications
             throw new AfterShipException('Tracking number cannot be empty');
         }
 
-        return $this->request->send('POST', 'notifications/' . $slug . '/' . $trackingNumber . '/add',
+        return $this->request->send('POST', 'notifications/' . $slug . '/' . $trackingNumber . '/add' . TrackingAdditionalFields::buildQuery($additionalFields, '?'),
             ['notification' => $params]);
     }
 
@@ -71,10 +72,11 @@ class Notifications
      * @param string $slug The slug of the tracking provider
      * @param string $trackingNumber The tracking number which is provider by tracking provider
      * @param array $params
+     * @param array $additionalFields The tracking additional_fields required by some courier
      * @return array Response body
      * @throws AfterShipException
      */
-    public function delete($slug, $trackingNumber, array $params = [])
+    public function delete($slug, $trackingNumber, array $params = [], $additionalFields = [])
     {
         if (empty($slug)) {
             throw new AfterShipException('Slug cannot be empty');
@@ -84,7 +86,7 @@ class Notifications
             throw new AfterShipException('Tracking number cannot be empty');
         }
 
-        return $this->request->send('POST', 'notifications/' . $slug . '/' . $trackingNumber . '/remove',
+        return $this->request->send('POST', 'notifications/' . $slug . '/' . $trackingNumber . '/remove' . TrackingAdditionalFields::buildQuery($additionalFields, '?'),
             ['notification' => $params]);
     }
 

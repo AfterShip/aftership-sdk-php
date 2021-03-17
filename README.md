@@ -77,6 +77,19 @@ and restart the web server and PHP process.
 2. Insert your AfterShip API Key. [How to generate AfterShip API Key](https://help.aftership.com/hc/en-us/articles/115008353227-How-to-generate-AfterShip-API-Key-)
 3. Click the request all button or the button of the represented request.
 
+## Error handling
+
+Simply add a try-catch block
+
+```php
+try {
+  $couriers = new AfterShip\Couriers('AFTERSHIP_API_KEY');
+  $response = $couriers->get();
+}catch(\AfterShipException $e) {
+    echo $e->getMessage();
+}
+
+```
 
 ## Couriers
 ##### Get your selected couriers list
@@ -101,6 +114,70 @@ $response = $courier->detect('1234567890Z');
 ```
 
 ## Trackings
+
+##### Tracking additional_fields 
+
+Couriers below need pass additional_fields when create, update, or delete tracking
+
+|Courier Slug               |Required Fields                                     |
+|---------------------------|----------------------------------------------------|
+|abcustom                   | [tracking_postal_code]                             |
+|alliedexpress              | [tracking_postal_code]                             |
+|amazon-fba-us              | [tracking_key]                                     |
+|apc-overnight-connum       | [tracking_postal_code]                             |
+|ark-logistics              | [tracking_postal_code]                             |
+|arrowxl                    | [tracking_postal_code]                             |
+|asm                        | [tracking_postal_code]                             |
+|australia-post-sftp        | [tracking_account_number]                          |
+|b2ceurope                  | [tracking_postal_code & tracking_destination_country]|
+|bestwayparcel              | [tracking_key]                                     |
+|bluestar                   | [tracking_postal_code]                             |
+|bpost                      | [tracking_postal_code]                             |
+|brt-it-sender-ref          | [tracking_account_number]                          |
+|capital                    | [tracking_account_number]                          |
+|chrobinson                 | [tracking_key]                                     |
+|colis-prive                | [tracking_postal_code]                             |
+|courant-plus               | [tracking_account_number]                          |
+|deutsch-post               | [tracking_ship_date]                               |
+|dhl-reference              | [tracking_ship_date]                               |
+|dpd-fr-reference           | [tracking_account_number]                          |
+|dx                         | [tracking_account_number]                          |
+|dynamic-logistics          | [tracking_account_number]                          |
+|endeavour-delivery         | [tracking_postal_code]                             |
+|eu-fleet-solutions         | [tracking_postal_code]                             |
+|geodis-espace              | [tracking_key]                                     |
+|gls-netherlands            | [tracking_postal_code]                             |
+|gls-spain                  | [tracking_key]                                     |
+|interlink-express-reference| [tracking_postal_code]                             |
+|international-seur-api     | [tracking_ship_date]                               |
+|mikropakket                | [tracking_postal_code]                             |
+|mikropakket-be             | [tracking_postal_code]                             |
+|mondialrelay               | [tracking_postal_code]                             |
+|nacex                      | [tracking_account_number]                          |
+|nacex-spain                | [tracking_postal_code]                             |
+|newzealand-couriers        | [tracking_account_number]                          |
+|packs                      | [tracking_postal_code]                             |
+|palletways                 | [tracking_postal_code]                             |
+|panther-order-number       | [tracking_postal_code]                             |
+|panther-reference          | [tracking_account_number]                          |
+|paper-express              | [tracking_postal_code]                             |
+|parcelpoint                | [tracking_key]                                     |
+|planzer                    | [tracking_postal_code]                             |
+|postnl                     | [tracking_postal_code]                             |
+|postnl-3s                  | [tracking_destination_country & tracking_postal_code]|
+|relaiscolis                | [tracking_key]                                     |
+|star-track-courier         | [tracking_state]                                   |
+|tfm                        | [tracking_postal_code]                             |
+|thedeliverygroup           | [tracking_postal_code]                             |
+|total-express              | [tracking_account_number & tracking_key]           |
+|transmission-nl            | [tracking_postal_code]                             |
+|tuffnells                  | [tracking_account_number & tracking_postal_code]   |
+|tuffnells-reference        | [tracking_postal_code]                             |
+|virtransport               | [tracking_account_number]                          |
+|xdp-uk                     | [tracking_postal_code]                             |
+|xdp-uk-reference           | [tracking_postal_code]                             |
+
+
 ##### Create a new tracking
 https://www.aftership.com/docs/api/4/trackings/post-trackings
 ```php
@@ -120,6 +197,13 @@ https://www.aftership.com/docs/api/4/trackings/delete-trackings
 ```php
 $trackings = new AfterShip\Trackings('AFTERSHIP_API_KEY');
 $response = $trackings->delete('dhl', 'RA123456789US');
+```
+
+##### Delete a tracking by slug and tracking number and additional_fields
+https://www.aftership.com/docs/api/4/trackings/delete-trackings
+```php
+$trackings = new AfterShip\Trackings('AFTERSHIP_API_KEY');
+$response = $trackings->delete('abcustom', 'RA123456789US', ['tracking_postal_code' => '90199']);
 ```
 
 ##### Delete a tracking by tracking ID
@@ -210,6 +294,13 @@ $trackings = new AfterShip\Trackings('AFTERSHIP_API_KEY');
 $response = $trackings->retrack('dhl','RA123456789US');
 ```
 
+##### Reactivate Tracking by slug and tracking number and additional_fields
+https://www.aftership.com/docs/api/4/trackings/post-trackings-slug-tracking_number-retrack
+```php
+$trackings = new AfterShip\Trackings('AFTERSHIP_API_KEY');
+$response = $trackings->retrack('abcustom','RA123456789US', ['tracking_postal_code' => '90199']);
+```
+
 ##### Reactivate Tracking by tracking ID
 https://www.aftership.com/docs/api/4/trackings/post-trackings-slug-tracking_number-retrack
 ```php
@@ -242,6 +333,15 @@ $response = $notifications->create('ups', '1ZV90R483A33906706', [
             ])
 ```
 
+##### Create a new notification by slug and tracking number and additional_fields
+https://www.aftership.com/docs/api/4/notifications/post-add-notifications
+```php
+$notifications = new AfterShip\Notifications('AFTERSHIP_API_KEY');
+$response = $notifications->create('abcustom', '1ZV90R483A33906706', [
+                'emails' => ['youremail@yourdomain.com']
+            ], ['tracking_postal_code' => '90199'])
+```
+
 ##### Create a new notification by tracking ID
 https://www.aftership.com/docs/api/4/notifications/post-add-notifications
 ```php
@@ -256,6 +356,15 @@ $notifications = new AfterShip\Notifications('AFTERSHIP_API_KEY');
 $response = $notifications->delete('ups', '1ZV90R483A33906706', [
                   'emails' => ['youremail@yourdomain.com']
               ]);
+```
+
+##### Delete a notification by slug and tracking number and additional_fields.
+https://www.aftership.com/docs/api/4/notifications/post-remove-notifications
+```php
+$notifications = new AfterShip\Notifications('AFTERSHIP_API_KEY');
+$response = $notifications->delete('abcustom', '1ZV90R483A33906706', [
+                  'emails' => ['youremail@yourdomain.com']
+              ], ['tracking_postal_code' => '90199']);
 ```
 
 ##### Delete a notification by tracking ID.

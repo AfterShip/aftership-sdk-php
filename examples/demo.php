@@ -9,6 +9,7 @@ $key = '';
 $couriers = new AfterShip\Couriers($key);
 $trackings = new AfterShip\Trackings($key);
 $last_check_point = new AfterShip\LastCheckPoint($key);
+$estimated_delivery_dates = new AfterShip\EstimatedDeliveryDates($key);
 
 $tracking_info = [
     'slug'    => 'aramex',

@@ -24,7 +24,18 @@ class Request implements Requestable
      * @var string
      */
     protected $apiKey = '';
-
+    /**
+     * @var string
+     */
+    private $apiSecret = '';
+    /**
+     * @var string
+     */
+    private $encryptionMethod = '';
+    /**
+     * @var string
+     */
+    private $encryptionPassword = '';
     /**
      * Request constructor.
      *
@@ -32,34 +43,59 @@ class Request implements Requestable
      */
     function __construct($apiKey)
     {
-        $this->apiKey = $apiKey;
+        $apiSecret = '';
+        $encryptionMethod = '';
+        $encryptionPassword= '';
+        $asApiKey='';
+
+        if (is_array($apiKey)) {
+            if (array_key_exists('api_secret', $apiKey)) {
+                $apiSecret = $apiKey['api_secret'];
+            }
+            if (array_key_exists('encryption_method', $apiKey)) {
+                $encryptionMethod = $apiKey['encryption_method'];
+            }
+            if (array_key_exists('encryption_password', $apiKey)) {
+                $encryptionPassword = $apiKey['encryption_password'];
+            }
+            if (array_key_exists('api_key', $apiKey)) {
+                $asApiKey = $apiKey['api_key'];
+            }
+        } else {
+            $asApiKey = $apiKey;
+        }
+
+        $this->apiKey = $asApiKey;
+        $this->apiSecret = $apiSecret;
+        $this->encryptionMethod = $encryptionMethod;
+        $this->encryptionPassword = $encryptionPassword;
     }
 
     /**
-     * @param $url
+     * @param $path
      * @param $method
      * @param array $data
      *
      * @return mixed
      */
-    public function send($method, $url, array $data = [])
+    public function send($method, $path, array $data = [])
     {
+        $url = self::API_URL . '/' . self::API_VERSION . '/' . $path;
         $methodUpper = strtoupper($method);
-        $headers     = [
-            'aftership-api-key' => $this->apiKey,
-            'content-type'      => 'application/json'
-        ];
         $parameters  = [
-            'url'     => self::API_URL . '/' . self::API_VERSION . '/' . $url,
-            'headers' => array_map(function ($key, $value) {
-                return "$key: $value";
-            }, array_keys($headers), $headers)
+            'url'     => $url,
         ];
+
         if ($methodUpper == 'GET' && $data > 0) {
             $parameters['url'] = $parameters['url'] . '?' . http_build_query($data);
         } else if ($methodUpper != 'GET') {
             $parameters['body'] = $this->safeJsonEncode($data);
         }
+
+        $headers     = $this->getHeaders($method, $parameters['url'], $data);
+        $parameters['headers'] = array_map(function ($key, $value) {
+            return "$key: $value";
+        }, array_keys($headers), $headers);
 
         return $this->call($methodUpper, $parameters);
     }
@@ -152,5 +188,114 @@ class Request implements Requestable
         }
         curl_close($curl);
         throw new AfterShipException("$errType: $errCode - $errMessage", $errCode);
+    }
+
+    function getCanonicalizedHeaders($headers)
+    {
+        $filtered_headers = [];
+    
+        foreach ($headers as $key => $value) {
+            // Check if the header key starts with "as-"
+            if (strpos($key, 'as-') === 0) {
+                // Convert header key to lowercase and trim leading/trailing spaces
+                $key = strtolower(trim($key));
+                
+                // Trim leading/trailing spaces from header value
+                $value = trim($value);
+                
+                // Concatenate header key and value
+                $filtered_headers[] = "{$key}:{$value}";
+            }
+        }
+        
+        // Sort headers in ASCII code order
+        sort($filtered_headers, SORT_STRING);
+        
+        // Concatenate header pairs with new line character
+        $header_string = implode("\n", $filtered_headers);
+        
+        return $header_string;
+    }
+
+    function getCanonicalizedResource($url) 
+    {
+        $path = "";
+        $query = "";
+        $parse_url = parse_url($url);
+        if (array_key_exists('path', $parse_url)) {
+            $path = $parse_url['path'];
+        }
+        if (array_key_exists('query', $parse_url)) {
+            $query = $parse_url['query'];
+        }
+        if ($query === "") {
+            return $path;
+        }
+
+        $params = explode("&", $query);
+        sort($params);
+        $queryStr = implode("&", $params);
+        $path .= "?" . $queryStr;
+        
+        return $path;
+    }
+
+    function getSignString($method, $url, $data, $headers) 
+    {
+        $contentMD5 = "";
+        $contentType = "";
+        if (!empty($data) && $method != "GET") {
+            $contentMD5 = strtoupper(md5($this->safeJsonEncode($data)));
+            $contentType = "application/json";
+        }
+       
+        $canonicalizedHeaders = $this->getCanonicalizedHeaders($headers);
+        $canonicalizedResource = $this->getCanonicalizedResource($url);
+        return mb_convert_encoding($method."\n".$contentMD5."\n".$contentType."\n".$headers['date']."\n".$canonicalizedHeaders."\n".$canonicalizedResource, 'UTF-8');
+    }
+
+    private function getHeaders($method, $url, $data)
+    {
+        $isRSAEncryptionMethod = strcmp($this->encryptionMethod, Encryption::ENCRYPTION_RSA) == 0;
+        $isAESEncryptionMethod = strcmp($this->encryptionMethod, Encryption::ENCRYPTION_AES) == 0;
+
+        // if not RSA or AES encryption, just return the legacy headers
+        if (!$isRSAEncryptionMethod && !$isAESEncryptionMethod) {
+            return [
+                'aftership-api-key' => $this->apiKey,
+                'content-type'      => 'application/json'
+            ];
+        }
+
+        $encryption = new Encryption($this->apiSecret, $this->encryptionMethod, $this->encryptionPassword);
+        // get the header `date`
+        date_default_timezone_set('UTC');
+        $date = gmdate('D, d M Y H:i:s \G\M\T', time());
+        $contentType = "";
+
+        // get the header `content-type`
+        if (!empty($data) && $method != "GET") {
+            $contentType = "application/json";
+        }
+
+        $headers = [
+            'as-api-key' => $this->apiKey,
+            'date' => $date,
+            'content-type' => $contentType,
+        ];
+        $signString = $this->getSignString($method, $url, $data, $headers);
+        
+        if ($isRSAEncryptionMethod) {
+            $rsa = $encryption->rsaPSSSha256Encrypt($signString);
+            $headers['as-signature-rsa-sha256'] = $rsa;
+            
+            return $headers;
+        }
+        if ($isAESEncryptionMethod) {
+            $rsa = $encryption->hmacSha256Encrypt($signString);
+            $headers['as-signature-hmac-sha256'] = $rsa;
+
+            return $headers;
+        }
     }
 }

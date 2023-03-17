@@ -218,4 +218,42 @@ class Trackings extends BackwardCompatible
         return $this->request->send('POST', 'trackings/' . $trackingId . '/retrack');
     }
 
+    /**
+     * Mark a tracking as completed once by slug and tracking number.
+     * https://www.aftership.com/docs/api/4/trackings/post-trackings-slug-tracking_number-retrack
+     * @param string $slug The slug of tracking provider
+     * @param string $trackingNumber The tracking number which is provider by tracking provider
+     * @param array $additionalFields The tracking additional_fields required by some courier
+     * @return array Response body
+     * @throws AfterShipException
+     */
+    public function markAsCompleted($slug, $trackingNumber, $additionalFields = [], array $params = [])
+    {
+        if (empty($slug)) {
+            throw new AfterShipException("Slug cannot be empty");
+        }
+
+        if (empty($trackingNumber)) {
+            throw new AfterShipException('Tracking number cannot be empty');
+        }
+
+        return $this->request->send('POST', 'trackings/' . $slug . '/' . $trackingNumber . '/mark-as-completed' . TrackingAdditionalFields::buildQuery($additionalFields, '?'), $params);
+    }
+
+    /**
+     * Mark a tracking as completed once by tracking ID.
+     * https://www.aftership.com/docs/tracking/272f444a1eb42-mark-tracking-as-completed-by-id
+     * @param string $trackingId The tracking ID which is provided by AfterShip
+     * @return array Response body
+     * @throws \AfterShip\AfterShipException
+     */
+    public function markAsCompletedById($trackingId, array $params = [])
+    {
+        if (empty($trackingId)) {
+            throw new AfterShipException('Tracking ID cannot be empty');
+        }
+
+        return $this->request->send('POST', 'trackings/' . $trackingId . '/mark-as-completed', $params);
+    }
+
 }

@@ -23,7 +23,7 @@ class Request implements Requestable
     /**
      * @var string
      */
-    protected $apiKey = '';
+    protected $apiKey;
     /**
      * @var string
      */
@@ -46,7 +46,7 @@ class Request implements Requestable
         $apiSecret = '';
         $encryptionMethod = '';
         $encryptionPassword= '';
-        $asApiKey='';
+        $asApiKey=$apiKey;
 
         if (is_array($apiKey)) {
             if (array_key_exists('api_secret', $apiKey)) {
@@ -61,8 +61,6 @@ class Request implements Requestable
             if (array_key_exists('api_key', $apiKey)) {
                 $asApiKey = $apiKey['api_key'];
             }
-        } else {
-            $asApiKey = $apiKey;
         }
 
         $this->apiKey = $asApiKey;

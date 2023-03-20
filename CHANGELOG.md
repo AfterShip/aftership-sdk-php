@@ -9,6 +9,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Add API: POST `trackings/{slug}/{tracking_number}/mark-as-completed`
 - Add API: POST `trackings/{id}/mark-as-completed`
 - Add Request Header: `as-api-key`
+- Add AES signature
+- Add RSA signature
 
 ## [5.1.3] - 2022-07-20
 ### Added

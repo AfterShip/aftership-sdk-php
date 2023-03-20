@@ -68,6 +68,22 @@ sudo apt-get install php5-curl
 ```
 and restart the web server and PHP process.
 
+Use signature headers
+```php
+require 'vendor/autoload.php';
+
+$api_key = 'AFTERSHIP API KEY';
+$api_secret = 'Your api secret'; // if the encryption_method = RSA, the api_secret is PEM private key
+$encryption_method = 'AES or RSA';
+$encryption_password = 'PEM pass phrase'; 
+
+$key = ['api_key' => $api_key, 'api_secret' => $api_secret, 'encryption_method' => $encryption_method, 'encryption_password' => $encryption_password]
+
+$couriers = new AfterShip\Couriers($key);
+$trackings = new AfterShip\Trackings($key);
+$last_check_point = new AfterShip\LastCheckPoint($key);
+```
+
 
 ## Testing
 1. Execute the file:

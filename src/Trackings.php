@@ -220,7 +220,7 @@ class Trackings extends BackwardCompatible
 
     /**
      * Mark a tracking as completed once by slug and tracking number.
-     * https://www.aftership.com/docs/api/4/trackings/post-trackings-slug-tracking_number-retrack
+     * https://www.aftership.com/docs/tracking/16935744036c1-mark-tracking-as-completed-legacy
      * @param string $slug The slug of tracking provider
      * @param string $trackingNumber The tracking number which is provider by tracking provider
      * @param array $additionalFields The tracking additional_fields required by some courier

@@ -2,7 +2,7 @@
 
 namespace AfterShip;
 
-use phpseclib\Crypt\RSA;
+use phpseclib3\Crypt\RSA;
 
 /**
  * Class Encryption
@@ -48,22 +48,10 @@ class Encryption
      * @throws AfterShipException
      */
     function rsaPSSSha256Encrypt($data) {
-        $rsa = new RSA();
-        if (!empty($this->encryptionPassword )) {
-            $rsa->setPassword($this->encryptionPassword);
-        }
-        $loadResult = $rsa->loadKey($this->apiSecret, RSA::PRIVATE_FORMAT_PKCS1);
-        if (!$loadResult) {
-            throw new AfterShipException('Load private key failed');
-        }
-        $rsa->setHash("sha256");
-        $rsa->setMGFHash('sha256');
-        $rsa->setSignatureMode(RSA::SIGNATURE_PSS);
-        $key = $rsa->sign($data);
-        if (empty($key)) {
-            throw new AfterShipException('Sign with RSA_SIGN_PSS_2048_SHA256 failed');
-        }
-
+        $key = RSA::loadPrivateKey($this->apiSecret, $this->encryptionPassword)
+            -> withHash("sha256")
+            -> withPadding(RSA::SIGNATURE_PSS)
+            -> sign($data);
         return base64_encode($key);
     }
 

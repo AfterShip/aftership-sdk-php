@@ -12,7 +12,7 @@ class EstimatedDeliveryDates extends BackwardCompatible
      * @param Requestable $request
      * @throws AfterShipException
      */
-    public function __construct($apiKey = '', $curlOpt = null, Requestable $request = null)
+    public function __construct($apiKey = '', Requestable $request = null, $curlOpt = null)
     {
         if (empty($apiKey)) {
             throw new AfterShipException('API Key is missing');

@@ -37,11 +37,16 @@ class Request implements Requestable
      */
     private $encryptionPassword = '';
     /**
+     *
+     * @var array
+     */
+    private $curlOpt;
+    /**
      * Request constructor.
      *
      * @param $apiKey
      */
-    function __construct($apiKey)
+    function __construct($apiKey, $curlOpt)
     {
         $apiSecret = '';
         $encryptionMethod = '';
@@ -67,6 +72,7 @@ class Request implements Requestable
         $this->apiSecret = $apiSecret;
         $this->encryptionMethod = $encryptionMethod;
         $this->encryptionPassword = $encryptionPassword;
+        $this->curlOpt = $curlOpt;
     }
 
     /**
@@ -101,11 +107,15 @@ class Request implements Requestable
     private function call($method, $parameters = [])
     {
         $curl       = curl_init();
+        // user custom curl opt
+        if (!empty($this->curlOpt)) {
+            curl_setopt_array($curl, $this->curlOpt);
+        }
         $curlParams = [
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_URL            => $parameters['url'],
             CURLOPT_CUSTOMREQUEST  => $method,
-            CURLOPT_HTTPHEADER     => $parameters['headers']
+            CURLOPT_HTTPHEADER     => $parameters['headers'],
         ];
         if ($method != 'GET') {
             $curlParams[CURLOPT_POSTFIELDS] = $parameters['body'];

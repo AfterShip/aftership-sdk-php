@@ -84,6 +84,18 @@ $trackings = new AfterShip\Trackings($key);
 $last_check_point = new AfterShip\LastCheckPoint($key);
 ```
 
+Custom CURL opt
+```php
+require 'vendor/autoload.php';
+
+$api_key = 'AFTERSHIP API KEY';
+
+$curl_opt = [CURLOPT_PROXY => 'http://example.com', 'CURLOPT_PROXYPORT' => '8080']
+
+$couriers = new AfterShip\Couriers($key, null, $curl_opt);
+$trackings = new AfterShip\Trackings($key, null, $curl_opt);
+$last_check_point = new AfterShip\LastCheckPoint($key, null, $curl_opt);
+```
 
 ## Testing
 1. Execute the file:

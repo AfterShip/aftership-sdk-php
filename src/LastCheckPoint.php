@@ -16,17 +16,17 @@ class LastCheckPoint extends BackwardCompatible
      * The LastCheckPoint constructor.
      *
      * @param string $apiKey The AfterShip API Key.
-     *
+     * @param array|null the request curl opt
      * @param Requestable|null $request
      * @throws AfterShipException
      */
-    public function __construct($apiKey = '', Requestable $request = null)
+    public function __construct($apiKey = '', Requestable $request = null, $curlOpt = null)
     {
         if (empty($apiKey)) {
             throw new AfterShipException('API Key is missing');
         }
 
-        $this->request = $request ? $request : new Request($apiKey);
+        $this->request = $request ? $request : new Request($apiKey, $curlOpt);
     }
 
     /**

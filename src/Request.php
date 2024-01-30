@@ -19,7 +19,7 @@ class Request implements Requestable
     /**
      * @var string
      */
-    const API_VERSION = 'v4';
+    const API_VERSION = 'tracking/2024-01';
     /**
      * @var string
      */
@@ -201,31 +201,31 @@ class Request implements Requestable
     function getCanonicalizedHeaders($headers)
     {
         $filtered_headers = [];
-    
+
         foreach ($headers as $key => $value) {
             // Check if the header key starts with "as-"
             if (strpos($key, 'as-') === 0) {
                 // Convert header key to lowercase and trim leading/trailing spaces
                 $key = strtolower(trim($key));
-                
+
                 // Trim leading/trailing spaces from header value
                 $value = trim($value);
-                
+
                 // Concatenate header key and value
                 $filtered_headers[] = "{$key}:{$value}";
             }
         }
-        
+
         // Sort headers in ASCII code order
         sort($filtered_headers, SORT_STRING);
-        
+
         // Concatenate header pairs with new line character
         $header_string = implode("\n", $filtered_headers);
-        
+
         return $header_string;
     }
 
-    function getCanonicalizedResource($url) 
+    function getCanonicalizedResource($url)
     {
         $path = "";
         $query = "";
@@ -244,11 +244,11 @@ class Request implements Requestable
         sort($params);
         $queryStr = implode("&", $params);
         $path .= "?" . $queryStr;
-        
+
         return $path;
     }
 
-    function getSignString($method, $url, $data, $headers) 
+    function getSignString($method, $url, $data, $headers)
     {
         $contentMD5 = "";
         $contentType = "";
@@ -256,7 +256,7 @@ class Request implements Requestable
             $contentMD5 = strtoupper(md5($this->safeJsonEncode($data)));
             $contentType = "application/json";
         }
-       
+
         $canonicalizedHeaders = $this->getCanonicalizedHeaders($headers);
         $canonicalizedResource = $this->getCanonicalizedResource($url);
         return mb_convert_encoding($method."\n".$contentMD5."\n".$contentType."\n".$headers['date']."\n".$canonicalizedHeaders."\n".$canonicalizedResource, 'UTF-8');
@@ -270,7 +270,7 @@ class Request implements Requestable
         // if not RSA or AES encryption, just return the legacy headers
         if (!$isRSAEncryptionMethod && !$isAESEncryptionMethod) {
             return [
-                'aftership-api-key' => $this->apiKey,
+                'as-api-key' => $this->apiKey,
                 'content-type'      => 'application/json'
             ];
         }
@@ -292,11 +292,11 @@ class Request implements Requestable
             'content-type' => $contentType,
         ];
         $signString = $this->getSignString($method, $url, $data, $headers);
-        
+
         if ($isRSAEncryptionMethod) {
             $rsa = $encryption->rsaPSSSha256Encrypt($signString);
             $headers['as-signature-rsa-sha256'] = $rsa;
-            
+
             return $headers;
         }
         if ($isAESEncryptionMethod) {

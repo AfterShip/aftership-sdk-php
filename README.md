@@ -1,3 +1,10 @@
+# Deprecation notice: New Version Available
+
+This version of the SDK has been deprecated and replaced with the newly reconstructed SDK.
+
+For the latest API features and improved integration, please visit our updated repository at https://github.com/AfterShip/tracking-sdk-php and follow the provided instructions.
+
+
 # AfterShip API PHP SDK
 
 [![Build Status](https://travis-ci.org/AfterShip/aftership-sdk-php.svg?branch=master)](https://travis-ci.org/AfterShip/aftership-sdk-php)
